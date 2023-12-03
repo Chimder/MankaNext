@@ -1,0 +1,71 @@
+.NavBar_container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(4px);
+  border-radius: 9999px;
+  z-index: 50;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px 14px 10px 14px;
+  width: 400px;
+}
+.Noise {
+  z-index: -20;
+  border-radius: 9999px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url(/noise.webp);
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.NavBar {
+  width: 100%;
+  z-index: 101;
+  display: flex;
+  justify-content: space-around;
+}
+
+.Logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.UserLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Word_container {
+  z-index: 101;
+  display: flex;
+  padding: 4px 8px 4px 8px;
+  position: relative;
+  border-radius: 99px;
+  text-decoration: none;
+  opacity: 0.9;
+  color: rgb(255, 255, 255);
+  // background-color: rgb(0, 0, 0);
+  font-weight: 600;
+  transition: color 0.3s, background-color 0.3s;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.Search {
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: rgb(255, 255, 255);
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
