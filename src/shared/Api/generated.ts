@@ -12,6 +12,12 @@ name: string;
 status: string;
 };
 
+export interface UserDto {
+  email: string;
+  image: string;
+  name: string;
+}
+
 export interface Chapter {
   animeName: string;
   chapter: number;
@@ -77,7 +83,7 @@ export const animeControllerGetAnimeByName = (
 export const animeControllerGetAnimeByGenres = (
     params: AnimeControllerGetAnimeByGenresParams,
  options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<AnimeDto>(
+      return customInstance<AnimeDto[]>(
       {url: `/anime/get-by-filters`, method: 'GET',
         params
     },
@@ -95,8 +101,20 @@ export const animeControllerCreateAnime = (
       options);
     }
   
+export const userControllerRegNewUser = (
+    userDto: BodyType<UserDto>,
+ options?: SecondParameter<typeof customInstance>,) => {
+      return customInstance<void>(
+      {url: `/user/checkOrCreate`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: userDto
+    },
+      options);
+    }
+  
 export type AppControllerGetHelloResult = NonNullable<Awaited<ReturnType<typeof appControllerGetHello>>>
 export type AnimeControllerGetAllAnimeResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAllAnime>>>
 export type AnimeControllerGetAnimeByNameResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeByName>>>
 export type AnimeControllerGetAnimeByGenresResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeByGenres>>>
 export type AnimeControllerCreateAnimeResult = NonNullable<Awaited<ReturnType<typeof animeControllerCreateAnime>>>
+export type UserControllerRegNewUserResult = NonNullable<Awaited<ReturnType<typeof userControllerRegNewUser>>>
