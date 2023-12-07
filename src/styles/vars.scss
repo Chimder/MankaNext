@@ -1,13 +1,26 @@
 :root {
-  --c-primary: #ff9f59;
+  // manga
+  --m-primary: #ff6740;
+  --m-primary--hover: #cc4c2cd8;
+  --m-primary--active: #b66100;
+  --m-secondary: rgb(0, 255, 255);
+  --m-danger: #9b7a78;
+  --m-danger--hover: #725553;
+  --m-secondary--hover: #9b7a78;
+  --input-primary: #000000;
+  --m-reset: rgb(85, 22, 22);
+  --m-reset--hover: #410a0a;
+  --m-reset--text: #ec3434;
+
+  // anime
+  --c-primary: #406dff;
   --c-primary--hover: #76ade4;
   --c-primary--active: #2364a5;
   --c-secondary: rgb(0, 255, 255);
   --c-danger: #9b7a78;
   --c-secondary--hover: #9b7a78;
-  --input-primary: #000000;
 
-  // header
+  --input-primary: #000000;
   --h-primary: #ff9f59;
   --h-secondary: rgb(0, 255, 255);
 

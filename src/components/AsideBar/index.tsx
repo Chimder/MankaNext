@@ -4,9 +4,15 @@ import { CiSearch } from "react-icons/ci";
 import s from "./asidebar.module.scss";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 function AsideBar() {
   const { data: session } = useSession();
+
+  const pathname = usePathname();
+
+  const isManga = pathname.includes("manga") ? "manga" : undefined;
+
   return (
     <div className={s.NavBar_container}>
       <nav className={s.NavBar}>
@@ -14,17 +20,32 @@ function AsideBar() {
         <Link className={s.Logo} href='/'>
           ❄️
         </Link>
-        <Link className={clsx(s.Word_container)} href='/manka'>
-          Manga
+
+        <div className={s.activeLink}>
+          <Link
+            className={clsx(s.Word_containerActive)}
+            href={isManga ? "/manga" : "/anime"}
+          >
+            {isManga ? "Manga" : "Anime"}
+          </Link>
+          <Link
+            className={s.Search}
+            href={isManga ? "/manga/search" : "/anime/search"}
+          >
+            <CiSearch />
+          </Link>
+        </div>
+
+        <Link className={s.Word_container} href={isManga ? "/anime" : "/manga"}>
+          {isManga ? "Anime" : "Manga"}
         </Link>
-        <Link className={s.Search} href='/'>
-          <CiSearch />
-        </Link>
-        <Link className={s.Word_container} href='/ani'>
-          Anime
-        </Link>
+
         <Link className={s.UserLogo} href=''>
-          {session?.user ? <img src={session?.user?.image} width={24}/> : <div>user</div>}
+          {session?.user ? (
+            <img src={session?.user?.image} width={24} />
+          ) : (
+            <div>user</div>
+          )}
         </Link>
       </nav>
     </div>

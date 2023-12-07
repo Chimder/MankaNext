@@ -6,14 +6,24 @@
  */
 import { customInstance } from './axios.instance';
 import type { BodyType } from './axios.instance';
+export type AnimeControllerGetUserFavoriteParams = {
+email: string;
+};
+
 export type AnimeControllerGetAnimeByGenresParams = {
 genres: string;
 name: string;
 status: string;
 };
 
+export interface ToggleAnimeFavoriteDto {
+  email: string;
+  name: string;
+}
+
 export interface UserDto {
   email: string;
+  id: string;
   image: string;
   name: string;
 }
@@ -37,10 +47,6 @@ export interface AnimeDto {
   status: string;
 }
 
-export interface HelloDto {
-  message: string;
-}
-
 
 
 
@@ -53,16 +59,7 @@ export interface HelloDto {
   : never;
 
 
-  export const appControllerGetHello = (
-    
- options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<HelloDto>(
-      {url: `/hello`, method: 'GET'
-    },
-      options);
-    }
-  
-export const animeControllerGetAllAnime = (
+  export const animeControllerGetAllAnime = (
     
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<AnimeDto[]>(
@@ -101,6 +98,16 @@ export const animeControllerCreateAnime = (
       options);
     }
   
+export const animeControllerGetUserFavorite = (
+    params: AnimeControllerGetUserFavoriteParams,
+ options?: SecondParameter<typeof customInstance>,) => {
+      return customInstance<AnimeDto[]>(
+      {url: `/anime/userFavorite`, method: 'GET',
+        params
+    },
+      options);
+    }
+  
 export const userControllerRegNewUser = (
     userDto: BodyType<UserDto>,
  options?: SecondParameter<typeof customInstance>,) => {
@@ -112,9 +119,21 @@ export const userControllerRegNewUser = (
       options);
     }
   
-export type AppControllerGetHelloResult = NonNullable<Awaited<ReturnType<typeof appControllerGetHello>>>
+export const userControllerAddFavorite = (
+    toggleAnimeFavoriteDto: BodyType<ToggleAnimeFavoriteDto>,
+ options?: SecondParameter<typeof customInstance>,) => {
+      return customInstance<void>(
+      {url: `/user/addFavorite`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: toggleAnimeFavoriteDto
+    },
+      options);
+    }
+  
 export type AnimeControllerGetAllAnimeResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAllAnime>>>
 export type AnimeControllerGetAnimeByNameResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeByName>>>
 export type AnimeControllerGetAnimeByGenresResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeByGenres>>>
 export type AnimeControllerCreateAnimeResult = NonNullable<Awaited<ReturnType<typeof animeControllerCreateAnime>>>
+export type AnimeControllerGetUserFavoriteResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetUserFavorite>>>
 export type UserControllerRegNewUserResult = NonNullable<Awaited<ReturnType<typeof userControllerRegNewUser>>>
+export type UserControllerAddFavoriteResult = NonNullable<Awaited<ReturnType<typeof userControllerAddFavorite>>>
