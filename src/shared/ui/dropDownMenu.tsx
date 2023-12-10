@@ -2,15 +2,7 @@ import { Button, DropdownMenu, Theme } from "@radix-ui/themes";
 import React, { ButtonHTMLAttributes, ElementType, ReactNode } from "react";
 import { IoCode } from "react-icons/io5";
 import SelectDropBtn from "./selectDropBtn";
-
-interface ButtonProps<E extends ElementType = ElementType>
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
-  href?: string;
-  rounded?: boolean;
-  variant?: "primary" | "white" | "gray" | "glass";
-  startIcon?: ReactNode;
-  as?: E;
-}
+import { useAppSelector } from "../Store/store";
 
 interface DropMenuProps {
   text: string;

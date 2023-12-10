@@ -18,17 +18,20 @@ function mangaSearch() {
   );
   const dispatch = useAppDispatch();
 
+  const handleTag = (tag: string, category: string) => {
+    if (category === "genres") {
+      dispatch(setGenresTag(tag));
+    } else if (category === "lang") {
+      dispatch(setLangTag(tag));
+    } else if (category === "status") {
+      dispatch(setStatus(tag));
+    } else if (category === "sort") {
+      dispatch(setSort(tag));
+    }
+  };
   const on = (e: React.MouseEvent<HTMLButtonElement>, category: string) => {
     const button = e.target as HTMLButtonElement;
-    if (category === "genres") {
-      dispatch(setGenresTag(button.innerText));
-    } else if (category === "lang") {
-      dispatch(setLangTag(button.innerText));
-    } else if (category === "status") {
-      dispatch(setStatus(button.innerText));
-    } else if (category === "sort") {
-      dispatch(setSort(button.innerText));
-    }
+    handleTag(button.innerText, category);
   };
 
   return (
@@ -70,25 +73,45 @@ function mangaSearch() {
 
           <div className={s.tags}>
             {genresTag?.map((tag) => (
-              <Badge key={tag} className='badge' color='orange'>
+              <Badge
+                onClick={() => handleTag(tag, "genres")}
+                key={tag}
+                className='badge'
+                color='orange'
+              >
                 {tag}
                 <Cross1Icon />
               </Badge>
             ))}
             {langTag?.map((tag) => (
-              <Badge onClick={() = on(tag, "lang")} key={tag} className='badge' color='orange'>
+              <Badge
+                onClick={() => handleTag(tag, "lang")}
+                key={tag}
+                className='badge'
+                color='orange'
+              >
                 {tag}
                 <Cross1Icon />
               </Badge>
             ))}
             {statusTag?.map((tag) => (
-              <Badge key={tag} className='badge' color='orange'>
+              <Badge
+                onClick={() => handleTag(tag, "status")}
+                key={tag}
+                className='badge'
+                color='orange'
+              >
                 {tag}
                 <Cross1Icon />
               </Badge>
             ))}
             {sortTag?.map((tag) => (
-              <Badge key={tag} className='badge' color='orange'>
+              <Badge
+                onClick={() => handleTag(tag, "sort")}
+                key={tag}
+                className='badge'
+                color='orange'
+              >
                 {tag}
                 <Cross1Icon />
               </Badge>

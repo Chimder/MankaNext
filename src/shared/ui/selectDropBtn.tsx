@@ -1,6 +1,7 @@
 import { Button, DropdownMenu } from "@radix-ui/themes";
 import React from "react";
 import { genres, status, lang, sort, Lang } from "../anotherdata";
+import { useAppSelector } from "../Store/store";
 
 type Data = {
   text: string;
@@ -23,6 +24,12 @@ function SelectDropBtn({ type, click }: SelectDropBtnProps) {
       : type == "lang"
       ? lang
       : sort;
+
+  const { genresTag, langTag, statusTag, sortTag } = useAppSelector(
+    (store) => store.tagSlice
+  );
+
+  const allTags = [...genresTag, ...langTag, ...statusTag, ...sortTag];
   return (
     <div>
       {data.map((g) => (
@@ -30,7 +37,7 @@ function SelectDropBtn({ type, click }: SelectDropBtnProps) {
           key={g.text}
           onClick={(e) => click(e, type)}
           className={`btn_select_${type}`}
-          color='orange'
+          color={allTags.includes(g.text) ? "green" : "orange"}
           variant='ghost'
         >
           {type == "lang" && <img src={g.img} width={22} height={22} />}

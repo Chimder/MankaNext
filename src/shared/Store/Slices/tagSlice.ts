@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface tagSlice {
-  genresTag?: string[];
-  langTag?: string[];
-  statusTag?: string[];
-  sortTag?: string[];
+  genresTag: string[];
+  langTag: string[];
+  statusTag: string[];
+  sortTag: string[];
 }
 
 const initialState: tagSlice = {
