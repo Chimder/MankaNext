@@ -1,9 +1,12 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "@/components/layout";
 import type { AppProps } from "next/app";
-import "@/styles/index.scss";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { SessionProvider } from "next-auth/react";
+import { Provider } from "react-redux";
+import { store } from "@/shared/Store/store";
+import "@radix-ui/themes/styles.css";
+import "@/styles/index.scss";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(
@@ -20,13 +23,15 @@ const App = ({ Component, pageProps }: AppProps) => {
   );
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <SessionProvider session={pageProps.session}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </SessionProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider session={pageProps.session}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SessionProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 };
 
