@@ -6,7 +6,7 @@ import Image from "next/image";
 
 // const [test, setTest] = useState([]);
 
-function MainAnime() {
+function MainManga() {
   const { data: session } = useSession();
   // console.log(session);
   const { data } = useQuery({
@@ -41,4 +41,4 @@ function MainAnime() {
   );
 }
 
-export default MainAnime;
+export default MainManga;

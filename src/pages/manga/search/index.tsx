@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./mangaSearch.module.scss";
-import { Badge, Button, Theme } from "@radix-ui/themes";
-import { DropMenu } from "@/shared/ui/dropDownMenu";
+import { Button, Separator, Theme } from "@radix-ui/themes";
 import TextFieldd from "@/shared/ui/textField";
-import { Cross1Icon } from "@radix-ui/react-icons";
 import { useAppDispatch, useAppSelector } from "@/shared/Store/store";
 import {
+  resetTag,
   setGenresTag,
+  setInputValue,
   setLangTag,
   setSort,
   setStatus,
 } from "@/shared/Store/Slices/tagSlice";
+import { DropDownMenu } from "@/components/DropMenu";
+import { TagsMenu } from "@/components/Tags";
+import { MangaList } from "@/components/MangaList/MangaList";
+import clsx from "clsx";
 
 function mangaSearch() {
-  const { genresTag, langTag, statusTag, sortTag } = useAppSelector(
-    (store) => store.tagSlice
-  );
+  const { inputValue } = useAppSelector((store) => store.tagSlice);
   const dispatch = useAppDispatch();
-
   const handleTag = (tag: string, category: string) => {
     if (category === "genres") {
       dispatch(setGenresTag(tag));
@@ -34,103 +35,46 @@ function mangaSearch() {
     handleTag(button.innerText, category);
   };
 
+  const reset = () => {
+    dispatch(resetTag());
+  };
+
   return (
     <Theme appearance='dark'>
-      <main className={s.container}>
+      <main className={clsx("container")}>
         <section className={s.filter}>
           <h1>Advaced Manga Search</h1>
 
           <div className={s.first_filter}>
             <div className={s.search_field}>
-              <TextFieldd></TextFieldd>
+              <TextFieldd
+                value={inputValue}
+                change={(e) => dispatch(setInputValue(e.target.value))}
+              ></TextFieldd>
             </div>
 
-            <DropMenu
-              text='Genres'
-              click={on}
-              ctgr='genres'
-              clsn='drop_genres'
-            ></DropMenu>
-            <DropMenu
-              text='Status'
-              click={on}
-              ctgr='status'
-              clsn='drop_status'
-            ></DropMenu>
-            <DropMenu
-              text='Lang'
-              click={on}
-              ctgr='lang'
-              clsn='drop_lang'
-            ></DropMenu>
-            <DropMenu
-              text='Sort By'
-              click={on}
-              ctgr='sort'
-              clsn='drop_sort'
-            ></DropMenu>
+            <DropDownMenu on={on} />
           </div>
 
           <div className={s.tags}>
-            {genresTag?.map((tag) => (
-              <Badge
-                onClick={() => handleTag(tag, "genres")}
-                key={tag}
-                className='badge'
-                color='orange'
+            <div className={s.tag}>
+              <TagsMenu handleTag={handleTag} />
+            </div>
+            <div className={s.reset}>
+              <Button
+                onClick={() => reset()}
+                className='btn_reset'
+                variant='soft'
+                color='red'
               >
-                {tag}
-                <Cross1Icon />
-              </Badge>
-            ))}
-            {langTag?.map((tag) => (
-              <Badge
-                onClick={() => handleTag(tag, "lang")}
-                key={tag}
-                className='badge'
-                color='orange'
-              >
-                {tag}
-                <Cross1Icon />
-              </Badge>
-            ))}
-            {statusTag?.map((tag) => (
-              <Badge
-                onClick={() => handleTag(tag, "status")}
-                key={tag}
-                className='badge'
-                color='orange'
-              >
-                {tag}
-                <Cross1Icon />
-              </Badge>
-            ))}
-            {sortTag?.map((tag) => (
-              <Badge
-                onClick={() => handleTag(tag, "sort")}
-                key={tag}
-                className='badge'
-                color='orange'
-              >
-                {tag}
-                <Cross1Icon />
-              </Badge>
-            ))}
-          </div>
-
-          <div className={s.buttons}>
-            <Button className='btn_reset' variant='soft' color='red'>
-              Reset
-            </Button>
-            <Button className='btn_search' variant='classic' color='orange'>
-              Search
-            </Button>
+                Reset
+              </Button>
+            </div>
           </div>
         </section>
 
-        <section className={s.manga_list}>
-          <div className={s.variant_view}></div>
-          <ul className={s.main_list}></ul>
+        <section className={s.manga_list_container}>
+          <MangaList />
         </section>
       </main>
     </Theme>

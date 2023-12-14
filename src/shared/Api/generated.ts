@@ -6,20 +6,26 @@
  */
 import { customInstance } from './axios.instance';
 import type { BodyType } from './axios.instance';
+export type UserControllerAddFavoriteParams = {
+email: string;
+name: string;
+};
+
 export type AnimeControllerGetUserFavoriteParams = {
 email: string;
 };
 
 export type AnimeControllerGetAnimeByGenresParams = {
-genres: string;
+genres: string[];
 name: string;
 status: string;
+orderField: string;
+orderDirection: string;
 };
 
-export interface ToggleAnimeFavoriteDto {
-  email: string;
-  name: string;
-}
+export type AnimeControllerGetAnimeByNameParams = {
+name: string;
+};
 
 export interface UserDto {
   email: string;
@@ -69,10 +75,11 @@ export interface AnimeDto {
     }
   
 export const animeControllerGetAnimeByName = (
-    name: string,
+    params: AnimeControllerGetAnimeByNameParams,
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<AnimeDto>(
-      {url: `/anime/get-one/${name}`, method: 'GET'
+      {url: `/anime/get-one`, method: 'GET',
+        params
     },
       options);
     }
@@ -120,12 +127,11 @@ export const userControllerRegNewUser = (
     }
   
 export const userControllerAddFavorite = (
-    toggleAnimeFavoriteDto: BodyType<ToggleAnimeFavoriteDto>,
+    params: UserControllerAddFavoriteParams,
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<void>(
       {url: `/user/addFavorite`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: toggleAnimeFavoriteDto
+        params
     },
       options);
     }

@@ -1,67 +1,74 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 export interface tagSlice {
   genresTag: string[];
   langTag: string[];
-  statusTag: string[];
-  sortTag: string[];
+  statusTag: string;
+  sortTag: string;
+  inputValue: string;
 }
 
 const initialState: tagSlice = {
   genresTag: [],
   langTag: [],
-  statusTag: [],
-  sortTag: [],
+  statusTag: "",
+  sortTag: "",
+  inputValue: "",
 };
 
 export const tagSlice = createSlice({
   name: "Tags",
   initialState,
   reducers: {
-    setGenresTag(state, action: PayloadAction<string>) {
-      const include = state.genresTag!.includes(action.payload);
+    setGenresTag(state, { payload }: PayloadAction<string>) {
+      const include = state.genresTag!.includes(payload);
       if (include) {
-        state.genresTag = state.genresTag!.filter(
-          (tag) => tag !== action.payload
-        );
+        state.genresTag = state.genresTag!.filter((tag) => tag !== payload);
       } else {
-        state.genresTag!.push(action.payload);
+        state.genresTag!.push(payload);
       }
     },
-    setLangTag(state, action: PayloadAction<string>) {
-      const include = state.langTag!.includes(action.payload);
+    setLangTag(state, { payload }: PayloadAction<string>) {
+      const include = state.langTag!.includes(payload);
       if (include) {
-        state.langTag = state.langTag!.filter((tag) => tag !== action.payload);
+        state.langTag = state.langTag!.filter((tag) => tag !== payload);
       } else {
-        state.langTag!.push(action.payload);
+        state.langTag!.push(payload);
       }
     },
-    setStatus(state, action: PayloadAction<string>) {
-      const include = state.statusTag!.includes(action.payload);
-      if (include) {
-        state.statusTag = state.statusTag!.filter(
-          (tag) => tag !== action.payload
-        );
-      } else {
-        state.statusTag!.push(action.payload);
-      }
+    setStatus(state, {payload}: PayloadAction<string>) {
+      const currentTag = state.statusTag;
+      const newTag = payload;
+
+      state.statusTag = !currentTag || currentTag !== newTag ? newTag : "";
     },
-    setSort(state, action: PayloadAction<string>) {
-      const include = state.sortTag!.includes(action.payload);
-      if (include) {
-        state.sortTag = state.sortTag!.filter((tag) => tag !== action.payload);
-      } else {
-        state.sortTag!.push(action.payload);
-      }
+    setSort(state, {payload}: PayloadAction<string>) {
+      const currentTag = state.sortTag;
+      const newTag = payload;
+
+      state.sortTag = !currentTag || currentTag !== newTag ? newTag : "";
     },
-    deleteTag(state, action: PayloadAction<string>) {
-      // const del = state.activeTag.filter((item) => item !== action.payload);
-      // state.activeTag = del;
+    resetTag(state) {
+      state.genresTag = [];
+      state.langTag = [];
+      state.sortTag = "";
+      state.statusTag = "";
+      state.inputValue = "";
+    },
+    setInputValue(state, action: PayloadAction<string>) {
+      state.inputValue = action.payload;
     },
   },
 });
 
-export const { setGenresTag, setLangTag, setSort, setStatus } =
-  tagSlice.actions;
+export const {
+  setGenresTag,
+  setLangTag,
+  setSort,
+  setStatus,
+  resetTag,
+  setInputValue,
+} = tagSlice.actions;
 
 export default tagSlice.reducer;

@@ -11,7 +11,7 @@ function AsideBar() {
 
   const pathname = usePathname();
 
-  const isManga = pathname.includes("manga") ? "manga" : undefined;
+  const isManga = pathname?.includes("manga") ? "manga" : undefined;
 
   return (
     <div className={s.NavBar_container}>
@@ -24,7 +24,7 @@ function AsideBar() {
         <div className={s.activeLink}>
           <Link
             className={clsx(s.Word_containerActive)}
-            href={isManga ? "/manga" : "/anime"}
+            href={isManga ? "/manga/" : "/anime/"}
           >
             {isManga ? "Manga" : "Anime"}
           </Link>
@@ -36,7 +36,10 @@ function AsideBar() {
           </Link>
         </div>
 
-        <Link className={s.Word_container} href={isManga ? "/anime" : "/manga"}>
+        <Link
+          className={s.Word_container}
+          href={isManga ? "/anime/" : "/manga/"}
+        >
           {isManga ? "Anime" : "Manga"}
         </Link>
 
