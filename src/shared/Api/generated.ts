@@ -13,6 +13,7 @@ name: string;
 
 export type AnimeControllerGetUserFavoriteParams = {
 email: string;
+name: string;
 };
 
 export type AnimeControllerGetAnimeByGenresParams = {
@@ -21,6 +22,11 @@ name: string;
 status: string;
 orderField: string;
 orderDirection: string;
+};
+
+export type AnimeControllerGetAnimeChapterParams = {
+name: string;
+chapter: number;
 };
 
 export type AnimeControllerGetAnimeByNameParams = {
@@ -56,88 +62,91 @@ export interface AnimeDto {
 
 
 
-// eslint-disable-next-line
-  type SecondParameter<T extends (...args: any) => any> = T extends (
-  config: any,
-  args: infer P,
-) => any
-  ? P
-  : never;
-
 
   export const animeControllerGetAllAnime = (
     
- options?: SecondParameter<typeof customInstance>,) => {
+ ) => {
       return customInstance<AnimeDto[]>(
       {url: `/anime/get-all`, method: 'GET'
     },
-      options);
+      );
     }
   
 export const animeControllerGetAnimeByName = (
     params: AnimeControllerGetAnimeByNameParams,
- options?: SecondParameter<typeof customInstance>,) => {
+ ) => {
       return customInstance<AnimeDto>(
       {url: `/anime/get-one`, method: 'GET',
         params
     },
-      options);
+      );
+    }
+  
+export const animeControllerGetAnimeChapter = (
+    params: AnimeControllerGetAnimeChapterParams,
+ ) => {
+      return customInstance<AnimeDto>(
+      {url: `/anime/get-chapter`, method: 'GET',
+        params
+    },
+      );
     }
   
 export const animeControllerGetAnimeByGenres = (
     params: AnimeControllerGetAnimeByGenresParams,
- options?: SecondParameter<typeof customInstance>,) => {
+ ) => {
       return customInstance<AnimeDto[]>(
       {url: `/anime/get-by-filters`, method: 'GET',
         params
     },
-      options);
+      );
     }
   
 export const animeControllerCreateAnime = (
     animeDto: BodyType<AnimeDto>,
- options?: SecondParameter<typeof customInstance>,) => {
+ ) => {
       return customInstance<void>(
       {url: `/anime/create`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: animeDto
     },
-      options);
+      );
     }
   
 export const animeControllerGetUserFavorite = (
     params: AnimeControllerGetUserFavoriteParams,
- options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<AnimeDto[]>(
+ ) => {
+      return customInstance<void>(
       {url: `/anime/userFavorite`, method: 'GET',
         params
     },
-      options);
+      );
     }
   
 export const userControllerRegNewUser = (
     userDto: BodyType<UserDto>,
- options?: SecondParameter<typeof customInstance>,) => {
+ ) => {
       return customInstance<void>(
       {url: `/user/checkOrCreate`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
       data: userDto
     },
-      options);
+      );
     }
   
 export const userControllerAddFavorite = (
     params: UserControllerAddFavoriteParams,
- options?: SecondParameter<typeof customInstance>,) => {
+ ) => {
       return customInstance<void>(
       {url: `/user/addFavorite`, method: 'POST',
         params
     },
-      options);
+      );
     }
   
 export type AnimeControllerGetAllAnimeResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAllAnime>>>
 export type AnimeControllerGetAnimeByNameResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeByName>>>
+export type AnimeControllerGetAnimeChapterResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeChapter>>>
 export type AnimeControllerGetAnimeByGenresResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeByGenres>>>
 export type AnimeControllerCreateAnimeResult = NonNullable<Awaited<ReturnType<typeof animeControllerCreateAnime>>>
 export type AnimeControllerGetUserFavoriteResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetUserFavorite>>>

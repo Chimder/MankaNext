@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { AnimeDto } from "../Api/generated";
 
 type Data = {
   text?: string;
@@ -11,54 +12,28 @@ type Data = {
 };
 interface SelectDropBtnProps {
   type?: string;
-  data?: string[];
+  // data?: string[];
   click?: (e: React.MouseEvent<HTMLButtonElement>, category: string) => void;
+  data?: AnimeDto;
+  setIsMenuOpen: any;
 }
-function SelectDropChapter({ type, click, data }: SelectDropBtnProps) {
+function SelectDropChapter({
+  type,
+  click,
+  data,
+  setIsMenuOpen,
+}: SelectDropBtnProps) {
   return (
     <div className='Chapters_List'>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      {/* <Link href='#'>Chapter : 1 Cammy Big Ass sadasdad</Link> */}
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      {/* <Link href='#'>Chapter : 1 Cammy Big Assdfser 4ferfjj</Link> */}
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
-      <Link href='#'>Chapter : 1 Cammy Big Ass</Link>
+      {data?.chapters.map((chap) => (
+        <Link
+          key={chap.name}
+          href={`/manga/${chap.animeName}/${chap.chapter}`}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          {` Ch. ${chap.chapter} ${chap.name} `}
+        </Link>
+      ))}
     </div>
   );
 }

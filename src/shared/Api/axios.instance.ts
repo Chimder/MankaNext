@@ -1,7 +1,8 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 export const AXIOS_INSTANCE = Axios.create({
-  baseURL: "http://localhost:4000",
+  // baseURL: "http://localhost:4000",
+  baseURL: "https://pear-careful-swordfish.cyclic.app",
   headers: {
     "Content-Type": "application/json",
   },

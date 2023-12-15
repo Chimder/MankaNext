@@ -1,9 +1,11 @@
+import Layout from "@/components/layout";
 import Head from "next/head";
+import { ReactElement } from "react";
 // import { Noto_Sans_JP } from "next/font/google";
 
 // const inter = Noto_Sans_JP();
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Head>
@@ -13,10 +15,16 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main >
+      <main>
         <div>MAIN</div>
         <div></div>
       </main>
     </>
   );
-}
+};
+
+// Home.getLayout = function getLayout(page: ReactElement) {
+//   return <Layout>{page}</Layout>;
+// };
+
+export default Home;

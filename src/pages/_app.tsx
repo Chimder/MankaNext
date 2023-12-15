@@ -1,14 +1,23 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "@/components/layout";
 import type { AppProps } from "next/app";
-import { useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
 import { store } from "@/shared/Store/store";
 import "@radix-ui/themes/styles.css";
 import "@/styles/index.scss";
+import { NextPage } from "next";
 
-const App = ({ Component, pageProps }: AppProps) => {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -22,15 +31,15 @@ const App = ({ Component, pageProps }: AppProps) => {
       })
   );
 
+  const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
+
   return (
     <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <SessionProvider session={pageProps.session}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </SessionProvider>
-      </QueryClientProvider>
+      <SessionProvider session={pageProps.session}>
+        <QueryClientProvider client={queryClient}>
+          {getLayout(<Component {...pageProps} />)}
+        </QueryClientProvider>
+      </SessionProvider>
     </Provider>
   );
 };
