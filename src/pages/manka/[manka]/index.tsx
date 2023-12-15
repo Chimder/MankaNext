@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Manga = ({ data: manga }: MangaProps) => {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
   const path = useRouter();
   const mangaParam = path?.query?.manga! as string;
   const pat = usePathname();
@@ -59,7 +59,7 @@ const Manga = ({ data: manga }: MangaProps) => {
     enabled: !!session,
     staleTime: 0,
   });
-  console.log("FAVORITEUSER", favorite);
+  // console.log("FAVORITEUSER", favorite);
   // const [isFavor, setIsFav] = useState(favorite);
 
   const { mutate, isPending, isSuccess } = useMutation({
@@ -125,7 +125,7 @@ const Manga = ({ data: manga }: MangaProps) => {
               {manga.chapters?.map((chap) => (
                 <Link
                   key={chap.name}
-                  href={`/manga/${manga.name}/${chap.chapter}`}
+                  href={`/manka/${manga.name}/${chap.chapter}`}
                 >
                   <div className={s.chapter}>
                     Ch. {chap.chapter} - {chap.name}

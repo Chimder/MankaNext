@@ -12,7 +12,7 @@ export const authOptions = {
   callbacks: {
     async signIn({ user }: any) {
       const check = userControllerRegNewUser(user);
-      console.log(check.then((e) => console.log));
+      // console.log(check.then((e) => console.log));
       // console.log(check.data?.statusCode);
       return true;
     },

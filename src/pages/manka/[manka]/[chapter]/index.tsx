@@ -37,10 +37,10 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log("PARAMS", params);
+  // console.log("PARAMS", params);
   const chapterNumber = parseInt(params?.chapter as string, 10);
   if (isNaN(chapterNumber)) {
-    console.log("not Number");
+    // console.log("not Number");
     return { notFound: true };
   }
   const data = await animeControllerGetAnimeChapter({
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return { props: { data } };
 };
 const Chapter: NextPageWithLayout<ChapterProps> = ({ data: chapter }) => {
-  console.log(chapter);
+  // console.log(chapter);
   return (
     <main className={clsx("container", s.chapter)}>
       <section>

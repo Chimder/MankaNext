@@ -20,7 +20,7 @@ function AsideBarChapter() {
     staleTime: 0,
   });
 
-  console.log(manga?.chapters.length);
+  // console.log(manga?.chapters.length);
 
   const params = Number(param?.chapter);
   const prew = params - 1;
@@ -34,7 +34,7 @@ function AsideBarChapter() {
             ❄️
           </Link>
           <Link
-            href={`/manga/${param?.manga}`}
+            href={`/manka/${param?.manga}`}
             className={clsx(s.Word_container)}
           >
             {" "}
@@ -50,14 +50,14 @@ function AsideBarChapter() {
           ></DropMenu>
 
           <Link
-            href={`/manga/${param?.manga}/${prew}`}
+            href={`/manka/${param?.manga}/${prew}`}
             className={clsx(s.Word_container, params === 1 && s.disabledLink)}
           >
             {" "}
             - Prew
           </Link>
           <Link
-            href={`/manga/${param?.manga}/${next}`}
+            href={`/manka/${param?.manga}/${next}`}
             className={clsx(
               s.Word_container,
               params === manga?.chapters.length && s.disabledLink
