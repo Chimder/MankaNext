@@ -15,16 +15,12 @@ const Home = () => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main>
-        <div>MAIN</div>
-        <div></div>
-      </main>
+        <main>
+          <div>MAIN</div>
+          <div></div>
+        </main>
     </>
   );
 };
-
-// Home.getLayout = function getLayout(page: ReactElement) {
-//   return <Layout>{page}</Layout>;
-// };
 
 export default Home;

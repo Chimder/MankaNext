@@ -2,73 +2,72 @@ import Link from "next/link";
 import React from "react";
 import s from "./asidebar.module.scss";
 import clsx from "clsx";
-
 import { DropMenu } from "@/shared/ui/dropDownMenu";
-import { Theme } from "@radix-ui/themes";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { animeControllerGetAnimeByName } from "@/shared/Api/generated";
+import { useRouter } from "next/router";
 
 function AsideBarChapter() {
   const param = useParams();
+  const router = useRouter();
   console.log(param, "Params");
+  console.log(router, "ROUTER");
 
-  const { data: manga } = useQuery({
+  const { data: manga, isSuccess } = useQuery({
     queryKey: ["manga"],
     queryFn: () =>
-      animeControllerGetAnimeByName({ name: param?.manga as string }),
+      animeControllerGetAnimeByName({ name: router?.query?.manka as string }),
     staleTime: 0,
+    enabled: !!router?.query?.manka,
   });
 
-  // console.log(manga?.chapters.length);
-
-  const params = Number(param?.chapter);
+  const params = Number(router?.query?.chapter);
   const prew = params - 1;
   const next = params + 1;
   return (
-    <Theme appearance='dark'>
-      <div className={s.NavBar_container}>
-        <nav className={s.NavBar}>
-          <div className={s.Noise}></div>
-          <Link className={s.Logo} href='/'>
-            ❄️
-          </Link>
-          <Link
-            href={`/manka/${param?.manga}`}
-            className={clsx(s.Word_container)}
-          >
-            {" "}
-            Manga
-          </Link>
+    <div className={s.NavBar_container}>
+      <div className={s.NavBar}>
+        <div className={s.Noise}></div>
+        <Link className={s.Logo} href='/'>
+          ❄️
+        </Link>
+        <Link
+          href={`/manka/${router?.query?.manka}`}
+          className={clsx(s.Word_container)}
+        >
+          Manga
+        </Link>
 
-          <DropMenu
-            text={param?.chapter!}
-            // click={}
-            ctgr='chapter'
-            clsn='drop_chapter'
-            data={manga}
-          ></DropMenu>
+        {isSuccess && (
+          <div>
+            <DropMenu
+              text={router?.query?.chapter!}
+              // click={}
+              ctgr='chapter'
+              clsn='drop_chapter'
+              data={manga}
+            ></DropMenu>
+          </div>
+        )}
 
-          <Link
-            href={`/manka/${param?.manga}/${prew}`}
-            className={clsx(s.Word_container, params === 1 && s.disabledLink)}
-          >
-            {" "}
-            - Prew
-          </Link>
-          <Link
-            href={`/manka/${param?.manga}/${next}`}
-            className={clsx(
-              s.Word_container,
-              params === manga?.chapters.length && s.disabledLink
-            )}
-          >
-            {" "}
-            Next -
-          </Link>
-        </nav>
+        <Link
+          href={`/manka/${router?.query?.manka}/${prew}`}
+          className={clsx(s.Word_container, params === 1 && s.disabledLink)}
+        >
+          - Prew
+        </Link>
+        <Link
+          href={`/manka/${router?.query?.manka}/${next}`}
+          className={clsx(
+            s.Word_container,
+            params === manga?.chapters?.length && s.disabledLink
+          )}
+        >
+          Next -
+        </Link>
       </div>
-    </Theme>
+    </div>
   );
 }
 

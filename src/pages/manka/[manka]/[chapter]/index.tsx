@@ -3,12 +3,14 @@ import React, { ReactElement } from "react";
 import s from "./manga-chapter.module.scss";
 import {
   animeControllerGetAllAnime,
+  animeControllerGetAnimeByName,
   animeControllerGetAnimeChapter,
 } from "@/shared/Api/generated";
 import { GetStaticProps } from "next";
 import { NextPageWithLayout } from "@/pages/_app";
-import Layout from "@/components/layout";
-import LayoutTwo from "@/components/chapterLayout";
+import AsideBarChapter from "@/components/AsideBar/aside-bar-chapter";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 type Chapter = {
   animeName: string;
@@ -24,7 +26,7 @@ export const getStaticPaths = async () => {
   const paths = data.flatMap((manga) =>
     (manga?.chapters || []).map((chapter) => ({
       params: {
-        manga: manga.name,
+        manka: manga.name,
         chapter: chapter.chapter.toString(),
       },
     }))
@@ -43,29 +45,30 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { notFound: true };
   }
   const data = await animeControllerGetAnimeChapter({
-    name: params?.manga as string,
+    name: params?.manka as string,
     chapter: chapterNumber,
   });
   return { props: { data } };
 };
 const Chapter: NextPageWithLayout<ChapterProps> = ({ data: chapter }) => {
   // console.log(chapter);
+  const param = useParams();
+
   return (
-    <main className={clsx("container", s.chapter)}>
-      <section>
-        <div className={s.all_img}>
-          {chapter?.img.map((img) => (
-            <img key={img} src={img} alt='' />
-          ))}
-        </div>
-      </section>
-    </main>
+    <div className={clsx("container", s.chapter)}>
+      <div className={s.all_img}>
+        {chapter?.img?.map((img,i) => (
+          <img key={i} src={img} alt='' />
+        ))}
+      </div>
+      <AsideBarChapter  />
+    </div>
   );
 };
 
 // Chapter.getLayout = (page) => <ChapterLayout>{page}</ChapterLayout>;
 Chapter.getLayout = function getLayout(page: ReactElement) {
-  return <LayoutTwo>{page}</LayoutTwo>;
+  return <>{page}</>;
 };
 
 export default Chapter;

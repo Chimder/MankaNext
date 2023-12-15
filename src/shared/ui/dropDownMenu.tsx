@@ -15,7 +15,7 @@ interface DropMenuProps {
 export const DropMenu = ({ text, clsn, ctgr, click, data }: DropMenuProps) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   return (
-    <>
+    <Theme appearance='dark'>
       <DropdownMenu.Root
         open={isMenuOpen}
         onOpenChange={(isOpen) => setIsMenuOpen(isOpen)}
@@ -51,6 +51,6 @@ export const DropMenu = ({ text, clsn, ctgr, click, data }: DropMenuProps) => {
           )}
         </DropdownMenu.Content>
       </DropdownMenu.Root>
-    </>
+    </Theme>
   );
 };

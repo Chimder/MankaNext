@@ -41,7 +41,7 @@ const Manga = ({ data: manga }: MangaProps) => {
   const { data: session } = useSession();
   // console.log(session);
   const path = useRouter();
-  const mangaParam = path?.query?.manga! as string;
+  const mangaParam = path?.query?.manka! as string;
   const pat = usePathname();
   const pat2 = useParams();
 
