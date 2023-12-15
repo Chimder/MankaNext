@@ -45,7 +45,7 @@ function AsideBar() {
 
         <Link className={s.UserLogo} href=''>
           {session?.user ? (
-            <img src={session?.user?.image} width={24} />
+            <img src={session?.user?.image!} width={24} />
           ) : (
             <div>user</div>
           )}
