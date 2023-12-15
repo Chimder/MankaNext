@@ -4,23 +4,19 @@ import s from "./asidebar.module.scss";
 import clsx from "clsx";
 import { DropMenu } from "@/shared/ui/dropDownMenu";
 import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { animeControllerGetAnimeByName } from "@/shared/Api/generated";
+import {
+  AnimeDto,
+} from "@/shared/Api/generated";
 import { useRouter } from "next/router";
 
-function AsideBarChapter() {
+interface AsideBarChapterProps {
+  data?: AnimeDto;
+  isSuccess?: boolean;
+}
+
+function AsideBarChapter({ data: manga, isSuccess }: AsideBarChapterProps) {
   const param = useParams();
   const router = useRouter();
-  console.log(param, "Params");
-  console.log(router, "ROUTER");
-
-  const { data: manga, isSuccess } = useQuery({
-    queryKey: ["manga"],
-    queryFn: () =>
-      animeControllerGetAnimeByName({ name: router?.query?.manka as string }),
-    staleTime: 0,
-    enabled: !!router?.query?.manka,
-  });
 
   const params = Number(router?.query?.chapter);
   const prew = params - 1;

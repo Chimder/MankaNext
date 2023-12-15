@@ -11,6 +11,7 @@ import { NextPageWithLayout } from "@/pages/_app";
 import AsideBarChapter from "@/components/AsideBar/aside-bar-chapter";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 type Chapter = {
   animeName: string;
@@ -18,55 +19,35 @@ type Chapter = {
   img: string[];
   name: string;
 };
-type ChapterProps = {
-  data?: Chapter;
-};
-export const getStaticPaths = async () => {
-  const data = await animeControllerGetAllAnime();
-  const paths = data.flatMap((manga) =>
-    (manga?.chapters || []).map((chapter) => ({
-      params: {
-        manka: manga.name,
-        chapter: chapter.chapter.toString(),
-      },
-    }))
-  );
-  return {
-    paths,
-    fallback: false,
-  };
-};
+const Chapter: NextPageWithLayout = () => {
+  const router = useRouter();
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // console.log("PARAMS", params);
-  const chapterNumber = parseInt(params?.chapter as string, 10);
-  if (isNaN(chapterNumber)) {
-    // console.log("not Number");
-    return { notFound: true };
-  }
-  const data = await animeControllerGetAnimeChapter({
-    name: params?.manka as string,
-    chapter: chapterNumber,
+  const { data: manga, isSuccess } = useQuery({
+    queryKey: ["manga"],
+    queryFn: () =>
+      animeControllerGetAnimeByName({ name: router?.query?.manka as string }),
+    staleTime: 0,
+    enabled: !!router?.query?.manka,
   });
-  return { props: { data } };
-};
-const Chapter: NextPageWithLayout<ChapterProps> = ({ data: chapter }) => {
-  // console.log(chapter);
-  const param = useParams();
+
+  console.log(manga);
+  const chapters = manga?.chapters.find(
+    (chap) => chap.chapter == Number(router?.query?.chapter)
+  );
+  console.log(chapters);
 
   return (
     <div className={clsx("container", s.chapter)}>
       <div className={s.all_img}>
-        {chapter?.img?.map((img,i) => (
-          <img key={i} src={img} alt='' />
+        {chapters?.img?.map((chap, i) => (
+          <img key={i} src={chap} alt='' />
         ))}
       </div>
-      <AsideBarChapter  />
+      <AsideBarChapter data={manga} isSuccess={isSuccess} />
     </div>
   );
 };
 
-// Chapter.getLayout = (page) => <ChapterLayout>{page}</ChapterLayout>;
 Chapter.getLayout = function getLayout(page: ReactElement) {
   return <>{page}</>;
 };
