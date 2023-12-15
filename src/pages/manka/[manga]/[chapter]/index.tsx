@@ -19,7 +19,6 @@ type Chapter = {
 type ChapterProps = {
   data?: Chapter;
 };
-
 export const getStaticPaths = async () => {
   const data = await animeControllerGetAllAnime();
   const paths = data.flatMap((manga) =>
