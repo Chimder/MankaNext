@@ -23,7 +23,7 @@ type MangaProps = {
 
 export const getStaticPaths = async () => {
   const data = await animeControllerGetAllAnime();
-  const paths = await data.map((manga) => ({ params: { manga: manga.name } }));
+  const paths = await data.map((manga) => ({ params: { manka: manga.name } }));
   return {
     paths,
     fallback: false,
@@ -32,7 +32,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await animeControllerGetAnimeByName({
-    name: params?.manga as string,
+    name: params?.manka as string,
   });
   return { props: { data }, revalidate: 10 };
 };
