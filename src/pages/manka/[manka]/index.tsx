@@ -14,13 +14,12 @@ import clsx from "clsx";
 import { Badge, Button } from "@radix-ui/themes";
 import Link from "next/link";
 import Recomend from "@/components/Recomend/aside";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 type MangaProps = {
   data: AnimeDto;
 };
-
 export const getStaticPaths = async () => {
   const data = await animeControllerGetAllAnime();
   const paths = await data.map((manga) => ({ params: { manka: manga.name } }));
@@ -29,7 +28,6 @@ export const getStaticPaths = async () => {
     fallback: false,
   };
 };
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await animeControllerGetAnimeByName({
     name: params?.manka as string,
@@ -39,30 +37,34 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Manga = ({ data: manga }: MangaProps) => {
   const { data: session } = useSession();
-  // console.log(session);
-  const path = useRouter();
-  const mangaParam = path?.query?.manka! as string;
-  const pat = usePathname();
-  const pat2 = useParams();
+  const router = useRouter();
 
   const {
     data: favorite,
     refetch: refetchFavorite,
-    isPending: isFavoritePending,
-  } = useQuery({
+    isFetching,
+    isSuccess,
+  } = useQuery<boolean>({
     queryKey: ["isFavorite"],
-    queryFn: () =>
-      animeControllerGetUserFavorite({
-        email: session?.user?.email!,
-        name: manga.name,
-      }),
-    enabled: !!session,
+    queryFn: async () => {
+      if (session) {
+        const result = await animeControllerGetUserFavorite({
+          email: session?.user?.email as string,
+          name: manga.name,
+        });
+        return Boolean(result);
+      }
+      return false; // Если пользователь не авторизован, возвращаем false
+    },
+    enabled: !!session, // Устанавливаем enabled в зависимости от наличия сессии
     staleTime: 0,
   });
-  // console.log("FAVORITEUSER", favorite);
-  // const [isFavor, setIsFav] = useState(favorite);
 
-  const { mutate, isPending, isSuccess } = useMutation({
+  console.log(isSuccess, "issuscsc");
+  console.log(isFetching, "sadada");
+  console.log(favorite, "sadada");
+
+  const { mutate } = useMutation({
     mutationKey: ["addFavorite"],
     mutationFn: () =>
       userControllerAddFavorite({
@@ -76,7 +78,7 @@ const Manga = ({ data: manga }: MangaProps) => {
 
   const addFavorite = () => {
     if (!session) {
-      redirect("/api/auth/signIn");
+      signIn();
     } else {
       mutate();
     }
@@ -94,21 +96,19 @@ const Manga = ({ data: manga }: MangaProps) => {
           <img src={manga.img} alt='' />
         </div>
         <div className={s.manga_info}>
-          <h1>{manga.name}</h1>
+          <div className={s.manga_info_2}>
+            <h1>{manga.name}</h1>
+            <div className={s.statistic}>Another iconst icon icon</div>
+          </div>
           <div className={s.badges}>
             <Button onClick={addFavorite} color={favorite ? "orange" : "teal"}>
-              {isFavoritePending
-                ? "Loading...."
-                : favorite
-                ? "Favorite"
-                : " Add To Favorite"}
+              {favorite ? "Favorite" : "Add To Favorite"}
             </Button>
             {manga.genres.map((genres, i) => (
-              <Badge key={i} className='badge' color='iris'>
+              <Badge key={i} className='badge_manga' color='iris'>
                 {genres}
               </Badge>
             ))}
-            <div className={s.statistic}>Another iconst icon icon</div>B
           </div>
           <div className={s.description}>{manga.describe}</div>
         </div>

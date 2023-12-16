@@ -22,6 +22,8 @@ name: string;
 status: string;
 orderField: string;
 orderDirection: string;
+page: number;
+perPage: number;
 };
 
 export type AnimeControllerGetAnimeChapterParams = {

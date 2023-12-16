@@ -15,7 +15,6 @@ import "@radix-ui/themes/styles.css";
 import "@/styles/index.scss";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import ScrollToTopOnRouteChange from "@/components/onTop";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -47,7 +46,6 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     <Provider store={store}>
       <SessionProvider session={pageProps.session}>
         <QueryClientProvider client={queryClient}>
-          <ScrollToTopOnRouteChange />
           {getLayout(<Component {...pageProps} />)}
         </QueryClientProvider>
       </SessionProvider>

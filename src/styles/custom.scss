@@ -27,7 +27,8 @@
 }
 
 .btn_drop {
-  width: min(14%, 140px);
+  width: 100%;
+  min-width: 120px;
   height: 40px;
 }
 
@@ -163,4 +164,11 @@
       font-size: 1rem;
     }
   }
+}
+
+.badge_manga{
+  margin-left: 10px;
+&:hover{
+  opacity: 1;
+}
 }
