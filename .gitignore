@@ -25,10 +25,7 @@
 .env.test.local
 .env.production.local
 .env*.local
-.env.*
-.env*
 .env
-!.env.example
 
 
 # debug
