@@ -1,8 +1,9 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 
+const url = process.env.NEXT_PUBLIC_API;
 export const AXIOS_INSTANCE = Axios.create({
   // baseURL: "http://localhost:4000",
-  baseURL: "https://pear-careful-swordfish.cyclic.app",
+  baseURL: url?.toString(),
   headers: {
     "Content-Type": "application/json",
   },

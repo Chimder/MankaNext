@@ -19,6 +19,7 @@ function SelectDropChapter({
     <div className='Chapters_List'>
       {data?.chapters?.map((chap) => (
         <Link
+          scroll={true}
           key={chap.name}
           href={`/manka/${chap.animeName}/${chap.chapter}`}
           onClick={() => setIsMenuOpen(false)}

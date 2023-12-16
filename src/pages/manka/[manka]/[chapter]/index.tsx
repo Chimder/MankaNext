@@ -1,16 +1,10 @@
 import clsx from "clsx";
 import React, { ReactElement } from "react";
 import s from "./manga-chapter.module.scss";
-import {
-  animeControllerGetAllAnime,
-  animeControllerGetAnimeByName,
-  animeControllerGetAnimeChapter,
-} from "@/shared/Api/generated";
-import { GetStaticProps } from "next";
+import { animeControllerGetAnimeByName } from "@/shared/Api/generated";
 import { NextPageWithLayout } from "@/pages/_app";
 import AsideBarChapter from "@/components/AsideBar/aside-bar-chapter";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 
 type Chapter = {
@@ -22,7 +16,13 @@ type Chapter = {
 const Chapter: NextPageWithLayout = () => {
   const router = useRouter();
 
-  const { data: manga, isSuccess } = useQuery({
+  const {
+    data: manga,
+    isSuccess,
+    isPending,
+    isLoading,
+    isFetchedAfterMount,
+  } = useQuery({
     queryKey: ["manga"],
     queryFn: () =>
       animeControllerGetAnimeByName({ name: router?.query?.manka as string }),
@@ -30,12 +30,15 @@ const Chapter: NextPageWithLayout = () => {
     enabled: !!router?.query?.manka,
   });
 
-  console.log(manga);
   const chapters = manga?.chapters.find(
     (chap) => chap.chapter == Number(router?.query?.chapter)
   );
-  console.log(chapters);
 
+  if (!isFetchedAfterMount) {
+    return <div>pending</div>;
+  }
+
+  console.log(isFetchedAfterMount);
   return (
     <div className={clsx("container", s.chapter)}>
       <div className={s.all_img}>
