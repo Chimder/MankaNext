@@ -6,7 +6,6 @@ import s from "./mangaList.module.scss";
 import clsx from "clsx";
 import { useIntersection } from "@mantine/hooks";
 import Link from "next/link";
-import Skeleton from "react-loading-skeleton";
 
 type pageParam = {
   pageParam: number;

@@ -19,8 +19,6 @@ const Chapter: NextPageWithLayout = () => {
   const {
     data: manga,
     isSuccess,
-    isPending,
-    isLoading,
     isFetchedAfterMount,
   } = useQuery({
     queryKey: ["manga"],
@@ -38,7 +36,6 @@ const Chapter: NextPageWithLayout = () => {
     return <div>pending</div>;
   }
 
-  console.log(isFetchedAfterMount);
   return (
     <div className={clsx("container", s.chapter)}>
       <div className={s.all_img}>

@@ -6,9 +6,8 @@ import {
   userControllerAddFavorite,
 } from "@/shared/Api/generated";
 import { GetStaticProps } from "next";
-import { redirect, useParams, usePathname } from "next/navigation";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import s from "./manga-page.module.scss";
 import clsx from "clsx";
 import { Badge, Button } from "@radix-ui/themes";
@@ -39,30 +38,16 @@ const Manga = ({ data: manga }: MangaProps) => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const {
-    data: favorite,
-    refetch: refetchFavorite,
-    isFetching,
-    isSuccess,
-  } = useQuery<boolean>({
+  const { data: favorite, refetch: refetchFavorite } = useQuery({
     queryKey: ["isFavorite"],
-    queryFn: async () => {
-      if (session) {
-        const result = await animeControllerGetUserFavorite({
-          email: session?.user?.email as string,
-          name: manga.name,
-        });
-        return Boolean(result);
-      }
-      return false; // Если пользователь не авторизован, возвращаем false
-    },
-    enabled: !!session, // Устанавливаем enabled в зависимости от наличия сессии
+    queryFn: () =>
+      animeControllerGetUserFavorite({
+        email: session?.user?.email as string,
+        name: manga.name,
+      }),
+    enabled: !!session,
     staleTime: 0,
   });
-
-  console.log(isSuccess, "issuscsc");
-  console.log(isFetching, "sadada");
-  console.log(favorite, "sadada");
 
   const { mutate } = useMutation({
     mutationKey: ["addFavorite"],
@@ -122,7 +107,7 @@ const Manga = ({ data: manga }: MangaProps) => {
           <div className={s.list}>
             <span className={s.chapters_span}>Chapters</span>
             <div className={s.chapters_list}>
-              {manga.chapters?.map((chap) => (
+              {manga.chapters?.toReversed().map((chap) => (
                 <Link
                   key={chap.name}
                   href={`/manka/${manga.name}/${chap.chapter}`}
