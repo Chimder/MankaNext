@@ -1,4 +1,4 @@
-import AsideBarChapter from "./AsideBar/aside-bar-chapter";
+import AsideBarChapter from "./aside-bar-chapter";
 
 export default function LayoutTwo({ children }: { children: React.ReactNode }) {
   return (

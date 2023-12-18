@@ -1,8 +1,8 @@
 import { Button, DropdownMenu, Theme } from "@radix-ui/themes";
 import React from "react";
 import { IoCode } from "react-icons/io5";
-import SelectDropBtn from "./selectDropBtn";
-import SelectDropChapter from "./selectDropChapter";
+import SelectDropBtn from "../../components/select-drop";
+import SelectDropChapter from "../../components/select-drop-chapter";
 
 interface DropMenuProps {
   text?: string | string[];
@@ -15,7 +15,7 @@ interface DropMenuProps {
 export const DropMenu = ({ text, clsn, ctgr, click, data }: DropMenuProps) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   return (
-    <Theme appearance='dark'>
+    <Theme appearance="dark">
       <>
         <DropdownMenu.Root
           open={isMenuOpen}
@@ -23,15 +23,15 @@ export const DropMenu = ({ text, clsn, ctgr, click, data }: DropMenuProps) => {
         >
           <DropdownMenu.Trigger>
             {ctgr == "chapter" ? (
-              <div className='Word_container'>{text}</div>
+              <div className="Word_container">{text}</div>
             ) : (
-              <Button className='btn_drop' variant='outline' color='orange'>
+              <Button className="btn_drop" variant="outline" color="orange">
                 <span>{text}</span>
                 <IoCode />
               </Button>
             )}
           </DropdownMenu.Trigger>
-          <DropdownMenu.Content className={clsn} variant='solid'>
+          <DropdownMenu.Content className={clsn} variant="solid">
             {ctgr == "chapter" && (
               <SelectDropChapter
                 data={data}
@@ -39,16 +39,16 @@ export const DropMenu = ({ text, clsn, ctgr, click, data }: DropMenuProps) => {
               ></SelectDropChapter>
             )}
             {ctgr == "genres" && (
-              <SelectDropBtn click={click!} type='genres'></SelectDropBtn>
+              <SelectDropBtn click={click!} type="genres"></SelectDropBtn>
             )}
             {ctgr == "status" && (
-              <SelectDropBtn click={click!} type='status'></SelectDropBtn>
+              <SelectDropBtn click={click!} type="status"></SelectDropBtn>
             )}
             {ctgr == "lang" && (
-              <SelectDropBtn click={click!} type='lang'></SelectDropBtn>
+              <SelectDropBtn click={click!} type="lang"></SelectDropBtn>
             )}
             {ctgr == "sort" && (
-              <SelectDropBtn type='sort' click={click!}></SelectDropBtn>
+              <SelectDropBtn type="sort" click={click!}></SelectDropBtn>
             )}
           </DropdownMenu.Content>
         </DropdownMenu.Root>

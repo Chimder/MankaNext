@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React from "react";
-import { AnimeDto } from "../Api/generated";
+import { AnimeDto } from "../shared/Api/generated";
 
 interface SelectDropBtnProps {
   type?: string;
   // data?: string[];
   click?: (e: React.MouseEvent<HTMLButtonElement>, category: string) => void;
   data?: AnimeDto;
-  setIsMenuOpen: any;
+  setIsMenuOpen?: any;
 }
 function SelectDropChapter({
   type,
@@ -16,7 +16,7 @@ function SelectDropChapter({
   setIsMenuOpen,
 }: SelectDropBtnProps) {
   return (
-    <div className='Chapters_List'>
+    <div className="Chapters_List">
       {data?.chapters?.map((chap) => (
         <Link
           scroll={true}

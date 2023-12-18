@@ -8,11 +8,10 @@ import {
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import s from "./manga-page.module.scss";
-import clsx from "clsx";
-import { Badge, Button } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
+import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import Recomend from "@/components/Recomend/aside";
+import Recomend from "@/components/recomend";
 import { signIn, useSession } from "next-auth/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -71,48 +70,52 @@ const Manga = ({ data: manga }: MangaProps) => {
 
   return (
     <main>
-      <section className={clsx(s.manga_header)}>
-        <div className={s.header_img}>
-          <img src={manga.imgHeader} alt='' />
+      <section className="relative -z-10 flex max-h-[480px] items-center overflow-y-hidden border-[1px] border-red-500">
+        <div className=" h-full w-full">
+          <img className="h-full w-full" src={manga.imgHeader} alt="" />
+          {/* <div className=" absolute inset-x-0 bottom-0 h-full bg-black bg-opacity-0 backdrop-blur-[0.3px]"></div> */}
         </div>
       </section>
-      <section className={clsx("container", s.manga_page)}>
-        <div className={s.manga_logo}>
-          <img src={manga.img} alt='' />
+      <section className="z-50 mx-auto flex h-full w-full border-[1px] border-white 2xl:px-44">
+        <div className="z-50 -mt-28 w-1/5">
+          <img className="w-full self-end rounded-lg" src={manga.img} alt="" />
         </div>
-        <div className={s.manga_info}>
-          <div className={s.manga_info_2}>
-            <h1>{manga.name}</h1>
-            <div className={s.statistic}>Another iconst icon icon</div>
+        <div className="w-4/5 overflow-hidden border-[1px] border-white">
+          <div className="flex items-center justify-start overflow-hidden border-[1px] border-emerald-500">
+            <h1 className="relative flex px-5 py-0 text-3xl">{manga.name}</h1>
+            <div className="p-2">Another iconst icon icon</div>
           </div>
-          <div className={s.badges}>
+          <div className="relative my-2.5 ml-5 flex w-full items-center  ">
             <Button onClick={addFavorite} color={favorite ? "orange" : "teal"}>
               {favorite ? "Favorite" : "Add To Favorite"}
             </Button>
             {manga.genres.map((genres, i) => (
-              <Badge key={i} className='badge_manga' color='iris'>
+              // <Badge key={i} className="badge_manga" color="iris">
+              //   {genres}
+              // </Badge>
+              <Badge className="ml-3 bg-pink-800 hover:bg-pink-600" key={i}>
                 {genres}
               </Badge>
             ))}
           </div>
-          <div className={s.description}>{manga.describe}</div>
+          <div className="mx-5">{manga.describe}</div>
         </div>
       </section>
-      <section className={clsx("container", s.chapters)}>
-        <div className={s.chapters_inner}>
-          <aside className={s.aside}>
-            <span>This manga has Anime</span>
+      <section className="z-50 mx-auto h-full w-full border-[1px] border-white pt-2.5 2xl:px-44">
+        <div className="flex">
+          <aside className="w-1/5 border-[1px] border-fuchsia-500">
+            <span className="text-xl font-semibold ">This manga has Anime</span>
             <Recomend />
           </aside>
-          <div className={s.list}>
-            <span className={s.chapters_span}>Chapters</span>
-            <div className={s.chapters_list}>
+          <div className="w-4/5 border-[1px] border-green-700 px-5">
+            <span className="text-xl font-semibold">Chapters</span>
+            <div className="pt-3">
               {manga.chapters?.toReversed().map((chap) => (
                 <Link
                   key={chap.name}
                   href={`/manka/${manga.name}/${chap.chapter}`}
                 >
-                  <div className={s.chapter}>
+                  <div className="flex h-14 w-full content-start items-center  border-[1px] border-orange-600 ">
                     Ch. {chap.chapter} - {chap.name}
                   </div>
                 </Link>

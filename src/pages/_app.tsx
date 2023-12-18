@@ -4,8 +4,6 @@ import type { AppProps } from "next/app";
 import {
   ReactElement,
   ReactNode,
-  useCallback,
-  useEffect,
   useState,
 } from "react";
 import { SessionProvider } from "next-auth/react";

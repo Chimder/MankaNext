@@ -1,12 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import s from "./asidebar.module.scss";
-import clsx from "clsx";
 import { DropMenu } from "@/shared/ui/dropDownMenu";
 import { useParams } from "next/navigation";
-import {
-  AnimeDto,
-} from "@/shared/Api/generated";
+import { AnimeDto } from "@/shared/Api/generated";
 import { useRouter } from "next/router";
 
 interface AsideBarChapterProps {
@@ -22,16 +18,16 @@ function AsideBarChapter({ data: manga, isSuccess }: AsideBarChapterProps) {
   const prew = params - 1;
   const next = params + 1;
   return (
-    <div className={s.NavBar_container}>
-      <div className={s.NavBar}>
-        <div className={s.Noise}></div>
-        <Link className={s.Logo} href='/'>
+    <div className="nav_bar_container ">
+      <div className="z-100 flex w-full justify-evenly">
+        <div
+          className="noisee"
+          style={{ backgroundImage: "url(/noise.webp)" }}
+        ></div>
+        <Link className="nav_icon" href="/">
           ❄️
         </Link>
-        <Link
-          href={`/manka/${router?.query?.manka}`}
-          className={clsx(s.Word_container)}
-        >
+        <Link href={`/manka/${router?.query?.manka}`} className="nav_btn">
           Manga
         </Link>
 
@@ -40,25 +36,28 @@ function AsideBarChapter({ data: manga, isSuccess }: AsideBarChapterProps) {
             <DropMenu
               text={router?.query?.chapter!}
               // click={}
-              ctgr='chapter'
-              clsn='drop_chapter'
+              ctgr="chapter"
+              clsn="drop_chapter"
               data={manga}
             ></DropMenu>
           </div>
         )}
 
-        <Link
+        {/* <Link
           href={`/manka/${router?.query?.manka}/${prew}`}
           className={clsx(s.Word_container, params === 1 && s.disabledLink)}
+        >
+          - Prew
+        </Link> */}
+        <Link
+          href={`/manka/${router?.query?.manka}/${prew}`}
+          className="nav_btn"
         >
           - Prew
         </Link>
         <Link
           href={`/manka/${router?.query?.manka}/${next}`}
-          className={clsx(
-            s.Word_container,
-            params === manga?.chapters?.length && s.disabledLink
-          )}
+          className="nav_btn"
         >
           Next -
         </Link>

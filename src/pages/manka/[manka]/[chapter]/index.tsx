@@ -1,9 +1,7 @@
-import clsx from "clsx";
 import React, { ReactElement } from "react";
-import s from "./manga-chapter.module.scss";
 import { animeControllerGetAnimeByName } from "@/shared/Api/generated";
 import { NextPageWithLayout } from "@/pages/_app";
-import AsideBarChapter from "@/components/AsideBar/aside-bar-chapter";
+import AsideBarChapter from "@/components/aside-bar-chapter";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
@@ -29,7 +27,7 @@ const Chapter: NextPageWithLayout = () => {
   });
 
   const chapters = manga?.chapters.find(
-    (chap) => chap.chapter == Number(router?.query?.chapter)
+    (chap) => chap.chapter == Number(router?.query?.chapter),
   );
 
   if (!isFetchedAfterMount) {
@@ -37,10 +35,10 @@ const Chapter: NextPageWithLayout = () => {
   }
 
   return (
-    <div className={clsx("container", s.chapter)}>
-      <div className={s.all_img}>
+    <div className="container flex items-center justify-center">
+      <div className="flex flex-col ">
         {chapters?.img?.map((chap, i) => (
-          <img key={i} src={chap} alt='' />
+          <img className="pt-5" key={i} src={chap} alt="" />
         ))}
       </div>
       <AsideBarChapter data={manga} isSuccess={isSuccess} />
