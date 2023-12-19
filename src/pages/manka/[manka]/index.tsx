@@ -8,12 +8,12 @@ import {
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { Button } from "@radix-ui/themes";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Recomend from "@/components/recomend";
 import { signIn, useSession } from "next-auth/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
 
 type MangaProps = {
   data: AnimeDto;
@@ -70,10 +70,10 @@ const Manga = ({ data: manga }: MangaProps) => {
 
   return (
     <main>
-      <section className="relative -z-10 flex max-h-[480px] items-center overflow-y-hidden border-[1px] border-red-500">
+      <section className="relative z-10 flex max-h-[480px] items-center overflow-y-hidden border-[1px] border-red-500">
         <div className=" h-full w-full">
           <img className="h-full w-full" src={manga.imgHeader} alt="" />
-          {/* <div className=" absolute inset-x-0 bottom-0 h-full bg-black bg-opacity-0 backdrop-blur-[0.3px]"></div> */}
+          <div className=" absolute inset-x-0 bottom-0 h-full bg-black/30 backdrop-blur-0"></div>
         </div>
       </section>
       <section className="z-50 mx-auto flex h-full w-full border-[1px] border-white 2xl:px-44">
@@ -85,15 +85,15 @@ const Manga = ({ data: manga }: MangaProps) => {
             <h1 className="relative flex px-5 py-0 text-3xl">{manga.name}</h1>
             <div className="p-2">Another iconst icon icon</div>
           </div>
-          <div className="relative my-2.5 ml-5 flex w-full items-center  ">
-            <Button onClick={addFavorite} color={favorite ? "orange" : "teal"}>
+          <div className="relative my-2.5 ml-5 flex w-full items-center">
+            <Button
+              onClick={addFavorite}
+              className={`bg-${favorite ? "orange" : "teal"}-600 text-white `}
+            >
               {favorite ? "Favorite" : "Add To Favorite"}
             </Button>
             {manga.genres.map((genres, i) => (
-              // <Badge key={i} className="badge_manga" color="iris">
-              //   {genres}
-              // </Badge>
-              <Badge className="ml-3 bg-pink-800 hover:bg-pink-600" key={i}>
+              <Badge className="ml-3 bg-pink-700 hover:bg-pink-600" key={i}>
                 {genres}
               </Badge>
             ))}

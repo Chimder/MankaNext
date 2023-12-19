@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import { DropMenu } from "@/shared/ui/dropDownMenu";
 import { useParams } from "next/navigation";
 import { AnimeDto } from "@/shared/Api/generated";
 import { useRouter } from "next/router";
+import DropDownN from "./drop-down";
 
 interface AsideBarChapterProps {
   data?: AnimeDto;
@@ -33,13 +33,13 @@ function AsideBarChapter({ data: manga, isSuccess }: AsideBarChapterProps) {
 
         {isSuccess && (
           <div>
-            <DropMenu
+            <DropDownN
               text={router?.query?.chapter!}
               // click={}
               ctgr="chapter"
-              clsn="drop_chapter"
+              clsn="max-w-[30vw] min-w-[20vw] h-full flex rounded-md bg-black/60  backdrop-blur-md z-999 p-4 text-lg overflow-y-auto "
               data={manga}
-            ></DropMenu>
+            ></DropDownN>
           </div>
         )}
 

@@ -77,15 +77,27 @@
 
 @layer components {
   .nav_bar_container {
-    @apply fixed items-center bottom-0 left-1/2 z-50 flex max-h-[40px] w-full max-w-[440px] -translate-x-1/2 -translate-y-1/2 transform rounded-2xl bg-[rgba(0,0,0,0.3)] p-2 text-lg backdrop-blur-md;
+    @apply fixed bottom-0 left-1/2 z-999 flex max-h-[40px] w-full max-w-[440px] -translate-x-1/2 -translate-y-1/2 transform items-center rounded-2xl bg-[rgba(0,0,0,0.3)] p-2 text-lg backdrop-blur-md;
   }
   .noisee {
     @apply pointer-events-none absolute bottom-0 left-0 right-0 top-0 -z-20 rounded-xl opacity-0 mix-blend-overlay;
   }
   .nav_icon {
-    @apply flex items-center justify-center px-2.5 py-[1px] hover:rounded-xl  hover:bg-black/20;
+    @apply flex cursor-pointer items-center justify-center px-2.5 py-[1px] hover:rounded-xl  hover:bg-black/20;
   }
   .nav_btn {
-    @apply z-100 relative  flex items-center rounded-lg  px-2.5 py-[1px]  font-semibold text-white opacity-90 transition-colors hover:rounded-lg  hover:bg-black/20;
+    @apply relative z-100  flex items-center rounded-lg  px-2.5 py-[1px]  font-semibold text-white opacity-90 transition-colors hover:rounded-lg  hover:bg-black/20;
+  }
+  .select_btn_genres {
+    @apply m-2.5 h-7;
+  }
+  .select_btn_status {
+    @apply m-2.5 h-7 w-full justify-start;
+  }
+  .select_btn_lang {
+    @apply m-2.5 h-7 w-3/4 justify-start;
+  }
+  .select_btn_sort {
+    @apply m-2.5 h-7 w-4/5 justify-start;
   }
 }

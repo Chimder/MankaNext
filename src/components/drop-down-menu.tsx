@@ -11,25 +11,25 @@ export const DropDownMenuN = ({ on }: DropMenuProps) => {
         text="Genres"
         click={on}
         ctgr="genres"
-        clsn="min-w-[40vw] w-[480px] "
+        clsn="min-w-[18vw] w-36 "
       ></DropDownN>
       <DropDownN
         text="Status"
         click={on}
         ctgr="status"
-        clsn="drop_status"
+        clsn="min-w-[20vh] w-36"
       ></DropDownN>
       <DropDownN
         text="Lang"
         click={on}
         ctgr="lang"
-        clsn="drop_lang"
+        clsn="min-w-[20vh] w-36 "
       ></DropDownN>
       <DropDownN
         text="Sort By"
         click={on}
         ctgr="sort"
-        clsn="drop_sort"
+        clsn="min-w-[20vh] w-36"
       ></DropDownN>
     </>
   );

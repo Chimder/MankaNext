@@ -31,16 +31,17 @@ function SelectDropBtn({ type, click }: SelectDropBtnProps) {
 
   const allTags = [...genresTag, ...langTag, statusTag, sortTag];
   return (
-    <div>
+    <div className="items-center flex flex-col w-full">
       {data.map((g) => (
         <Button
+          variant="ghost"
           key={g.text}
           onClick={(e) => click(e, type)}
-          // className={`btn_select_${type}`}
-          color={allTags.includes(g.text) ? "green" : "orange"}
-          variant="ghost"
+          className={`select_btn_${type} ${
+            allTags.includes(g.text) ? "text-green-500" : "text-orange-500"
+          }`}
         >
-          {type == "lang" && <img src={g.img} width={22} height={22} />}
+          {type == "lang" && <img className="mr-2" src={g.img} width={22} height={22} />}
           {g.text}
         </Button>
       ))}

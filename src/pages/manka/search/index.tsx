@@ -1,5 +1,4 @@
 import React from "react";
-import { Button, Theme } from "@radix-ui/themes";
 import { useAppDispatch, useAppSelector } from "@/shared/Store/store";
 import {
   resetTag,
@@ -13,6 +12,7 @@ import { MangaList } from "@/components/manga-list";
 import { Input } from "@/components/ui/input";
 import { BadgeList } from "@/components/badge-list";
 import { DropDownMenuN } from "@/components/drop-down-menu";
+import { Button } from "@/components/ui/button";
 
 function mangaSearch() {
   const { inputValue } = useAppSelector((store) => store.tagSlice);
@@ -38,38 +38,36 @@ function mangaSearch() {
   };
 
   return (
-    <Theme appearance="dark">
-      <main className="mx-auto h-full w-full border-[1px] border-white 2xl:px-44">
-        <section className="container p-8">
-          <h1 className="pb-2 text-2xl">Advaced Manga Search</h1>
+    <main className="mx-auto h-full w-full border-[1px] border-white 2xl:px-44">
+      <section className="container p-8">
+        <h1 className="pb-2 text-2xl">Advaced Manga Search</h1>
 
-          <div className="flex w-full items-center justify-between pb-4">
-            <Input
-              className="min-w-60 w-full focus:border-2 focus:border-orange-600 md:w-1/3 lg:w-2/3"
-              value={inputValue}
-              onChange={(e) => dispatch(setInputValue(e.target.value))}
-            />
-            <DropDownMenuN on={on} />
+        <div className="flex w-full items-center justify-between pb-4">
+          <Input
+            className="min-w-60 w-full focus:border-2 focus:border-orange-600 md:w-1/3 lg:w-2/3"
+            value={inputValue}
+            onChange={(e) => dispatch(setInputValue(e.target.value))}
+          />
+          <DropDownMenuN on={on} />
+        </div>
+
+        <div className="flex w-full justify-between">
+          <div className="">
+            <BadgeList handleTag={handleTag} />
           </div>
-
-          <div className="flex w-full justify-between">
-            <div className="">
-              <BadgeList handleTag={handleTag} />
-            </div>
-            <div className="">
-              <Button
-                onClick={() => reset()}
-                className="rounded-lg bg-red-800 px-12 py-4 hover:bg-red-800/50 "
-              >
-                Reset
-              </Button>
-            </div>
+          <div className="">
+            <Button
+              onClick={() => reset()}
+              className="rounded-lg bg-red-800 px-12 py-4 hover:bg-red-800/50 "
+            >
+              Reset
+            </Button>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <MangaList />
-      </main>
-    </Theme>
+      <MangaList />
+    </main>
   );
 }
 

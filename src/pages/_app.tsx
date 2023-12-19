@@ -1,16 +1,11 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "@/components/layout";
 import type { AppProps } from "next/app";
-import {
-  ReactElement,
-  ReactNode,
-  useState,
-} from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
 import { store } from "@/shared/Store/store";
-import "@radix-ui/themes/styles.css";
-import "@/styles/index.scss";
+import "@/styles/globals.css";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
@@ -30,12 +25,10 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
       new QueryClient({
         defaultOptions: {
           queries: {
-            // With SSR, we usually want to set some default staleTime
-            // above 0 to avoid refetching immediately on the client
             staleTime: 60 * 1000,
           },
         },
-      })
+      }),
   );
 
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);

@@ -24,7 +24,7 @@ const DropDownN = ({ text, clsn, ctgr, click, data }: Props) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         {ctgr == "chapter" ? (
-          <div className="Word_container">{text}</div>
+          <div className="nav_icon">{text}</div>
         ) : (
           <Button
             className="ml-3 rounded-lg px-10 py-4  text-orange-600"

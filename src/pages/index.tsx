@@ -1,6 +1,4 @@
-import Layout from "@/components/layout";
 import Head from "next/head";
-import { ReactElement } from "react";
 // import { Noto_Sans_JP } from "next/font/google";
 
 // const inter = Noto_Sans_JP();
