@@ -110,7 +110,7 @@ const Manga = ({ data: manga }: MangaProps) => {
           <div className="w-4/5 border-[1px] border-green-700 px-5">
             <span className="text-xl font-semibold">Chapters</span>
             <div className="pt-3">
-              {manga.chapters?.toReversed().map((chap) => (
+              {manga.chapters?.map((chap) => (
                 <Link
                   key={chap.name}
                   href={`/manka/${manga.name}/${chap.chapter}`}
