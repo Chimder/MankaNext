@@ -1,16 +1,21 @@
+import { ThemeProvider } from "@/components/theme-provider";
 import { Html, Head, Main, NextScript } from "next/document";
-import { Theme } from "@radix-ui/themes";
 
 export default function Document() {
   return (
-    <Html lang='en'>
-      <Theme appearance='dark'>
-        <Head />
-        <body>
+    <Html lang="en">
+      <Head />
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Main />
           <NextScript />
-        </body>
-      </Theme>
+        </ThemeProvider>
+      </body>
     </Html>
   );
 }

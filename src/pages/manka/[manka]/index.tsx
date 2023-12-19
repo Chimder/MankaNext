@@ -14,6 +14,7 @@ import Recomend from "@/components/recomend";
 import { signIn, useSession } from "next-auth/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/shared/lib/utils";
 
 type MangaProps = {
   data: AnimeDto;
@@ -88,12 +89,20 @@ const Manga = ({ data: manga }: MangaProps) => {
           <div className="relative my-2.5 ml-5 flex w-full items-center">
             <Button
               onClick={addFavorite}
-              className={`bg-${favorite ? "orange" : "teal"}-600 text-white `}
+              className={cn(
+                favorite
+                  ? "bg-orange-600 hover:bg-orange-600/60"
+                  : "bg-teal-600 hover:bg-teal-600/60",
+                "text-white",
+              )}
             >
               {favorite ? "Favorite" : "Add To Favorite"}
             </Button>
             {manga.genres.map((genres, i) => (
-              <Badge className="ml-3 bg-pink-700 hover:bg-pink-600" key={i}>
+              <Badge
+                className="ml-3 bg-pink-700 text-white cursor-default hover:bg-pink-600"
+                key={i}
+              >
                 {genres}
               </Badge>
             ))}

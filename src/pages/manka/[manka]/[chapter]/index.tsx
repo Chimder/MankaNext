@@ -4,6 +4,8 @@ import { NextPageWithLayout } from "@/pages/_app";
 import AsideBarChapter from "@/components/aside-bar-chapter";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import ProgressIndicator from "@/components/progress-indicator";
+import { Progress } from "@/components/ui/progress";
 
 type Chapter = {
   animeName: string;
@@ -14,11 +16,7 @@ type Chapter = {
 const Chapter: NextPageWithLayout = () => {
   const router = useRouter();
 
-  const {
-    data: manga,
-    isSuccess,
-    isFetchedAfterMount,
-  } = useQuery({
+  const { data: manga, isSuccess } = useQuery({
     queryKey: ["manga"],
     queryFn: () =>
       animeControllerGetAnimeByName({ name: router?.query?.manka as string }),
@@ -30,19 +28,18 @@ const Chapter: NextPageWithLayout = () => {
     (chap) => chap.chapter == Number(router?.query?.chapter),
   );
 
-  if (!isFetchedAfterMount) {
-    return <div>pending</div>;
-  }
-
   return (
-    <div className="container flex items-center justify-center">
-      <div className="flex flex-col ">
-        {chapters?.img?.map((chap, i) => (
-          <img className="pt-5" key={i} src={chap} alt="" />
-        ))}
+    <>
+      <div className="container flex items-center justify-center">
+        <div className="flex flex-col ">
+          {chapters?.img?.map((chap, i) => (
+            <img className="pt-5" key={i} src={chap} alt="" />
+          ))}
+        </div>
+        <AsideBarChapter data={manga} isSuccess={isSuccess} />
       </div>
-      <AsideBarChapter data={manga} isSuccess={isSuccess} />
-    </div>
+      {/* <Progress></Progress> */}
+    </>
   );
 };
 

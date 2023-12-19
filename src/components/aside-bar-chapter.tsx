@@ -1,9 +1,12 @@
 import Link from "next/link";
-import React from "react";
 import { useParams } from "next/navigation";
 import { AnimeDto } from "@/shared/Api/generated";
 import { useRouter } from "next/router";
 import DropDownN from "./drop-down";
+import * as React from "react";
+import * as ProgressPrimitive from "@radix-ui/react-progress";
+import { cn } from "@/shared/lib/utils";
+import { Progress } from "./ui/progress";
 
 interface AsideBarChapterProps {
   data?: AnimeDto;
@@ -62,6 +65,7 @@ function AsideBarChapter({ data: manga, isSuccess }: AsideBarChapterProps) {
           Next -
         </Link>
       </div>
+      <Progress className="fixed transform  rounded-2xl -bottom-5 left-1/2 z-50 flex h-[40px] w-full max-w-[438px] -translate-x-1/2 -translate-y-1/2"  />
     </div>
   );
 }

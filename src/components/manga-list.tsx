@@ -4,6 +4,7 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import React, { useEffect, useRef } from "react";
 import { useIntersection } from "@mantine/hooks";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type pageParam = {
   pageParam: number;
@@ -32,8 +33,9 @@ export const MangaList = () => {
     data: mangas,
     refetch,
     fetchNextPage,
-    hasNextPage,
+    isFetching,
     isFetchingNextPage,
+    hasNextPage,
   } = useInfiniteQuery({
     queryKey: ["mangas"],
     queryFn: fetchAnimePages,
@@ -45,7 +47,7 @@ export const MangaList = () => {
     },
     initialPageParam: 1,
   });
-  console.log("INFIN", mangas);
+
   useEffect(() => {
     refetch();
   }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch]);
@@ -56,39 +58,49 @@ export const MangaList = () => {
     threshold: 1,
   });
 
-  console.log(hasNextPage);
   useEffect(() => {
     if (entry?.isIntersecting && hasNextPage) {
       fetchNextPage();
     }
   }, [entry]);
-  if (!mangas) {
-    return <div>Not found</div>;
-  }
+
   return (
     <div className="container border-[1px] border-rose-600">
       <div className="grid w-full grid-cols-6 gap-5">
-        {mangas?.pages?.flat().map((manga) => (
-          <Link
-            className="relative z-50 h-full w-full"
-            key={manga?.name}
-            href={`/manka/${manga?.name}`}
-          >
-            <img
-              ref={ref}
-              src={manga?.img}
-              alt=""
-              className="block h-full max-w-full rounded"
-            />
-            <div
-              className="absolute bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white "
-              style={{ WebkitTextStroke: "0.2px black" }}
-            >
-              <img src="/img/lang/JP.svg" width={20} height={20} alt="" />
-              <div>{manga?.name}</div>
-            </div>
-          </Link>
-        ))}
+        {isFetching && !isFetchingNextPage
+          ? Array.from({ length: 20 }, (_, index) => (
+              <React.Fragment key={`skeleton-${index}`}>
+                <div
+                  className="relative h-full w-full overflow-hidden rounded-sm"
+                  style={{ paddingBottom: "142%" }}
+                >
+                  <div className="absolute inset-0">
+                    <Skeleton className="h-full w-full" />
+                  </div>
+                </div>
+              </React.Fragment>
+            ))
+          : mangas?.pages?.flat().map((manga) => (
+              <Link
+                className="relative z-50 h-full w-full"
+                key={manga?.name}
+                href={`/manka/${manga?.name}`}
+              >
+                <img
+                  ref={ref}
+                  src={manga?.img}
+                  alt=""
+                  className="block h-full max-w-full rounded"
+                />
+                <div
+                  className="absolute bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white "
+                  style={{ WebkitTextStroke: "0.2px black" }}
+                >
+                  <img src="/img/lang/JP.svg" width={20} height={20} alt="" />
+                  <div>{manga?.name}</div>
+                </div>
+              </Link>
+            ))}
       </div>
     </div>
   );

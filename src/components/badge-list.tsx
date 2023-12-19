@@ -17,7 +17,7 @@ export const BadgeList = ({ handleTag }: Props) => {
         <Badge
           onClick={() => handleTag(tag, "genres")}
           key={tag}
-          className="relative ml-3 cursor-pointer text-emerald-500  hover:opacity-60"
+          className="relative ml-3 cursor-pointer bg-emerald-500 text-black    hover:bg-emerald-500/50"
         >
           {tag}
           <Cross1Icon className="ml-1 h-3 w-3 overflow-visible text-base hover:block" />
@@ -27,7 +27,7 @@ export const BadgeList = ({ handleTag }: Props) => {
         <Badge
           onClick={() => handleTag(tag, "lang")}
           key={tag}
-          className="relative ml-3  cursor-pointer text-pink-600  hover:opacity-60"
+          className="relative ml-3 cursor-pointer  bg-pink-600  text-black hover:bg-pink-600/50"
         >
           {tag}
           <Cross1Icon className="ml-1 h-3 w-3 overflow-visible text-base hover:block" />
@@ -37,7 +37,7 @@ export const BadgeList = ({ handleTag }: Props) => {
         <Badge
           onClick={() => handleTag(statusTag, "status")}
           key={statusTag}
-          className="relative ml-3 cursor-pointer text-blue-600  hover:opacity-60"
+          className="relative ml-3 cursor-pointer bg-cyan-600 text-black  hover:bg-cyan-600/50"
         >
           {statusTag}
           <Cross1Icon className="ml-1 h-3 w-3 overflow-visible text-base hover:block" />
@@ -47,7 +47,7 @@ export const BadgeList = ({ handleTag }: Props) => {
         <Badge
           onClick={() => handleTag(sortTag, "sort")}
           key={sortTag}
-          className="relative ml-3 cursor-pointer text-fuchsia-600  hover:opacity-60"
+          className="relative ml-3 cursor-pointer bg-fuchsia-600 text-black  hover:bg-fuchsia-600/50"
         >
           {sortTag}
           <Cross1Icon className="ml-1 h-3 w-3 overflow-visible text-base hover:block" />

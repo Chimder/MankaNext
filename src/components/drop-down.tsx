@@ -27,7 +27,7 @@ const DropDownN = ({ text, clsn, ctgr, click, data }: Props) => {
           <div className="nav_icon">{text}</div>
         ) : (
           <Button
-            className="ml-3 rounded-lg px-10 py-4  text-orange-600"
+            className="ml-3 rounded-lg px-10 py-4 text-orange-500 hover:text-orange-500"
             variant="outline"
           >
             <span>{text}</span>
