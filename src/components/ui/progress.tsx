@@ -25,7 +25,6 @@ const Progress = React.forwardRef<
   }, []);
 
   return (
-
     <ProgressPrimitive.Root
       ref={ref}
       className={cn(

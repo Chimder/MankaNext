@@ -3,9 +3,6 @@ import { useParams } from "next/navigation";
 import { AnimeDto } from "@/shared/Api/generated";
 import { useRouter } from "next/router";
 import DropDownN from "./drop-down";
-import * as React from "react";
-import * as ProgressPrimitive from "@radix-ui/react-progress";
-import { cn } from "@/shared/lib/utils";
 import { Progress } from "./ui/progress";
 
 interface AsideBarChapterProps {

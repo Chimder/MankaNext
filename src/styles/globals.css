@@ -100,4 +100,23 @@
   .select_btn_sort {
     @apply m-2.5 h-7 w-4/5 justify-start;
   }
+  .swiper-button-next {
+    @apply left-0 !bg-orange-600;
+  }
+  /* asdasda */
+  .embla {
+    @apply relative mb-8 cursor-grab overflow-hidden;
+  }
+  .embla__container {
+    @apply relative z-10 box-content flex w-full ;
+  }
+  .embla__slide {
+    @apply relative   flex flex-shrink-0 flex-grow-0 overflow-hidden rounded-2xl bg-cover  bg-no-repeat;
+  }
+  .embla__prev{
+    @apply absolute top-[20vh] items-center justify-center flex z-999 w-20 h-40  cursor-pointer
+  }
+  .embla__next{
+    @apply absolute top-[20vh] right-0 items-center justify-center flex  w-20 h-40 z-999  cursor-pointer
+  }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { genres, status, lang, sort, Lang } from "../shared/anotherdata";
+import { genres, status, lang, sort, Lang } from "../shared/data/anotherdata";
 import { useAppSelector } from "../shared/Store/store";
 import { Button } from "@/components/ui/button";
 

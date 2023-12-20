@@ -4,8 +4,6 @@ import { NextPageWithLayout } from "@/pages/_app";
 import AsideBarChapter from "@/components/aside-bar-chapter";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import ProgressIndicator from "@/components/progress-indicator";
-import { Progress } from "@/components/ui/progress";
 
 type Chapter = {
   animeName: string;
@@ -24,7 +22,7 @@ const Chapter: NextPageWithLayout = () => {
     enabled: !!router?.query?.manka,
   });
 
-  const chapters = manga?.chapters.find(
+  const chapters = manga?.chapters?.find(
     (chap) => chap.chapter == Number(router?.query?.chapter),
   );
 
