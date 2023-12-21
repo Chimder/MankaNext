@@ -119,4 +119,7 @@
   .embla__next{
     @apply absolute top-[20vh] right-0 items-center justify-center flex  w-20 h-40 z-999  cursor-pointer
   }
+  .disabled_link{
+    @apply pointer-events-none opacity-40
+  }
 }

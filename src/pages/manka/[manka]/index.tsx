@@ -15,6 +15,9 @@ import { signIn, useSession } from "next-auth/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/shared/lib/utils";
+import DotPublication from "@/components/dot-publication";
+import RatingStars from "@/components/rating-stars";
+import { formatCreatedAt } from "@/shared/lib/data-format";
 
 type MangaProps = {
   data: AnimeDto;
@@ -48,6 +51,7 @@ const Manga = ({ data: manga }: MangaProps) => {
     enabled: !!session,
     staleTime: 0,
   });
+  console.log("favorite", favorite);
 
   const { mutate } = useMutation({
     mutationKey: ["addFavorite"],
@@ -62,12 +66,14 @@ const Manga = ({ data: manga }: MangaProps) => {
   });
 
   const addFavorite = () => {
-    if (!session) {
+    if (!session?.user?.email) {
       signIn();
     } else {
       mutate();
     }
   };
+
+  console.log(manga);
 
   return (
     <main>
@@ -82,9 +88,10 @@ const Manga = ({ data: manga }: MangaProps) => {
           <img className="w-full self-end rounded-lg" src={manga.img} alt="" />
         </div>
         <div className="w-4/5 overflow-hidden border-[1px] border-white">
-          <div className="flex items-center justify-start overflow-hidden border-[1px] border-emerald-500">
+          <div className="flex items-center justify-between overflow-hidden border-[1px] border-emerald-500">
             <h1 className="relative flex px-5 py-0 text-3xl">{manga.name}</h1>
-            <div className="p-2">Another iconst icon icon</div>
+            {/* <div className="p-2">Another iconst icon icon</div> */}
+            <RatingStars {...manga}></RatingStars>
           </div>
           <div className="relative my-2.5 ml-5 flex w-full items-center">
             <Button
@@ -100,12 +107,13 @@ const Manga = ({ data: manga }: MangaProps) => {
             </Button>
             {manga.genres.map((genres, i) => (
               <Badge
-                className="ml-3 bg-pink-700 text-white cursor-default hover:bg-pink-600"
+                className="ml-3 cursor-default bg-pink-700 text-white hover:bg-pink-600"
                 key={i}
               >
                 {genres}
               </Badge>
             ))}
+            <DotPublication {...manga} />
           </div>
           <div className="mx-5">{manga.describe}</div>
         </div>
@@ -121,12 +129,14 @@ const Manga = ({ data: manga }: MangaProps) => {
             <div className="pt-3">
               {manga.chapters?.map((chap) => (
                 <Link
+                  className="flex items-center justify-between border-[1px] border-yellow-600 p-4"
                   key={chap.name}
                   href={`/manka/${manga.name}/${chap.chapter}`}
                 >
-                  <div className="flex h-14 w-full content-start items-center  border-[1px] border-orange-600 ">
+                  <div className="">
                     Ch. {chap.chapter} - {chap.name}
                   </div>
+                  <div className="">{formatCreatedAt(chap.createdAt)}</div>
                 </Link>
               ))}
             </div>

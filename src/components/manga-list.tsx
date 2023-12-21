@@ -11,17 +11,23 @@ type pageParam = {
 };
 
 export const MangaList = () => {
-  const { genresTag, langTag, statusTag, sortTag, inputValue } = useAppSelector(
-    (store) => store.tagSlice,
-  );
-
+  const {
+    genresTag,
+    langTag,
+    sortName,
+    sortValue,
+    statusTag,
+    sortTag,
+    inputValue,
+  } = useAppSelector((store) => store.tagSlice);
   const fetchAnimePages = async ({ pageParam }: pageParam) => {
     const response = await animeControllerGetAnimeByGenres({
       name: inputValue,
       genres: genresTag,
       status: statusTag,
-      orderField: sortTag,
-      orderDirection: "",
+      country: langTag,
+      orderField: sortName,
+      orderDirection: sortValue,
       page: pageParam,
       perPage: 30,
     });
@@ -48,6 +54,7 @@ export const MangaList = () => {
     initialPageParam: 1,
   });
 
+  console.log(mangas);
   useEffect(() => {
     refetch();
   }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch]);

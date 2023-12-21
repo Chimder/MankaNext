@@ -4,6 +4,7 @@ import { NextPageWithLayout } from "@/pages/_app";
 import AsideBarChapter from "@/components/aside-bar-chapter";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type Chapter = {
   animeName: string;
@@ -14,7 +15,11 @@ type Chapter = {
 const Chapter: NextPageWithLayout = () => {
   const router = useRouter();
 
-  const { data: manga, isSuccess } = useQuery({
+  const {
+    data: manga,
+    isSuccess,
+    isFetching,
+  } = useQuery({
     queryKey: ["manga"],
     queryFn: () =>
       animeControllerGetAnimeByName({ name: router?.query?.manka as string }),
@@ -30,9 +35,22 @@ const Chapter: NextPageWithLayout = () => {
     <>
       <div className="container flex items-center justify-center">
         <div className="flex flex-col ">
-          {chapters?.img?.map((chap, i) => (
-            <img className="pt-5" key={i} src={chap} alt="" />
-          ))}
+          {isFetching
+            ? Array.from({ length: 1 }, (_, index) => (
+                <React.Fragment key={`skelet-${index}`}>
+                  <div
+                    className=" h-full w-full"
+                    // style={{ paddingBottom: "42%" }}
+                  >
+                    <div className="absolute inset-0">
+                      <Skeleton className="h-full w-full" />
+                    </div>
+                  </div>
+                </React.Fragment>
+              ))
+            : chapters?.img?.map((chap, i) => (
+                <img className="pt-5" key={i} src={chap} alt="" />
+              ))}
         </div>
         <AsideBarChapter data={manga} isSuccess={isSuccess} />
       </div>

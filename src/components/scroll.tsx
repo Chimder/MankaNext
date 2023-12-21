@@ -60,10 +60,10 @@ export function Scroll() {
         ))}
       </div>
       <div className="embla__prev" onClick={scrollPrev}>
-        <DoubleArrowLeftIcon className="z-999 h-14 w-14 fill-current text-red-600 hover:text-red-950 " />
+        <DoubleArrowLeftIcon className="z-999 h-14 w-14 fill-current text-orange-600 hover:text-orange-950 " />
       </div>
       <div className="embla__next" onClick={scrollNext}>
-        <DoubleArrowRightIcon className="z-999 h-14 w-14 fill-current text-blue-600 hover:text-blue-950" />
+        <DoubleArrowRightIcon className="z-999 h-14 w-14 fill-current text-orange-600 hover:text-orange-950" />
       </div>
     </div>
   );

@@ -1,17 +1,11 @@
 export const sort = [
-  { gap: "2", text: "None", value: "1", color: "orange", size: "2" },
-  { gap: "2", text: "Latest upload", value: "2", color: "orange", size: "2" },
-  { gap: "2", text: "Oldest upload", value: "3", color: "orange", size: "2" },
-  { gap: "2", text: "Title Ascending", value: "4", color: "orange", size: "2" },
-  {
-    gap: "2",
-    text: "Title Descending",
-    value: "5",
-    color: "orange",
-    size: "2",
-  },
-  { gap: "2", text: "Highest Rating", value: "6", color: "orange", size: "2" },
-  { gap: "2", text: "Lowest Rating", value: "7", color: "orange", size: "2" },
+  { text: "None" },
+  { text: "Latest upload" },//published asc
+  { text: "Oldest upload" }, //published desc
+  { text: "Title Ascending" }, /// name asc
+  { text: "Title Descending" }, /// name desc
+  { text: "Highest Rating" },
+  { text: "Lowest Rating" },
 ];
 
 export type Lang = {
@@ -25,7 +19,9 @@ export const lang = [
 ];
 
 export const status = [
-  { gap: "2", text: "Lowest Rating", value: "7", color: "orange", size: "2" },
+  { text: "Ongoing" },
+  { text: "Finished" },
+  { text: "Cancelled" },
 ];
 
 export const genres = [

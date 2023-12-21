@@ -23,16 +23,16 @@ export const BadgeList = ({ handleTag }: Props) => {
           <Cross1Icon className="ml-1 h-3 w-3 overflow-visible text-base hover:block" />
         </Badge>
       ))}
-      {langTag?.map((tag) => (
+      {langTag && (
         <Badge
-          onClick={() => handleTag(tag, "lang")}
-          key={tag}
+          onClick={() => handleTag(langTag, "lang")}
+          key={langTag}
           className="relative ml-3 cursor-pointer  bg-pink-600  text-black hover:bg-pink-600/50"
         >
-          {tag}
+          {langTag}
           <Cross1Icon className="ml-1 h-3 w-3 overflow-visible text-base hover:block" />
         </Badge>
-      ))}
+      )}
       {statusTag && (
         <Badge
           onClick={() => handleTag(statusTag, "status")}
