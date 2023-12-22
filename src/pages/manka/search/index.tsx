@@ -41,7 +41,9 @@ function mangaSearch() {
 
   return (
     <main className="mx-auto h-full w-full border-[1px] border-white 2xl:px-44">
-      <section className="container p-8">
+      {/* Constiner */}
+      <section className="p-8">
+      {/* Constiner */}
         <h1 className="pb-2 text-2xl">Advaced Manga Search</h1>
 
         <div className="flex w-full items-center justify-between pb-4">

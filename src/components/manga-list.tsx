@@ -72,7 +72,8 @@ export const MangaList = () => {
   }, [entry]);
 
   return (
-    <div className="container border-[1px] border-rose-600">
+    <div className="border-[1px] border-rose-600">
+      {/* Constiner */}
       <div className="grid w-full grid-cols-6 gap-5">
         {isFetching && !isFetchingNextPage
           ? Array.from({ length: 20 }, (_, index) => (

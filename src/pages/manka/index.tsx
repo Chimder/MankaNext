@@ -18,7 +18,7 @@ function MainManga() {
       <section className="items-center justify-center ">
         <Scroll></Scroll>
       </section>
-      <section className="container">
+      <section className="">
         <h1 className="text-4xl">The most trending now</h1>
         <ScrollMost></ScrollMost>
       </section>

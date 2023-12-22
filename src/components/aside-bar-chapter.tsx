@@ -16,7 +16,7 @@ function AsideBarChapter({ name, isSuccess }: AsideBarChapterProps) {
   const router = useRouter();
 
   const { data: manga } = useQuery({
-    queryKey: ["manga"],
+    queryKey: ["mangaChap"],
     queryFn: () => animeControllerGetAnimeByName({ name: name as string }),
   });
 

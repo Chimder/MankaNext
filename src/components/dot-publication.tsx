@@ -10,7 +10,7 @@ const DotPublication = ({ ...manga }: AnimeDto) => {
   return (
     <div className="relative flex items-center justify-center">
       <DotFilledIcon
-        className={`ml-3, h-6 w-6 fill-current ${
+        className={`ml-3, h-6 w-6 fill-current lg:hidden ${
           manga.status === "Ongoing"
             ? "text-green-600"
             : manga.status === "Finished"
@@ -18,9 +18,11 @@ const DotPublication = ({ ...manga }: AnimeDto) => {
               : "text-purple-600"
         }`}
       />
-      <span className="text-[12px]">PUBLICATION: {manga.published}</span>
+      <span className="text-[12px] lg:hidden">
+        PUBLICATION: {manga.published}
+      </span>
       <Badge
-        className={`fill-curent ml-3 text-white ${
+        className={`fill-curent ml-3 text-white lg:px-[3px] md:mt-2 lg:py-[1px] ${
           manga.status === "Ongoing"
             ? "bg-green-600 hover:bg-green-800"
             : manga.status === "Finished"

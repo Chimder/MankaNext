@@ -46,10 +46,9 @@ const RatingStars = ({ ...manga }: AnimeDto) => {
   };
 
   return (
-
-    <div className="flex flex-col pl-8 items-center justify-center">
-      <h1>Rating Manga</h1>
-      <div className="">
+    <div className="flex flex-col items-center justify-center pl-8 lg:pr-8 lg:flex-row md:px-0 ">
+      <h1 className="lg:hidden">Rating Manga</h1>
+      <div className="md:">
         {[...Array(5)].map((_, index) => {
           const currentRating = index + 1;
           return (
@@ -62,7 +61,7 @@ const RatingStars = ({ ...manga }: AnimeDto) => {
                 className="hidden"
               />
               <span
-                className={`cursor-pointer text-2xl ${
+                className={`cursor-pointer text-2xl md:text-lg ${
                   currentRating <= (hover || rating)
                     ? "text-yellow-400"
                     : "text-gray-400"
@@ -76,7 +75,7 @@ const RatingStars = ({ ...manga }: AnimeDto) => {
           );
         })}
       </div>
-      <span>by {manga.ratingCount} reviews</span>
+      <span className="lg:text-xs md:hidden">by {manga.ratingCount} reviews</span>
       {showNotification && (
         <Alert className="fixed bottom-4 right-0 mr-4 w-[380px] border-yellow-600">
           <StarFilledIcon className="-m-1 h-4 w-6 fill-current text-yellow-600" />

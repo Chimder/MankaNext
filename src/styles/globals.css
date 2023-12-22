@@ -76,6 +76,9 @@
 }
 
 @layer components {
+  .containerM{
+    @apply px-[10vw] xl:px-[3vw] lg:px-0
+  }
   .nav_bar_container {
     @apply fixed bottom-0 left-1/2 z-999 flex max-h-[40px] w-full max-w-[440px] -translate-x-1/2 -translate-y-1/2 transform items-center rounded-2xl bg-[rgba(0,0,0,0.3)] p-2 text-lg backdrop-blur-md;
   }

@@ -10,8 +10,7 @@ const Favorite = () => {
   const { data: session } = useSession();
 
   return (
-    <section className="container">
-      
+    <section className="">
       <FavoriteList></FavoriteList>
     </section>
   );

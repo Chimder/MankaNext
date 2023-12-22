@@ -77,37 +77,51 @@ const Manga = ({ data: manga }: MangaProps) => {
 
   return (
     <main>
-      <section className="relative z-10 flex max-h-[480px] items-center overflow-y-hidden border-[1px] border-red-500">
-        <div className=" h-full w-full">
-          <img className="h-full w-full" src={manga.imgHeader} alt="" />
-          <div className=" absolute inset-x-0 bottom-0 h-full bg-black/30 backdrop-blur-0"></div>
+      <section className="relative z-40 flex max-h-[480px]   items-center overflow-y-hidden  lg:absolute lg:-z-10">
+        <div className="w-full  md:h-[36vh] lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] ">
+          <img
+            className="z-0 h-full w-full "
+            src={manga.imgHeader}
+            alt=""
+            // style={{
+            //   background:
+            //     "no-repeat top 35% center / 100% ",
+            // }}
+          />
+          <div className=" absolute inset-x-0 bottom-0 h-full bg-black/30  lg:z-40 lg:backdrop-blur-[1px]"></div>
         </div>
       </section>
-      <section className="z-50 mx-auto flex h-full w-full border-[1px] border-white 2xl:px-44">
-        <div className="z-50 -mt-28 w-1/5">
-          <img className="w-full self-end rounded-lg" src={manga.img} alt="" />
+      <section className="containerM z-100 mx-auto flex h-full w-full  md:pt-[22vh] lg:pt-[30vh] ">
+        <div className="z-100 -mt-28 w-1/5 lg:mt-0 lg:bg-black/80 lg:backdrop-blur-md">
+          <img
+            className="z-100 w-full self-end rounded-lg lg:rounded-none"
+            src={manga.img}
+            alt=""
+          />
         </div>
-        <div className="w-4/5 overflow-hidden border-[1px] border-white">
-          <div className="flex items-center justify-between overflow-hidden border-[1px] border-emerald-500">
-            <h1 className="relative flex px-5 py-0 text-3xl">{manga.name}</h1>
+        <div className="z-100 w-4/5 overflow-hidden  lg:bg-black/80 lg:backdrop-blur-md">
+          <div className="flex items-center justify-between overflow-hidden  ">
+            <h1 className="relative flex px-5 py-0 text-3xl md:px-2 md:text-lg lg:text-2xl">
+              {manga.name}
+            </h1>
             {/* <div className="p-2">Another iconst icon icon</div> */}
             <RatingStars {...manga}></RatingStars>
           </div>
-          <div className="relative my-2.5 ml-5 flex w-full items-center">
+          <div className="relative my-2.5 ml-5  flex w-full flex-wrap items-center md:ml-1 lg:ml-2">
             <Button
               onClick={addFavorite}
               className={cn(
                 favorite
                   ? "bg-orange-600 hover:bg-orange-600/60"
                   : "bg-teal-600 hover:bg-teal-600/60",
-                "text-white",
+                "text-white sm:mr-3 sm:w-full md:py-0",
               )}
             >
               {favorite ? "Favorite" : "Add To Favorite"}
             </Button>
             {manga.genres.map((genres, i) => (
               <Badge
-                className="ml-3 cursor-default bg-pink-700 text-white hover:bg-pink-600"
+                className="lg:-py-0 ml-3 cursor-default bg-slate-900 text-white hover:bg-slate-600 sm:mt-1 md:mt-2 lg:rounded-md lg:px-1"
                 key={i}
               >
                 {genres}
@@ -115,28 +129,36 @@ const Manga = ({ data: manga }: MangaProps) => {
             ))}
             <DotPublication {...manga} />
           </div>
-          <div className="mx-5">{manga.describe}</div>
+          <div className="mx-5 text-lg md:hidden lg:text-sm xl:text-[16px]">
+            {manga.describe}
+          </div>
         </div>
       </section>
-      <section className="z-50 mx-auto h-full w-full border-[1px] border-white pt-2.5 2xl:px-44">
-        <div className="flex">
-          <aside className="w-1/5 border-[1px] border-fuchsia-500">
-            <span className="text-xl font-semibold ">This manga has Anime</span>
+      <section className="containerM z-100 mx-auto h-full w-full bg-black  pt-2.5 ">
+        <div className="flex md:flex-col">
+          <aside className="w-1/5  md:flex  md:w-full  md:flex-col md:items-center md:pt-4">
+            <span className="text-xl font-semibold lg:text-sm  ">
+              This manga has Anime
+            </span>
             <Recomend />
           </aside>
-          <div className="w-4/5 border-[1px] border-green-700 px-5">
-            <span className="text-xl font-semibold">Chapters</span>
-            <div className="pt-3">
+          <div className="w-4/5 px-5 md:w-full md:px-0">
+            <span className="lg:text-md text-xl font-semibold md:px-4">
+              Chapters
+            </span>
+            <div className="pt-3 md:px-4">
               {manga.chapters?.map((chap) => (
                 <Link
-                  className="flex items-center justify-between border-[1px] border-yellow-600 p-4"
+                  className="my-2 flex items-center justify-between rounded-sm  bg-slate-900 p-4   md:my-1 md:py-3"
                   key={chap.name}
                   href={`/manka/${manga.name}/${chap.chapter}`}
                 >
-                  <div className="">
+                  <div className="lg:text-sm">
                     Ch. {chap.chapter} - {chap.name}
                   </div>
-                  <div className="">{formatCreatedAt(chap.createdAt)}</div>
+                  <div className="lg:text-sm">
+                    {formatCreatedAt(chap.createdAt)}
+                  </div>
                 </Link>
               ))}
             </div>

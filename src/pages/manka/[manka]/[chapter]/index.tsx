@@ -19,7 +19,6 @@ type Props = {
 };
 export const getStaticPaths = async () => {
   const data = await animeControllerGetAllAnime();
-  console.log("Data from animeControllerGetAllAnime:", data);
   const paths = await data?.flatMap((anime) => {
     return anime?.chapters?.map((chapterNumber) => ({
       params: { manka: anime.name, chapter: chapterNumber.chapter.toString() },
@@ -32,7 +31,6 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log("Data from getstaticProps:", params);
   const data = await animeControllerGetAnimeChapter({
     name: params?.manka as string,
     chapter: params?.chapter as string,
@@ -42,27 +40,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Chapter = ({ data: chapter }: Props) => {
   const router = useRouter();
-  // console.log(chapter);
   return (
     <>
-      <div className="container flex items-center justify-center">
+      {/* Constiner */}
+      <div className="flex items-center justify-center">
+        {/* Constiner */}
         <div className="flex flex-col ">
-          {/* {isFetching
-            ? Array.from({ length: 1 }, (_, index) => (
-                <React.Fragment key={`skelet-${index}`}>
-                  <div
-                    className=" h-full w-full"
-                    // style={{ paddingBottom: "42%" }}
-                  >
-                    <div className="absolute inset-0">
-                      <Skeleton className="h-full w-full" />
-                    </div>
-                  </div>
-                </React.Fragment>
-              ))
-            : chapters?.img?.map((chap, i) => (
-                <img className="pt-5" key={i} src={chap} alt="" />
-              ))} */}
           {chapter?.img?.map((chap, i) => (
             <div key={i}>
               <img src={chap} alt="chap" />
