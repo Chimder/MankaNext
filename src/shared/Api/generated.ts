@@ -38,7 +38,7 @@ perPage: number;
 
 export type AnimeControllerGetAnimeChapterParams = {
 name: string;
-chapter: number;
+chapter: string;
 };
 
 export type AnimeControllerGetAnimeByNameParams = {

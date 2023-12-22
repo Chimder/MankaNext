@@ -1,41 +1,50 @@
 import React, { ReactElement } from "react";
-import { animeControllerGetAnimeByName } from "@/shared/Api/generated";
-import { NextPageWithLayout } from "@/pages/_app";
-import AsideBarChapter from "@/components/aside-bar-chapter";
-import { useQuery } from "@tanstack/react-query";
+import {
+  animeControllerGetAllAnime,
+  animeControllerGetAnimeChapter,
+} from "@/shared/Api/generated";
 import { useRouter } from "next/router";
-import { Skeleton } from "@/components/ui/skeleton";
+import { GetStaticProps } from "next";
+import AsideBarChapter from "@/components/aside-bar-chapter";
 
-type Chapter = {
+export type ChapterDto = {
   animeName: string;
   chapter: number;
   img: string[];
   name: string;
+  createdAt: string;
 };
-const Chapter: NextPageWithLayout = () => {
-  const router = useRouter();
-
-  const {
-    data: manga,
-    isSuccess,
-    isFetching,
-  } = useQuery({
-    queryKey: ["manga"],
-    queryFn: () =>
-      animeControllerGetAnimeByName({ name: router?.query?.manka as string }),
-    staleTime: 0,
-    enabled: !!router?.query?.manka,
+type Props = {
+  data: ChapterDto;
+};
+export const getStaticPaths = async () => {
+  const data = await animeControllerGetAllAnime();
+  const paths = data?.flatMap((anime) => {
+    return anime.chapters.map((chapterNumber) => ({
+      params: { manka: anime.name, chapter: chapterNumber.chapter.toString() },
+    }));
   });
+  return {
+    paths,
+    fallback: false,
+  };
+};
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const data = await animeControllerGetAnimeChapter({
+    name: params?.manka as string,
+    chapter: params?.chapter as string,
+  });
+  return { props: { data } };
+};
 
-  const chapters = manga?.chapters?.find(
-    (chap) => chap.chapter == Number(router?.query?.chapter),
-  );
-
+const Chapter = ({ data: chapter }: Props) => {
+  const router = useRouter();
+  console.log(chapter);
   return (
     <>
       <div className="container flex items-center justify-center">
         <div className="flex flex-col ">
-          {isFetching
+          {/* {isFetching
             ? Array.from({ length: 1 }, (_, index) => (
                 <React.Fragment key={`skelet-${index}`}>
                   <div
@@ -50,9 +59,14 @@ const Chapter: NextPageWithLayout = () => {
               ))
             : chapters?.img?.map((chap, i) => (
                 <img className="pt-5" key={i} src={chap} alt="" />
-              ))}
+              ))} */}
+          {chapter?.img.map((chap, i) => (
+            <div key={i}>
+              <img src={chap} alt="chap" />
+            </div>
+          ))}
         </div>
-        <AsideBarChapter data={manga} isSuccess={isSuccess} />
+        <AsideBarChapter name={chapter.animeName} />
       </div>
       {/* <Progress></Progress> */}
     </>

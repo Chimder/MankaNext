@@ -1,19 +1,24 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { AnimeDto } from "@/shared/Api/generated";
+import { animeControllerGetAnimeByName } from "@/shared/Api/generated";
 import { useRouter } from "next/router";
 import DropDownN from "./drop-down";
 import { Progress } from "./ui/progress";
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+import { useQuery } from "@tanstack/react-query";
 
 interface AsideBarChapterProps {
-  data?: AnimeDto;
+  name?: string;
   isSuccess?: boolean;
 }
 
-function AsideBarChapter({ data: manga, isSuccess }: AsideBarChapterProps) {
-  const param = useParams();
+function AsideBarChapter({ name, isSuccess }: AsideBarChapterProps) {
   const router = useRouter();
+
+  const { data: manga } = useQuery({
+    queryKey: ["manga"],
+    queryFn: () => animeControllerGetAnimeByName({ name: name as string }),
+  });
 
   const params = Number(router?.query?.chapter);
   const prew = params - 1;
@@ -32,17 +37,17 @@ function AsideBarChapter({ data: manga, isSuccess }: AsideBarChapterProps) {
           Manga
         </Link>
 
-        {isSuccess && (
-          <div>
-            <DropDownN
-              text={router?.query?.chapter!}
-              // click={}
-              ctgr="chapter"
-              clsn="max-w-[30vw] min-w-[20vw] h-full flex rounded-md bg-black/60  backdrop-blur-md z-999 p-4 text-lg overflow-y-auto "
-              data={manga}
-            ></DropDownN>
-          </div>
-        )}
+        {/* {isSuccess && ( */}
+        <div>
+          <DropDownN
+            text={router?.query?.chapter!}
+            // click={}
+            ctgr="chapter"
+            clsn="max-w-[30vw] min-w-[20vw] h-full flex rounded-md bg-black/60  backdrop-blur-md z-999 p-4 text-lg overflow-y-auto "
+            data={manga}
+          ></DropDownN>
+        </div>
+        {/* )} */}
 
         <Link
           href={`/manka/${router?.query?.manka}/${prew}`}

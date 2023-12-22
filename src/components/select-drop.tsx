@@ -29,7 +29,7 @@ function SelectDropBtn({ type, click }: SelectDropBtnProps) {
     (store) => store.tagSlice,
   );
 
-  const allTags = [...genresTag, ...langTag, statusTag, sortTag];
+  const allTags = [...genresTag, langTag, statusTag, sortTag];
   return (
     <div className="flex w-full flex-col items-center">
       {data.map((g) => (

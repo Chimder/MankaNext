@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { BsChevronDoubleLeft } from "react-icons/bs";
 import { pages } from "@/shared/data/ScrollData";
 import Link from "next/link";
 import {
