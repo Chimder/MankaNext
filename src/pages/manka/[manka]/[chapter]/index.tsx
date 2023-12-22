@@ -30,6 +30,7 @@ export const getStaticPaths = async () => {
     fallback: false,
   };
 };
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   console.log("Data from getstaticProps:", params);
   const data = await animeControllerGetAnimeChapter({
