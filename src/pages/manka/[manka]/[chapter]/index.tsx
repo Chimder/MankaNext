@@ -19,6 +19,7 @@ type Props = {
 };
 export const getStaticPaths = async () => {
   const data = await animeControllerGetAllAnime();
+  console.log("Data from animeControllerGetAllAnime:", data);
   const paths = await data?.flatMap((anime) => {
     return anime?.chapters?.map((chapterNumber) => ({
       params: { manka: anime.name, chapter: chapterNumber.chapter.toString() },
@@ -30,6 +31,7 @@ export const getStaticPaths = async () => {
   };
 };
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  console.log("Data from getstaticProps:", params);
   const data = await animeControllerGetAnimeChapter({
     name: params?.manka as string,
     chapter: params?.chapter as string,
@@ -39,7 +41,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Chapter = ({ data: chapter }: Props) => {
   const router = useRouter();
-  console.log(chapter);
+  // console.log(chapter);
   return (
     <>
       <div className="container flex items-center justify-center">
