@@ -19,7 +19,7 @@ type Props = {
 };
 export const getStaticPaths = async () => {
   const data = await animeControllerGetAllAnime();
-  const paths = data?.flatMap((anime) => {
+  const paths = await data?.flatMap((anime) => {
     return anime?.chapters?.map((chapterNumber) => ({
       params: { manka: anime.name, chapter: chapterNumber.chapter.toString() },
     }));
