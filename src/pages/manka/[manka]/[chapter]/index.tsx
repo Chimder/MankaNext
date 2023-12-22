@@ -60,7 +60,7 @@ const Chapter = ({ data: chapter }: Props) => {
             : chapters?.img?.map((chap, i) => (
                 <img className="pt-5" key={i} src={chap} alt="" />
               ))} */}
-          {chapter?.img.map((chap, i) => (
+          {chapter?.img?.map((chap, i) => (
             <div key={i}>
               <img src={chap} alt="chap" />
             </div>
