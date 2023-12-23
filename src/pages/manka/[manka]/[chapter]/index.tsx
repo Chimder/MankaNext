@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import {
-  animeControllerGetAllAnime,
-  animeControllerGetAnimeChapter,
+  mangaControllerGetAllManga,
+  mangaControllerGetMangaChapter,
 } from "@/shared/Api/generated";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next";
@@ -18,7 +18,7 @@ type Props = {
   data: ChapterDto;
 };
 export const getStaticPaths = async () => {
-  const data = await animeControllerGetAllAnime();
+  const data = await mangaControllerGetAllManga();
   const paths = await data?.flatMap((anime) => {
     return anime?.chapters?.map((chapterNumber) => ({
       params: { manka: anime.name, chapter: chapterNumber.chapter.toString() },
@@ -31,7 +31,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = await animeControllerGetAnimeChapter({
+  const data = await mangaControllerGetMangaChapter({
     name: params?.manka as string,
     chapter: params?.chapter as string,
   });

@@ -76,8 +76,8 @@
 }
 
 @layer components {
-  .containerM{
-    @apply px-[10vw] xl:px-[3vw] lg:px-0
+  .containerM {
+    @apply px-[10vw] xl:px-[3vw] lg:px-0;
   }
   .nav_bar_container {
     @apply fixed bottom-0 left-1/2 z-999 flex max-h-[40px] w-full max-w-[440px] -translate-x-1/2 -translate-y-1/2 transform items-center rounded-2xl bg-[rgba(0,0,0,0.3)] p-2 text-lg backdrop-blur-md;
@@ -108,21 +108,21 @@
   }
   /* asdasda */
   .embla {
-    @apply relative mb-8 cursor-grab overflow-hidden;
+    @apply relative mb-8 cursor-grab overflow-hidden md:mb-2;
   }
   .embla__container {
-    @apply relative z-10 box-content flex w-full ;
+    @apply relative z-10 box-content flex w-full;
   }
   .embla__slide {
     @apply relative   flex flex-shrink-0 flex-grow-0 overflow-hidden rounded-2xl bg-cover  bg-no-repeat;
   }
-  .embla__prev{
-    @apply absolute top-[20vh] items-center justify-center flex z-999 w-20 h-40  cursor-pointer
+  .embla__prev {
+    @apply absolute top-[20vh] z-999 flex h-40 w-20 cursor-pointer items-center justify-center  md:top-10;
   }
-  .embla__next{
-    @apply absolute top-[20vh] right-0 items-center justify-center flex  w-20 h-40 z-999  cursor-pointer
+  .embla__next {
+    @apply absolute right-0 top-[20vh] z-999 flex h-40 w-20  cursor-pointer items-center justify-center  md:top-10;
   }
-  .disabled_link{
-    @apply pointer-events-none opacity-40
+  .disabled_link {
+    @apply pointer-events-none opacity-40;
   }
 }

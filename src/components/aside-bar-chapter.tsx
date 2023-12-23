@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { animeControllerGetAnimeByName } from "@/shared/Api/generated";
+import { mangaControllerGetMangaByName } from "@/shared/Api/generated";
 import { useRouter } from "next/router";
 import DropDownN from "./drop-down";
 import { Progress } from "./ui/progress";
@@ -17,7 +16,7 @@ function AsideBarChapter({ name, isSuccess }: AsideBarChapterProps) {
 
   const { data: manga } = useQuery({
     queryKey: ["mangaChap"],
-    queryFn: () => animeControllerGetAnimeByName({ name: name as string }),
+    queryFn: () => mangaControllerGetMangaByName({ name: name as string }),
   });
 
   const params = Number(router?.query?.chapter);

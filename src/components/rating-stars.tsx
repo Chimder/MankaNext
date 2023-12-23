@@ -1,6 +1,6 @@
 import {
-  AnimeDto,
-  animeControllerGetMangaRating,
+  MangaDto,
+  mangaControllerGetMangaRating,
 } from "@/shared/Api/generated";
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
@@ -8,10 +8,10 @@ import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { StarFilledIcon } from "@radix-ui/react-icons";
 
 interface Props {
-  manga: AnimeDto;
+  manga: MangaDto;
 }
 
-const RatingStars = ({ ...manga }: AnimeDto) => {
+const RatingStars = ({ ...manga }: MangaDto) => {
   const [rating, setRating] = useState<number>(manga.averageRating);
   const [hover, setHover] = useState<number | null>(null);
   const [showNotification, setShowNotification] = useState(false);
@@ -19,7 +19,7 @@ const RatingStars = ({ ...manga }: AnimeDto) => {
   const { mutate } = useMutation({
     mutationKey: ["rating"],
     mutationFn: (newRating: number) =>
-      animeControllerGetMangaRating({ name: manga?.name, rating: newRating }),
+      mangaControllerGetMangaRating({ name: manga?.name, rating: newRating }),
     onSuccess: () => {
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 3000);
@@ -80,7 +80,7 @@ const RatingStars = ({ ...manga }: AnimeDto) => {
       </span>
       {showNotification && (
         <Alert className="fixed bottom-4 right-0 z-999 mr-4 w-[380px] border-yellow-600 md:fixed md:-top-[21vh] md:m-0 md:h-[8vh] md:w-[100vw] ">
-          <StarFilledIcon className="-m-1 h-4 w-6 md:w-5 md:h-3 fill-current text-yellow-600" />
+          <StarFilledIcon className="-m-1 h-4 w-6 fill-current text-yellow-600 md:h-3 md:w-5" />
           <AlertTitle>Rating up!</AlertTitle>
           <AlertDescription>
             Thank you for appreciating the manga

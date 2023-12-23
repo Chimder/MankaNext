@@ -1,8 +1,8 @@
 import {
-  AnimeDto,
-  animeControllerGetAllAnime,
-  animeControllerGetAnimeByName,
-  animeControllerGetUserFavorite,
+  MangaDto,
+  mangaControllerGetAllManga,
+  mangaControllerGetMangaByName,
+  mangaControllerGetUserFavorite,
   userControllerAddFavorite,
 } from "@/shared/Api/generated";
 import { GetStaticProps } from "next";
@@ -20,10 +20,10 @@ import RatingStars from "@/components/rating-stars";
 import { formatCreatedAt } from "@/shared/lib/data-format";
 
 type MangaProps = {
-  data: AnimeDto;
+  data: MangaDto;
 };
 export const getStaticPaths = async () => {
-  const data = await animeControllerGetAllAnime();
+  const data = await mangaControllerGetAllManga();
   const paths = await data.map((manga) => ({ params: { manka: manga.name } }));
   return {
     paths,
@@ -31,7 +31,7 @@ export const getStaticPaths = async () => {
   };
 };
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = await animeControllerGetAnimeByName({
+  const data = await mangaControllerGetMangaByName({
     name: params?.manka as string,
   });
   return { props: { data }, revalidate: 10 };
@@ -44,7 +44,7 @@ const Manga = ({ data: manga }: MangaProps) => {
   const { data: favorite, refetch: refetchFavorite } = useQuery({
     queryKey: ["isFavorite"],
     queryFn: () =>
-      animeControllerGetUserFavorite({
+      mangaControllerGetUserFavorite({
         email: session?.user?.email as string,
         name: manga.name,
       }),
@@ -79,7 +79,7 @@ const Manga = ({ data: manga }: MangaProps) => {
     <main className="overflow-x-hidden ">
       <section className="relative z-40 flex max-h-[480px]   items-center  lg:absolute lg:-z-10">
         <div className="w-full  lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:h-[36vh] ">
-          <img className="z-0 h-full w-full " src={manga.imgHeader} alt="" />
+          <img className="z-0 h-full w-full " src={manga?.imgHeader} alt="" />
           <div className=" absolute inset-x-0 bottom-0 h-full bg-black/30  lg:z-40 lg:backdrop-blur-[1px]"></div>
         </div>
       </section>
@@ -87,14 +87,14 @@ const Manga = ({ data: manga }: MangaProps) => {
         <div className="z-100 -mt-28 w-1/5 lg:mt-0 lg:bg-black/80 lg:backdrop-blur-md">
           <img
             className="z-100 w-full self-end rounded-lg lg:rounded-none"
-            src={manga.img}
+            src={manga?.img}
             alt=""
           />
         </div>
         <div className="z-100 w-4/5   lg:bg-black/80 lg:backdrop-blur-md">
           <div className="flex items-center justify-between ">
             <h1 className="relative flex px-5 py-0 text-3xl lg:text-2xl md:px-2 md:text-lg">
-              {manga.name}
+              {manga?.name}
             </h1>
             {/* <div className="p-2">Another iconst icon icon</div> */}
             <RatingStars {...manga}></RatingStars>
@@ -111,7 +111,7 @@ const Manga = ({ data: manga }: MangaProps) => {
             >
               {favorite ? "Favorite" : "Add To Favorite"}
             </Button>
-            {manga.genres.map((genres, i) => (
+            {manga?.genres.map((genres, i) => (
               <Badge
                 className="lg:-py-0 ml-3 cursor-default bg-slate-900 text-white hover:bg-slate-600 lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
                 key={i}
@@ -122,7 +122,7 @@ const Manga = ({ data: manga }: MangaProps) => {
             <DotPublication {...manga} />
           </div>
           <div className="mx-5 text-lg xl:text-[16px] lg:text-sm md:hidden">
-            {manga.describe}
+            {manga?.describe}
           </div>
         </div>
       </section>
@@ -139,11 +139,11 @@ const Manga = ({ data: manga }: MangaProps) => {
               Chapters
             </span>
             <div className="pt-3 md:px-4 md:pb-14">
-              {manga.chapters?.map((chap) => (
+              {manga?.chapters?.map((chap) => (
                 <Link
                   className="my-2 flex items-center justify-between rounded-sm  bg-slate-900 p-4   md:my-1 md:py-3"
                   key={chap.name}
-                  href={`/manka/${manga.name}/${chap.chapter}`}
+                  href={`/manka/${manga?.name}/${chap.chapter}`}
                 >
                   <div className="lg:text-sm">
                     Ch. {chap.chapter} - {chap.name}

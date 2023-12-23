@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { animeControllerGetUserManga } from "@/shared/Api/generated";
+import { mangaControllerGetUserManga } from "@/shared/Api/generated";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -13,7 +13,7 @@ const FavoriteList = () => {
   const { data: mangas, isFetching } = useQuery({
     queryKey: ["user-favorite"],
     queryFn: () =>
-      animeControllerGetUserManga({ email: session?.user?.email as string }),
+      mangaControllerGetUserManga({ email: session?.user?.email as string }),
     staleTime: 0,
   });
 

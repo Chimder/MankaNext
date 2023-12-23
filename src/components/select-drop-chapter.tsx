@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { AnimeDto } from "../shared/Api/generated";
+import { MangaDto } from "../shared/Api/generated";
 
 interface SelectDropBtnProps {
   type?: string;
   // data?: string[];
   click?: (e: React.MouseEvent<HTMLButtonElement>, category: string) => void;
-  data?: AnimeDto;
+  data?: MangaDto;
   setIsMenuOpen?: any;
 }
 function SelectDropChapter({

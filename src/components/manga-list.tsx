@@ -1,4 +1,4 @@
-import { animeControllerGetAnimeByGenres } from "@/shared/Api/generated";
+import { mangaControllerGetMangaByGenres } from "@/shared/Api/generated";
 import { useAppSelector } from "@/shared/Store/store";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import React, { useEffect, useRef } from "react";
@@ -21,7 +21,7 @@ export const MangaList = () => {
     inputValue,
   } = useAppSelector((store) => store.tagSlice);
   const fetchAnimePages = async ({ pageParam }: pageParam) => {
-    const response = await animeControllerGetAnimeByGenres({
+    const response = await mangaControllerGetMangaByGenres({
       name: inputValue,
       genres: genresTag,
       status: statusTag,

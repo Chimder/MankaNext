@@ -11,21 +11,21 @@ email: string;
 name: string;
 };
 
-export type AnimeControllerGetMangaRatingParams = {
+export type MangaControllerGetMangaRatingParams = {
 name: string;
 rating: number;
 };
 
-export type AnimeControllerGetUserMangaParams = {
+export type MangaControllerGetUserMangaParams = {
 email: string;
 };
 
-export type AnimeControllerGetUserFavoriteParams = {
+export type MangaControllerGetUserFavoriteParams = {
 email: string;
 name: string;
 };
 
-export type AnimeControllerGetAnimeByGenresParams = {
+export type MangaControllerGetMangaByGenresParams = {
 genres: string[];
 name: string;
 status: string;
@@ -36,12 +36,12 @@ page: number;
 perPage: number;
 };
 
-export type AnimeControllerGetAnimeChapterParams = {
+export type MangaControllerGetMangaChapterParams = {
 name: string;
 chapter: string;
 };
 
-export type AnimeControllerGetAnimeByNameParams = {
+export type MangaControllerGetMangaByNameParams = {
 name: string;
 };
 
@@ -60,7 +60,7 @@ export interface Chapter {
   name: string;
 }
 
-export interface AnimeDto {
+export interface MangaDto {
   author: string;
   averageRating: number;
   chapters: Chapter[];
@@ -71,6 +71,7 @@ export interface AnimeDto {
   img: string;
   imgHeader: string;
   name: string;
+  popularity: number;
   published: number;
   ratingCount: number;
   status: string;
@@ -88,81 +89,90 @@ export interface AnimeDto {
   : never;
 
 
-  export const animeControllerGetAllAnime = (
+  export const mangaControllerGetAllManga = (
     
  options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<AnimeDto[]>(
-      {url: `/anime/get-all`, method: 'GET'
+      return customInstance<MangaDto[]>(
+      {url: `/manga/get-all`, method: 'GET'
     },
       options);
     }
   
-export const animeControllerGetAnimeByName = (
-    params: AnimeControllerGetAnimeByNameParams,
+export const mangaControllerGetMangaByName = (
+    params: MangaControllerGetMangaByNameParams,
  options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<AnimeDto>(
-      {url: `/anime/get-one`, method: 'GET',
+      return customInstance<MangaDto>(
+      {url: `/manga/get-one`, method: 'GET',
         params
     },
       options);
     }
   
-export const animeControllerGetAnimeChapter = (
-    params: AnimeControllerGetAnimeChapterParams,
+export const mangaControllerGetMangaChapter = (
+    params: MangaControllerGetMangaChapterParams,
  options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<AnimeDto>(
-      {url: `/anime/get-chapter`, method: 'GET',
+      return customInstance<MangaDto>(
+      {url: `/manga/get-chapter`, method: 'GET',
         params
     },
       options);
     }
   
-export const animeControllerGetAnimeByGenres = (
-    params: AnimeControllerGetAnimeByGenresParams,
+export const mangaControllerGetMankaPopular = (
+    
  options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<AnimeDto[]>(
-      {url: `/anime/get-by-filters`, method: 'GET',
+      return customInstance<MangaDto>(
+      {url: `/manga/get-popular`, method: 'GET'
+    },
+      options);
+    }
+  
+export const mangaControllerGetMangaByGenres = (
+    params: MangaControllerGetMangaByGenresParams,
+ options?: SecondParameter<typeof customInstance>,) => {
+      return customInstance<MangaDto[]>(
+      {url: `/manga/get-by-filters`, method: 'GET',
         params
     },
       options);
     }
   
-export const animeControllerCreateAnime = (
-    animeDto: BodyType<AnimeDto>,
+export const mangaControllerCreateManga = (
+    mangaDto: BodyType<MangaDto>,
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<void>(
-      {url: `/anime/create`, method: 'POST',
+      {url: `/manga/create`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: animeDto
+      data: mangaDto
     },
       options);
     }
   
-export const animeControllerGetUserFavorite = (
-    params: AnimeControllerGetUserFavoriteParams,
+export const mangaControllerGetUserFavorite = (
+    params: MangaControllerGetUserFavoriteParams,
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<void>(
-      {url: `/anime/userFavorite`, method: 'GET',
+      {url: `/manga/userFavorite`, method: 'GET',
         params
     },
       options);
     }
   
-export const animeControllerGetUserManga = (
-    params: AnimeControllerGetUserMangaParams,
+export const mangaControllerGetUserManga = (
+    params: MangaControllerGetUserMangaParams,
  options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<AnimeDto[]>(
-      {url: `/anime/user-favorite`, method: 'GET',
+      return customInstance<MangaDto[]>(
+      {url: `/manga/user-favorite`, method: 'GET',
         params
     },
       options);
     }
   
-export const animeControllerGetMangaRating = (
-    params: AnimeControllerGetMangaRatingParams,
+export const mangaControllerGetMangaRating = (
+    params: MangaControllerGetMangaRatingParams,
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<void>(
-      {url: `/anime/rating`, method: 'GET',
+      {url: `/manga/rating`, method: 'GET',
         params
     },
       options);
@@ -189,13 +199,14 @@ export const userControllerAddFavorite = (
       options);
     }
   
-export type AnimeControllerGetAllAnimeResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAllAnime>>>
-export type AnimeControllerGetAnimeByNameResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeByName>>>
-export type AnimeControllerGetAnimeChapterResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeChapter>>>
-export type AnimeControllerGetAnimeByGenresResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetAnimeByGenres>>>
-export type AnimeControllerCreateAnimeResult = NonNullable<Awaited<ReturnType<typeof animeControllerCreateAnime>>>
-export type AnimeControllerGetUserFavoriteResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetUserFavorite>>>
-export type AnimeControllerGetUserMangaResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetUserManga>>>
-export type AnimeControllerGetMangaRatingResult = NonNullable<Awaited<ReturnType<typeof animeControllerGetMangaRating>>>
+export type MangaControllerGetAllMangaResult = NonNullable<Awaited<ReturnType<typeof mangaControllerGetAllManga>>>
+export type MangaControllerGetMangaByNameResult = NonNullable<Awaited<ReturnType<typeof mangaControllerGetMangaByName>>>
+export type MangaControllerGetMangaChapterResult = NonNullable<Awaited<ReturnType<typeof mangaControllerGetMangaChapter>>>
+export type MangaControllerGetMankaPopularResult = NonNullable<Awaited<ReturnType<typeof mangaControllerGetMankaPopular>>>
+export type MangaControllerGetMangaByGenresResult = NonNullable<Awaited<ReturnType<typeof mangaControllerGetMangaByGenres>>>
+export type MangaControllerCreateMangaResult = NonNullable<Awaited<ReturnType<typeof mangaControllerCreateManga>>>
+export type MangaControllerGetUserFavoriteResult = NonNullable<Awaited<ReturnType<typeof mangaControllerGetUserFavorite>>>
+export type MangaControllerGetUserMangaResult = NonNullable<Awaited<ReturnType<typeof mangaControllerGetUserManga>>>
+export type MangaControllerGetMangaRatingResult = NonNullable<Awaited<ReturnType<typeof mangaControllerGetMangaRating>>>
 export type UserControllerRegNewUserResult = NonNullable<Awaited<ReturnType<typeof userControllerRegNewUser>>>
 export type UserControllerAddFavoriteResult = NonNullable<Awaited<ReturnType<typeof userControllerAddFavorite>>>

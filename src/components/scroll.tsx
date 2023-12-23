@@ -24,15 +24,15 @@ export function Scroll() {
         {pages.map((card) => (
           <div
             key={card.name}
-            className="embla__slide h-[80vh] w-full"
+            className="embla__slide h-[80vh] w-full md:h-[40vh]"
             style={{ backgroundImage: `url(${card.img})` }}
           >
-            <div className="z-100 box-border flex w-full items-end justify-between ">
-              <div className="flex text-white ">
-                <div className="z-999 mr-5 w-72 flex-shrink-0 overflow-hidden rounded-sm p-8">
+            <div className="z-100 box-border  flex w-full items-end justify-between ">
+              <div className="flex md:flex-wrap text-white ">
+                <div className="z-999  w-52 flex-shrink-0 overflow-hidden  rounded-sm p-8 md:mr-0  md:w-28 md:p-1">
                   <Link href={`/manka/${card.name}`}>
                     <img
-                      className="z-999 flex items-center"
+                      className="z-999 flex w-48 items-center p-1 md:w-28"
                       src={card.img2}
                       alt=""
                     />
@@ -45,10 +45,10 @@ export function Scroll() {
                       "linear-gradient(0deg, #1b1f35f2, #1b1f35cc 50%, #1b1f3500)",
                   }}
                 />
-                <div className="z-999 flex items-center">
+                <div className="z-999 flex w-full  items-center p-1">
                   <Link
                     href={`/manka/${card.name}`}
-                    className=" flex-shrink-0 text-5xl "
+                    className=" md:flex-shrink-1 flex-shrink-0 text-5xl lg:text-4xl md:text-2xl "
                   >
                     {card.name}
                   </Link>
@@ -59,10 +59,10 @@ export function Scroll() {
         ))}
       </div>
       <div className="embla__prev" onClick={scrollPrev}>
-        <DoubleArrowLeftIcon className="z-999 h-14 w-14 fill-current text-orange-600 hover:text-orange-950 " />
+        <DoubleArrowLeftIcon className="z-999 h-14 w-14 fill-current  text-orange-600 hover:text-orange-950 md:w-5 " />
       </div>
       <div className="embla__next" onClick={scrollNext}>
-        <DoubleArrowRightIcon className="z-999 h-14 w-14 fill-current text-orange-600 hover:text-orange-950" />
+        <DoubleArrowRightIcon className="z-999 h-14 w-14  fill-current text-orange-600 hover:text-orange-950 md:w-5" />
       </div>
     </div>
   );
