@@ -40,7 +40,7 @@ function mangaSearch() {
   console.log(inputValue);
 
   return (
-    <main className="mx-auto h-full w-full border-[1px] border-white 2xl:px-44">
+    <main className="mx-auto containerM h-full w-full border-[1px] border-white 2xl:px-44">
       {/* Constiner */}
       <section className="p-8">
       {/* Constiner */}

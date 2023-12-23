@@ -76,22 +76,14 @@ const Manga = ({ data: manga }: MangaProps) => {
   console.log(manga);
 
   return (
-    <main>
+    <main className="overflow-x-hidden ">
       <section className="relative z-40 flex max-h-[480px]   items-center overflow-y-hidden  lg:absolute lg:-z-10">
-        <div className="w-full  md:h-[36vh] lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] ">
-          <img
-            className="z-0 h-full w-full "
-            src={manga.imgHeader}
-            alt=""
-            // style={{
-            //   background:
-            //     "no-repeat top 35% center / 100% ",
-            // }}
-          />
+        <div className="w-full  lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:h-[36vh] ">
+          <img className="z-0 h-full w-full " src={manga.imgHeader} alt="" />
           <div className=" absolute inset-x-0 bottom-0 h-full bg-black/30  lg:z-40 lg:backdrop-blur-[1px]"></div>
         </div>
       </section>
-      <section className="containerM z-100 mx-auto flex h-full w-full  md:pt-[22vh] lg:pt-[30vh] ">
+      <section className="containerM z-100 mx-auto flex h-full  w-full  lg:pt-[30vh] md:pt-[22vh] ">
         <div className="z-100 -mt-28 w-1/5 lg:mt-0 lg:bg-black/80 lg:backdrop-blur-md">
           <img
             className="z-100 w-full self-end rounded-lg lg:rounded-none"
@@ -101,27 +93,27 @@ const Manga = ({ data: manga }: MangaProps) => {
         </div>
         <div className="z-100 w-4/5 overflow-hidden  lg:bg-black/80 lg:backdrop-blur-md">
           <div className="flex items-center justify-between overflow-hidden  ">
-            <h1 className="relative flex px-5 py-0 text-3xl md:px-2 md:text-lg lg:text-2xl">
+            <h1 className="relative flex px-5 py-0 text-3xl lg:text-2xl md:px-2 md:text-lg">
               {manga.name}
             </h1>
             {/* <div className="p-2">Another iconst icon icon</div> */}
             <RatingStars {...manga}></RatingStars>
           </div>
-          <div className="relative my-2.5 ml-5  flex w-full flex-wrap items-center md:ml-1 lg:ml-2">
+          <div className="relative my-2.5 ml-5  flex w-full flex-wrap items-center lg:ml-2 md:ml-1">
             <Button
               onClick={addFavorite}
               className={cn(
                 favorite
                   ? "bg-orange-600 hover:bg-orange-600/60"
                   : "bg-teal-600 hover:bg-teal-600/60",
-                "text-white sm:mr-3 sm:w-full md:py-0",
+                "text-white md:py-0 sm:mr-3 sm:w-full",
               )}
             >
               {favorite ? "Favorite" : "Add To Favorite"}
             </Button>
             {manga.genres.map((genres, i) => (
               <Badge
-                className="lg:-py-0 ml-3 cursor-default bg-slate-900 text-white hover:bg-slate-600 sm:mt-1 md:mt-2 lg:rounded-md lg:px-1"
+                className="lg:-py-0 ml-3 cursor-default bg-slate-900 text-white hover:bg-slate-600 lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
                 key={i}
               >
                 {genres}
@@ -129,7 +121,7 @@ const Manga = ({ data: manga }: MangaProps) => {
             ))}
             <DotPublication {...manga} />
           </div>
-          <div className="mx-5 text-lg md:hidden lg:text-sm xl:text-[16px]">
+          <div className="mx-5 text-lg xl:text-[16px] lg:text-sm md:hidden">
             {manga.describe}
           </div>
         </div>
@@ -146,7 +138,7 @@ const Manga = ({ data: manga }: MangaProps) => {
             <span className="lg:text-md text-xl font-semibold md:px-4">
               Chapters
             </span>
-            <div className="pt-3 md:px-4">
+            <div className="pt-3 md:px-4 md:pb-14">
               {manga.chapters?.map((chap) => (
                 <Link
                   className="my-2 flex items-center justify-between rounded-sm  bg-slate-900 p-4   md:my-1 md:py-3"
