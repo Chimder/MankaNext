@@ -17,7 +17,6 @@ export const lang = [
   { text: "Japanese", img: "/img/lang/JP.svg" },
   { text: "Chinese", img: "/img/lang/CHN.svg" },
 ];
-
 export const status = [
   { text: "Ongoing" },
   { text: "Finished" },
