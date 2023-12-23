@@ -46,7 +46,7 @@ const RatingStars = ({ ...manga }: AnimeDto) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center pl-8 lg:pr-8 lg:flex-row md:px-0 ">
+    <div className="flex flex-col items-center justify-center pl-8 lg:flex-row lg:pr-8 md:px-0 ">
       <h1 className="lg:hidden">Rating Manga</h1>
       <div className="md:">
         {[...Array(5)].map((_, index) => {
@@ -75,10 +75,12 @@ const RatingStars = ({ ...manga }: AnimeDto) => {
           );
         })}
       </div>
-      <span className="lg:text-xs md:hidden">by {manga.ratingCount} reviews</span>
+      <span className="lg:text-xs md:hidden">
+        by {manga.ratingCount} reviews
+      </span>
       {showNotification && (
-        <Alert className="fixed bottom-4 right-0 mr-4 w-[380px] border-yellow-600">
-          <StarFilledIcon className="-m-1 h-4 w-6 fill-current text-yellow-600" />
+        <Alert className="fixed bottom-4 right-0 z-999 mr-4 w-[380px] border-yellow-600 md:fixed md:-top-[21vh] md:m-0 md:h-[8vh] md:w-[100vw] ">
+          <StarFilledIcon className="-m-1 h-4 w-6 md:w-5 md:h-3 fill-current text-yellow-600" />
           <AlertTitle>Rating up!</AlertTitle>
           <AlertDescription>
             Thank you for appreciating the manga

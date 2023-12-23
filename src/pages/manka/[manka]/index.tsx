@@ -77,13 +77,13 @@ const Manga = ({ data: manga }: MangaProps) => {
 
   return (
     <main className="overflow-x-hidden ">
-      <section className="relative z-40 flex max-h-[480px]   items-center overflow-y-hidden  lg:absolute lg:-z-10">
+      <section className="relative z-40 flex max-h-[480px]   items-center  lg:absolute lg:-z-10">
         <div className="w-full  lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:h-[36vh] ">
           <img className="z-0 h-full w-full " src={manga.imgHeader} alt="" />
           <div className=" absolute inset-x-0 bottom-0 h-full bg-black/30  lg:z-40 lg:backdrop-blur-[1px]"></div>
         </div>
       </section>
-      <section className="containerM z-100 mx-auto flex h-full  w-full  lg:pt-[30vh] md:pt-[22vh] ">
+      <section className="containerM z-100 mx-auto flex h-full  w-full  lg:mt-[30vh] md:mt-[22vh] ">
         <div className="z-100 -mt-28 w-1/5 lg:mt-0 lg:bg-black/80 lg:backdrop-blur-md">
           <img
             className="z-100 w-full self-end rounded-lg lg:rounded-none"
@@ -91,8 +91,8 @@ const Manga = ({ data: manga }: MangaProps) => {
             alt=""
           />
         </div>
-        <div className="z-100 w-4/5 overflow-hidden  lg:bg-black/80 lg:backdrop-blur-md">
-          <div className="flex items-center justify-between overflow-hidden  ">
+        <div className="z-100 w-4/5   lg:bg-black/80 lg:backdrop-blur-md">
+          <div className="flex items-center justify-between ">
             <h1 className="relative flex px-5 py-0 text-3xl lg:text-2xl md:px-2 md:text-lg">
               {manga.name}
             </h1>
