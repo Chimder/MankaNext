@@ -40,15 +40,15 @@ function mangaSearch() {
   console.log(inputValue);
 
   return (
-    <main className="mx-auto containerM h-full w-full border-[1px] border-white 2xl:px-44">
+    <main className="containerM overflow-x-hidden h-full w-full border-[1px] border-white">
       {/* Constiner */}
-      <section className="p-8">
-      {/* Constiner */}
+      <section className="containerM w-full lg:p-2">
+        {/* Constiner */}
         <h1 className="pb-2 text-2xl">Advaced Manga Search</h1>
 
         <div className="flex w-full items-center justify-between pb-4">
           <Input
-            className="min-w-60 focus:border-1 w-full  focus:border-orange-600 md:w-1/3 lg:w-2/3"
+            className="min-w-60 focus:border-1 w-full  focus:border-orange-600 lg:w-2/3 md:w-1/3"
             value={inputValue}
             onChange={(e) => dispatch(setInputValue(e.target.value))}
           />

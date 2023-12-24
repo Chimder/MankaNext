@@ -72,9 +72,9 @@ export const MangaList = () => {
   }, [entry]);
 
   return (
-    <div className="border-[1px] border-rose-600">
+    <div className="border-[1px] pt-8 px-0 containerM border-rose-600">
       {/* Constiner */}
-      <div className="grid w-full grid-cols-6 gap-5">
+      <div className="grid w-full grid-cols-6 gap-5 xl:grid-cols-5 xl:gap-4 lg:grid-cols-4 lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
         {isFetching && !isFetchingNextPage
           ? Array.from({ length: 20 }, (_, index) => (
               <React.Fragment key={`skeleton-${index}`}>

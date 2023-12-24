@@ -19,7 +19,7 @@ const FavoriteList = () => {
 
   return (
     <div className="border-[1px] border-rose-600">
-      <div className="grid w-full grid-cols-6 gap-5">
+      <div className="grid w-full grid-cols-6 gap-5 xl:grid-cols-5 xl:gap-4 lg:grid-cols-4 lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
         {isFetching
           ? Array.from({ length: 18 }, (_, index) => (
               <React.Fragment key={`skeleton-${index}`}>
