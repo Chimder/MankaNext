@@ -4,7 +4,7 @@ import { RecomendAnim } from "@/shared/data/PopRecod";
 
 const Recomend = () => {
   return (
-    <div className=" -my-2 mt-0.5   md:flex md:my-2 md:justify-center md:items-center ">
+    <div className=" -my-2 mt-0.5  z-100  md:flex md:my-2 md:justify-center md:items-center ">
       {RecomendAnim.map((manga) => (
         <Link
           key={manga.name}

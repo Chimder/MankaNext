@@ -63,7 +63,7 @@ const RatingStars = ({ ...manga }: MangaDto) => {
               <span
                 className={`cursor-pointer text-2xl md:text-lg ${
                   currentRating <= (hover || rating)
-                    ? "text-yellow-400"
+                    ? "text-primary"
                     : "text-gray-400"
                 }`}
                 onMouseEnter={() => setHover(currentRating)}
@@ -79,9 +79,9 @@ const RatingStars = ({ ...manga }: MangaDto) => {
         by {manga.ratingCount} reviews
       </span>
       {showNotification && (
-        <Alert className="fixed bottom-4 right-0 z-999 mr-4 w-[380px] border-yellow-600 md:fixed md:-top-[21vh] md:m-0 md:h-[8vh] md:w-[100vw] ">
-          <StarFilledIcon className="-m-1 h-4 w-6 fill-current text-yellow-600 md:h-3 md:w-5" />
-          <AlertTitle>Rating up!</AlertTitle>
+        <Alert className="fixed bottom-4 right-0 z-999 mr-4 w-[380px] border-primary md:fixed md:-right-4 md:-top-[20vh]  md:m-0 md:h-[7vh] md:w-[100vw] ">
+          <StarFilledIcon className="-m-1 h-4 w-6 text-primary md:h-3 md:w-5" />
+          <AlertTitle className="text-primary">Rating up!</AlertTitle>
           <AlertDescription>
             Thank you for appreciating the manga
           </AlertDescription>

@@ -35,6 +35,10 @@ module.exports = {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+        button: {
+          DEFAULT: "hsl(var(--button-accent))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -77,6 +81,10 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+      },
+      backgroundImage: {
+        "gradient-dark":
+          "linear-gradient(to bottom, rgba(40, 42, 54, 0.8) 0%, rgb(40, 42, 54) 100%)",
       },
       zIndex: {
         60: 60,

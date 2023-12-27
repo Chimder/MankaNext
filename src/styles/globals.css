@@ -13,8 +13,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
 
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 274 36% 61%;
+    --primary-foreground: 274 36% 61%;
 
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
@@ -28,15 +28,15 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    /* --border: 240 5.9% 90%; */
-    /* --input: 240 5.9% 90%; */
-    /* --ring: 240 10% 3.9%; */
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 231 15% 18%;
     --foreground: 0 0% 98%;
 
     --card: 240 10% 3.9%;
@@ -45,8 +45,8 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 274 36% 61%;
+    --primary-foreground: 274 27% 51%;
 
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
@@ -54,8 +54,10 @@
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
 
-    --accent: 240 3.7% 15.9%;
+    --accent: 230 15% 24%;
     --accent-foreground: 0 0% 98%;
+
+    --button-accent: 218 12% 25%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
@@ -79,6 +81,7 @@
   .containerM {
     @apply px-[10vw] xl:px-[3vw] lg:px-0;
   }
+  
   .nav_bar_container {
     @apply fixed bottom-0 left-1/2 z-999 flex max-h-[40px] w-full max-w-[440px] -translate-x-1/2 -translate-y-1/2 transform items-center rounded-2xl bg-[rgba(0,0,0,0.3)] p-2 text-lg backdrop-blur-md;
   }

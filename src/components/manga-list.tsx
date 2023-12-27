@@ -72,9 +72,9 @@ export const MangaList = () => {
   }, [entry]);
 
   return (
-    <div className="border-[1px] pt-8 px-0 containerM border-rose-600">
+    <div className="containerM border-[1px] border-rose-600 px-0 pt-8">
       {/* Constiner */}
-      <div className="grid w-full grid-cols-6 gap-5 xl:grid-cols-5 xl:gap-4 lg:grid-cols-4 lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
+      <div className="grid w-full grid-cols-6 gap-5 xl:grid-cols-5 xl:gap-4 lg:grid-cols-4 lg:gap-3 md:grid-cols-3 md:gap-2 md:px-10 sm:px-1">
         {isFetching && !isFetchingNextPage
           ? Array.from({ length: 20 }, (_, index) => (
               <React.Fragment key={`skeleton-${index}`}>
@@ -90,7 +90,7 @@ export const MangaList = () => {
             ))
           : mangas?.pages?.flat().map((manga) => (
               <Link
-                className="relative z-50 h-full w-full"
+                className="relative z-50 h-full w-full "
                 key={manga?.name}
                 href={`/manka/${manga?.name}`}
               >

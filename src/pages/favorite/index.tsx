@@ -10,7 +10,7 @@ const Favorite = () => {
   const { data: session } = useSession();
 
   return (
-    <section className="containerM">
+    <section className="containerM overflow-x-hidden">
       <h1 className="py-4 text-3xl">Favorite Manga</h1>
       <FavoriteList></FavoriteList>
     </section>

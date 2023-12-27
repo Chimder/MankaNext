@@ -77,22 +77,26 @@ const Manga = ({ data: manga }: MangaProps) => {
 
   return (
     <main className="overflow-x-hidden ">
-      <section className="relative z-40 flex max-h-[480px] items-center  lg:absolute  lg:-z-10 md:hidden">
-        <div className="w-full  lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:h-[36vh] ">
-          <img className="z-0 h-full w-full " src={manga?.imgHeader} alt="" />
-          <div className=" absolute inset-x-0 bottom-0 h-full bg-black/30  lg:z-40 lg:backdrop-blur-[1px]"></div>
+      <section className="relative z-40 flex max-h-[480px] items-center  lg:absolute  lg:-z-10 ">
+        <div className="w-full  lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:absolute md:w-[100vw] ">
+          <img
+            className="z-0 h-full w-full md:absolute "
+            src={manga?.imgHeader}
+            alt=""
+          />
+          <div className=" md:bg-gradient-dark absolute inset-x-0 bottom-0 h-full  bg-black/30 lg:z-40 lg:backdrop-blur-[1px]"></div>
         </div>
       </section>
-      <section className=" flex h-full w-full  lg:pt-[30vh] md:pt-[22vh] ">
-        <div className="containerM z-100 flex w-full bg-black">
-          <div className="z-90 -mt-28 w-1/5 lg:mt-0 lg:backdrop-blur-md">
+      <section className="flex h-full w-full   lg:pt-[30vh] md:pt-40 ">
+        <div className="containerM z-100 flex w-full bg-background md:bg-transparent md:p-4">
+          <div className="z-90 -mt-28 w-1/5 lg:mt-0 lg:backdrop-blur-md md:backdrop-blur-none">
             <img
-              className="z-100 w-full self-end rounded-lg lg:rounded-none"
+              className="md: z-100 w-full self-end rounded-lg lg:rounded-none"
               src={manga?.img}
               alt=""
             />
           </div>
-          <div className="z-100 w-4/5 bg-black/10 lg:backdrop-blur-md">
+          <div className="z-100 w-4/5 lg:backdrop-blur-md md:backdrop-blur-none">
             <div className="flex items-center justify-between ">
               <h1 className="relative flex px-5 py-0 text-3xl lg:text-2xl md:px-2 md:text-lg">
                 {manga?.name}
@@ -105,7 +109,7 @@ const Manga = ({ data: manga }: MangaProps) => {
                 onClick={addFavorite}
                 className={cn(
                   favorite
-                    ? "bg-orange-600 hover:bg-orange-600/60"
+                    ? "bg-primary hover:bg-primary-foreground"
                     : "bg-teal-600 hover:bg-teal-600/60",
                   "text-white md:py-0 sm:mr-3 sm:w-full",
                 )}
@@ -114,7 +118,7 @@ const Manga = ({ data: manga }: MangaProps) => {
               </Button>
               {manga?.genres.map((genres, i) => (
                 <Badge
-                  className="lg:-py-0 ml-3 cursor-default bg-slate-900 text-white hover:bg-slate-600 lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
+                  className="lg:-py-0 bg-button ml-3 cursor-default text-white hover:bg-slate-600 lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
                   key={i}
                 >
                   {genres}
@@ -128,7 +132,7 @@ const Manga = ({ data: manga }: MangaProps) => {
           </div>
         </div>
       </section>
-      <section className="containerM z-100 mx-auto h-full w-full bg-black  pt-2.5 ">
+      <section className="containerM z-100 mx-auto h-full w-full  pt-2.5 ">
         <div className="flex md:flex-col">
           <aside className="w-1/5  md:flex  md:w-full  md:flex-col md:items-center md:pt-4">
             <span className="text-xl font-semibold lg:text-sm  ">
@@ -143,7 +147,7 @@ const Manga = ({ data: manga }: MangaProps) => {
             <div className="pt-3 md:px-4 md:pb-14">
               {manga?.chapters?.map((chap) => (
                 <Link
-                  className="my-2 flex items-center justify-between rounded-sm  bg-slate-900 p-4   md:my-1 md:py-3"
+                  className="my-2 flex items-center justify-between rounded-sm bg-accent p-4   md:my-1 md:py-3"
                   key={chap.name}
                   href={`/manka/${manga?.name}/${chap.chapter}`}
                 >

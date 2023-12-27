@@ -36,9 +36,9 @@ function AsideBar() {
         </div>
         {session?.user && (
           <Link className=" nav_btn group h-10 w-10" href="/favorite">
-            <HeartIcon className="h-10 w-10 fill-current text-red-600 group-hover:hidden" />
+            <HeartIcon className="h-10 w-10 fill-current text-primary group-hover:hidden" />
 
-            <HeartFilledIcon className="hidden h-10 w-10 fill-current text-red-600 group-hover:block" />
+            <HeartFilledIcon className="hidden h-10 w-10 fill-current text-primary group-hover:block" />
             <div></div>
           </Link>
         )}
