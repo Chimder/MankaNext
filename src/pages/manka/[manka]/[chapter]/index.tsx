@@ -42,9 +42,7 @@ const Chapter = ({ data: chapter }: Props) => {
   const router = useRouter();
   return (
     <>
-      {/* Constiner */}
       <div className="flex items-center justify-center">
-        {/* Constiner */}
         <div className="flex flex-col ">
           {chapter?.img?.map((chap, i) => (
             <div key={i}>

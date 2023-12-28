@@ -40,29 +40,33 @@ function mangaSearch() {
   console.log(inputValue);
 
   return (
-    <main className="containerM overflow-x-hidden h-full w-full border-[1px] border-white">
+    <main className="containerM h-full w-full overflow-x-hidden border-[1px]">
       {/* Constiner */}
-      <section className="containerM w-full lg:p-2">
+      <section className="w-full md:block md:px-10 sm:px-4">
         {/* Constiner */}
         <h1 className="pb-2 text-2xl">Advaced Manga Search</h1>
 
-        <div className="flex w-full items-center justify-between pb-4">
-          <Input
-            className="min-w-60 focus:border-1 w-full  focus:border-orange-600 lg:w-2/3 md:w-1/3"
-            value={inputValue}
-            onChange={(e) => dispatch(setInputValue(e.target.value))}
-          />
-          <DropDownMenuN on={on} />
+        <div className="flex w-full items-center justify-between pb-4 md:block md:pb-0">
+          <div className="w-full">
+            <Input
+              className="focus:border-1 w-full bg-button focus:border-primary"
+              value={inputValue}
+              onChange={(e) => dispatch(setInputValue(e.target.value))}
+            />
+          </div>
+          <div className="flex md:flex md:flex-col">
+            <DropDownMenuN on={on} />
+          </div>
         </div>
 
-        <div className="flex w-full justify-between">
-          <div className="">
+        <div className="flex w-full justify-between md:mt-[2px]">
+          <div className="md:hidden">
             <BadgeList handleTag={handleTag} />
           </div>
-          <div className="">
+          <div className="md:w-full">
             <Button
               onClick={() => reset()}
-              className="rounded-lg bg-red-800/80 px-12 py-4 text-red-400 hover:bg-red-800/40 "
+              className="rounded-lg bg-red-800/80  px-12 py-4 text-red-400 hover:bg-red-800/40 md:w-full "
             >
               Reset
             </Button>

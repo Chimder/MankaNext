@@ -147,7 +147,7 @@ const Manga = ({ data: manga }: MangaProps) => {
             <div className="pt-3 md:px-4 md:pb-14">
               {manga?.chapters?.map((chap) => (
                 <Link
-                  className="my-2 flex items-center justify-between rounded-sm bg-accent p-4   md:my-1 md:py-3"
+                  className="my-2 flex items-center justify-between rounded-sm bg-accent p-4 md:my-1 md:py-3"
                   key={chap.name}
                   href={`/manka/${manga?.name}/${chap.chapter}`}
                 >

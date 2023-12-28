@@ -79,7 +79,7 @@ export const MangaList = () => {
           ? Array.from({ length: 20 }, (_, index) => (
               <React.Fragment key={`skeleton-${index}`}>
                 <div
-                  className="relative h-full w-full overflow-hidden rounded-sm"
+                  className="relative w-full overflow-hidden rounded-sm"
                   style={{ paddingBottom: "142%" }}
                 >
                   <div className="absolute inset-0">
@@ -90,7 +90,7 @@ export const MangaList = () => {
             ))
           : mangas?.pages?.flat().map((manga) => (
               <Link
-                className="relative z-50 h-full w-full "
+                className="relative z-50 w-full "
                 key={manga?.name}
                 href={`/manka/${manga?.name}`}
               >
@@ -98,10 +98,10 @@ export const MangaList = () => {
                   ref={ref}
                   src={manga?.img}
                   alt=""
-                  className="block h-full max-w-full rounded"
+                  className="block max-w-full rounded"
                 />
                 <div
-                  className="absolute bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white "
+                  className="absolute sm:hidden bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white "
                   style={{ WebkitTextStroke: "0.2px black" }}
                 >
                   <img src="/img/lang/JP.svg" width={20} height={20} alt="" />
