@@ -92,7 +92,7 @@ export const MangaList = () => {
             ))
           : mangas?.pages?.flat().map((manga) => (
               <Link
-                className="relative z-50 w-full "
+                className="relative z-50 h-full w-full "
                 key={manga?.name}
                 href={`/manka/${manga?.name}`}
               >
@@ -100,7 +100,7 @@ export const MangaList = () => {
                   ref={ref}
                   src={manga?.img}
                   alt=""
-                  className="block max-w-full h-full rounded"
+                  className="block max-w-full rounded"
                 />
                 <div
                   className="absolute bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white sm:hidden "
