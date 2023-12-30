@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from "react";
 import { useIntersection } from "@mantine/hooks";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useInView } from "react-intersection-observer";
 
 type pageParam = {
   pageParam: number;
@@ -52,28 +53,29 @@ export const MangaList = () => {
       return lastPageParam + 1;
     },
     initialPageParam: 1,
+    refetchOnWindowFocus: false,
   });
 
-  console.log(mangas);
   useEffect(() => {
     refetch();
   }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch]);
 
   const lastVideoRef = useRef(null);
-  const { ref, entry } = useIntersection({
-    root: lastVideoRef.current,
-    threshold: 1,
-  });
+  // const { ref, entry } = useIntersection({
+  //   root: lastVideoRef.current,
+  //   threshold: 1,
+  // });
+
+  const { ref, inView } = useInView();
 
   useEffect(() => {
-    if (entry?.isIntersecting && hasNextPage) {
+    if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [entry]);
+  }, [inView]);
 
   return (
     <div className="containerM border-[1px] border-rose-600 px-0 pt-8">
-      {/* Constiner */}
       <div className="grid w-full grid-cols-6 gap-5 xl:grid-cols-5 xl:gap-4 lg:grid-cols-4 lg:gap-3 md:grid-cols-3 md:gap-2 md:px-10 sm:px-1">
         {isFetching && !isFetchingNextPage
           ? Array.from({ length: 20 }, (_, index) => (
@@ -98,10 +100,10 @@ export const MangaList = () => {
                   ref={ref}
                   src={manga?.img}
                   alt=""
-                  className="block max-w-full rounded"
+                  className="block max-w-full h-full rounded"
                 />
                 <div
-                  className="absolute sm:hidden bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white "
+                  className="absolute bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white sm:hidden "
                   style={{ WebkitTextStroke: "0.2px black" }}
                 >
                   <img src="/img/lang/JP.svg" width={20} height={20} alt="" />
