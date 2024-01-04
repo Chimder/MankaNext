@@ -19,7 +19,7 @@ type Props = {
 };
 export const getStaticPaths = async () => {
   const data = await mangaControllerGetAllManga();
-  const paths = await data?.flatMap((anime) => {
+  const paths = data?.flatMap((anime) => {
     return anime?.chapters?.map((chapterNumber) => ({
       params: { manka: anime.name, chapter: chapterNumber.chapter.toString() },
     }));
@@ -52,7 +52,6 @@ const Chapter = ({ data: chapter }: Props) => {
         </div>
         <AsideBarChapter name={chapter.animeName} />
       </div>
-      {/* <Progress></Progress> */}
     </>
   );
 };

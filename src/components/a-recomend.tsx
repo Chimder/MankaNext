@@ -2,34 +2,40 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { RecomendAnim } from "@/shared/data/PopRecod";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "next/navigation";
+import { mangaControllerGetMangaByName } from "@/shared/Api/generated";
+import { useRouter } from "next/router";
 
-const Recomend = () => {
-  const name = useParams();
-  const { data, refetch, isFetching } = useQuery({
+const AnimeRecomend = ({ name }: any) => {
+  const param = useRouter();
+
+  console.log("param", name);
+  const {
+    data: manga,
+    refetch,
+    isFetching,
+  } = useQuery({
     queryKey: ["isAnime"],
-    queryFn: () =>
-      axios.get("/api/proxyAnimeSearch", { params: { name: name?.manka } }),
-    // staleTime: 0,
+    queryFn: () => mangaControllerGetMangaByName({ name: name as string }),
+    staleTime: 0,
   });
 
-  const anime = data?.data?.results[0];
+  // const manga = data?.data?.results[0];
   useEffect(() => {
     refetch();
-  }, [name?.manka]);
+  }, [param.query]);
 
-  console.log("aniMME", anime);
+  console.log("MANGARECOM", manga);
 
   if (isFetching) {
     return <div></div>;
   }
   return (
     <div className=" z-100 -my-2  mt-0.5  md:my-2 md:flex md:items-center md:justify-center ">
-      {anime ? (
+      {manga ? (
         <Link
-          key={anime.id}
-          href={`/anime/${anime.id}`}
+          key={manga.name}
+          href={`/manka/${manga.name}`}
           className="float-left ml-[0.5px] mt-2  w-full  rounded-2xl bg-transparent no-underline "
         >
           <div className="relative mx-2 flex ">
@@ -37,13 +43,13 @@ const Recomend = () => {
               <div className="relative box-border">
                 <img
                   className="left-0  top-0 h-full w-full"
-                  src={anime.material_data.poster_url}
+                  src={manga.img}
                   alt="#"
                 />
               </div>
             </div>
             <div className="flex items-center  px-3 text-sm lg:text-[12px] md:hidden">
-              <span>{anime.title_orig}</span>
+              <span>{manga.name}</span>
             </div>
           </div>
         </Link>
@@ -75,4 +81,4 @@ const Recomend = () => {
   );
 };
 
-export default Recomend;
+export default AnimeRecomend;

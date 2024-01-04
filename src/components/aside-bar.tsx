@@ -13,23 +13,23 @@ function AsideBar() {
 
   const pathname = usePathname();
 
-  const isManga = pathname?.includes("manka") ? "manka" : undefined;
+  // const isManga = pathname?.includes("manka") ? "manka" : undefined;
 
   return (
     <div className="nav_bar_container">
       <nav className="z-100 flex w-full justify-evenly">
         {/* <div className={s.Noise}></div> */}
-        <Link className="nav_icon " href="/">
+        <Link className="flex justify-center items-center"  href="/">
           ❄️
         </Link>
 
         <div className="w-18 -ml-2 flex justify-between rounded-xl bg-black/10 py-1 pl-0 pr-4  backdrop-blur-sm  ">
-          <Link className="nav_btn" href={isManga ? "/manka/" : "/anime/"}>
-            {isManga ? "Manga" : "Anime"}
+          <Link className="nav_btn" href="/manka/">
+            Manga
           </Link>
           <Link
             className="flex  items-center justify-end rounded-xl bg-black/20 px-3.5 py-1"
-            href={isManga ? "/manka/search" : "/anime/search"}
+            href="/manka/search"
           >
             <MagnifyingGlassIcon className="h-6 w-6 fill-white" />
           </Link>
@@ -43,9 +43,9 @@ function AsideBar() {
           </Link>
         )}
 
-        <Link className="nav_btn" href={isManga ? "/anime/" : "/manka/"}>
+        {/* <Link className="nav_btn" href={isManga ? "/anime/" : "/manka/"}>
           {isManga ? "Anime" : "Manga"}
-        </Link>
+        </Link> */}
 
         <Link className="nav_icon " href="">
           {session?.user ? (

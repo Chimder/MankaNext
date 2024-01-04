@@ -22,11 +22,6 @@ export function ScrollMost() {
     emblaApi.on("scroll", onScroll);
   }, [emblaApi, onScroll]);
 
-  // const { data: mangas } = useQuery({
-  //   queryKey: ["mangas"],
-  //   queryFn: ,
-  // });
-
   return (
     <div className="embla pt-10 md:pt-2" ref={emblaRef}>
       <div className="embla__container ">

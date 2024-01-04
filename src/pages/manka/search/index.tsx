@@ -37,13 +37,9 @@ function mangaSearch() {
     dispatch(resetTag());
   };
 
-  console.log(inputValue);
-
   return (
     <main className="containerM h-full w-full overflow-x-hidden border-[1px]">
-      {/* Constiner */}
       <section className="w-full md:block md:px-10 sm:px-4">
-        {/* Constiner */}
         <h1 className="pb-2 text-2xl">Advaced Manga Search</h1>
 
         <div className="flex w-full items-center justify-between pb-4 md:block md:pb-0">
