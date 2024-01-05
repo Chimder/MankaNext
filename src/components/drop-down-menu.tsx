@@ -11,7 +11,7 @@ export const DropDownMenuN = ({ on }: DropMenuProps) => {
         text="Genres"
         click={on}
         ctgr="genres"
-        clsn="min-w-[18vw] w-36 bg-accent"
+        clsn="min-w-[18vw] md:min-w-[68vw] w-36 bg-accent mb-30"
       ></DropDownN>
       <DropDownN
         text="Status"

@@ -6,6 +6,11 @@ import {
   DoubleArrowRightIcon,
   DoubleArrowLeftIcon,
 } from "@radix-ui/react-icons";
+import { useQuery } from "@tanstack/react-query";
+import {
+  MangaDto,
+  mangaControllerGetMankaPopular,
+} from "@/shared/Api/generated";
 
 export function Scroll() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -13,6 +18,7 @@ export function Scroll() {
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
+
 
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
@@ -28,7 +34,7 @@ export function Scroll() {
             style={{ backgroundImage: `url(${card.img})` }}
           >
             <div className="z-100 box-border  flex w-full items-end justify-between ">
-              <div className="flex md:flex-wrap text-white ">
+              <div className="flex text-white md:flex-wrap ">
                 <div className="z-999  w-52 flex-shrink-0 overflow-hidden  rounded-sm p-8 md:mr-0  md:w-28 md:p-1">
                   <Link href={`/manka/${card.name}`}>
                     <img

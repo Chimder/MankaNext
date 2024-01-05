@@ -18,6 +18,7 @@ import { cn } from "@/shared/lib/utils";
 import DotPublication from "@/components/dot-publication";
 import RatingStars from "@/components/rating-stars";
 import { formatCreatedAt } from "@/shared/lib/data-format";
+import useWindowSize from "@/shared/lib/isMobile";
 
 type MangaProps = {
   data: MangaDto;
@@ -51,7 +52,7 @@ const Manga = ({ data: manga }: MangaProps) => {
     enabled: !!session,
     staleTime: 0,
   });
-  // console.log("favorite", favorite);
+  console.log("favorite", favorite);
 
   const { mutate } = useMutation({
     mutationKey: ["addFavorite"],
@@ -73,16 +74,18 @@ const Manga = ({ data: manga }: MangaProps) => {
     }
   };
 
+  const isMobile = useWindowSize();
+
   return (
     <main className="overflow-x-hidden ">
       <section className="relative z-40 flex max-h-[480px] items-center  lg:absolute  lg:-z-10 ">
-        <div className="w-full lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:absolute md:w-[100vw]">
+        <div className="w-full lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:absolute md:w-[100vw] ">
           <img
             className="z-0 h-full w-full md:absolute "
-            src={manga?.imgHeader}
+            src={isMobile ? manga?.img : manga?.imgHeader}
             alt=""
           />
-          <div className="absolute inset-x-0 bottom-0 h-full bg-black/30 lg:z-40 lg:backdrop-blur-[1px] md:bg-gradient-dark"></div>
+          <div className="md:bg-gradient-light absolute inset-x-0 bottom-0 h-full bg-black/30 lg:z-40 lg:backdrop-blur-[1px] dark:md:bg-gradient-dark"></div>
         </div>
       </section>
       <section className="flex h-full w-full lg:pt-[30vh] md:pt-40 ">
@@ -95,8 +98,8 @@ const Manga = ({ data: manga }: MangaProps) => {
             />
           </div>
           <div className="z-100 w-4/5 lg:backdrop-blur-md md:backdrop-blur-none">
-            <div className="flex items-center justify-between ">
-              <h1 className="relative flex px-5 py-0 text-3xl lg:text-2xl md:px-2 md:text-lg">
+            <div className="flex pt-2 items-center justify-between ">
+              <h1 className="relative flex px-5 py-0 text-3xl  lg:text-2xl md:px-2 md:text-lg drop-shadow-2xl md:text-black">
                 {manga?.name}
               </h1>
               <RatingStars {...manga}></RatingStars>
@@ -113,15 +116,15 @@ const Manga = ({ data: manga }: MangaProps) => {
               >
                 {favorite ? "Favorite" : "Add To Favorite"}
               </Button>
-              {manga?.genres?.map((genres, i) => (
+              {manga?.genres.map((genres, i) => (
                 <Badge
-                  className="lg:-py-0 ml-3 cursor-default bg-button text-white hover:bg-slate-600 lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
+                  className="lg:-py-0 bg-badge hover:bg-badge/70 ml-3 cursor-default text-white lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
                   key={i}
                 >
                   {genres}
                 </Badge>
               ))}
-              <DotPublication {...manga} />
+              <DotPublication year={manga.published} status={manga.status} />
             </div>
             <div className="mx-5 text-lg xl:text-[16px] lg:text-sm md:hidden">
               {manga?.describe}
@@ -129,12 +132,9 @@ const Manga = ({ data: manga }: MangaProps) => {
           </div>
         </div>
       </section>
-      <section className="containerM z-100 mx-auto h-full w-full  pt-2.5 ">
-        <div className="flex md:flex-col">
-          <aside className="w-1/5 md:flex md:w-full md:flex-col md:items-center md:pt-4">
-            <span className="text-xl font-semibold lg:text-sm">
-              This manga has Anime
-            </span>
+      <section className="containerM z-100 mx-auto h-full w-full pt-2.5 lg:bg-background  md:bg-transparent ">
+        <div className="flex md:flex-col ">
+          <aside className="w-1/5 md:flex md:w-full flex-col md:items-center md:pt-4">
             <Recomend />
           </aside>
           <div className="w-4/5 px-5 md:w-full md:px-0">

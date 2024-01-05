@@ -6,15 +6,8 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Main />
-          <NextScript />
-        </ThemeProvider>
+        <Main />
+        <NextScript />
       </body>
     </Html>
   );

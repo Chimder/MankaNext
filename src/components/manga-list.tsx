@@ -75,7 +75,7 @@ export const MangaList = () => {
   }, [inView]);
 
   return (
-    <div className="containerM border-[1px] border-rose-600 px-0 pt-8">
+    <div className="containerM px-0 pt-8">
       <div className="grid w-full grid-cols-6 gap-5 xl:grid-cols-5 xl:gap-4 lg:grid-cols-4 lg:gap-3 md:grid-cols-3 md:gap-2 md:px-10 sm:px-1">
         {isFetching && !isFetchingNextPage
           ? Array.from({ length: 20 }, (_, index) => (

@@ -38,7 +38,7 @@ function mangaSearch() {
   };
 
   return (
-    <main className="containerM h-full w-full overflow-x-hidden border-[1px]">
+    <main className="containerM h-full w-full overflow-x-hidden">
       <section className="w-full md:block md:px-10 sm:px-4">
         <h1 className="pb-2 text-2xl">Advaced Manga Search</h1>
 

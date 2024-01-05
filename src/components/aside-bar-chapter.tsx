@@ -42,7 +42,7 @@ function AsideBarChapter({ name, isSuccess }: AsideBarChapterProps) {
             text={router?.query?.chapter!}
             // click={}
             ctgr="chapter"
-            clsn="w-[20vw] xl:w-[30vw] lg:w-[40vw] md:w-[80vw] h-full flex rounded-md bg-black/60 backdrop-blur-md z-999 p-4 text-lg overflow-y-auto "
+            clsn="w-[20vw] xl:w-[30vw] lg:w-[40vw] md:w-[80vw] h-full flex rounded-md bg-background/40  backdrop-blur-md z-999 p-4 text-lg overflow-y-auto "
             data={manga}
           ></DropDownN>
         </div>

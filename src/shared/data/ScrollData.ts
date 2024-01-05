@@ -1,6 +1,6 @@
 const pages = [
   {
-    name: "One Punch-Man",
+    name: "One Punch Man",
     img: "/img/MainTop/OP.webp",
     img2: "/img/Logo/One-Punch-Man.webp",
     desc: "After rigorously training for three years, the ordinary Saitama has gained immense strength which allows him to take out anyone and anything with just...",
@@ -21,7 +21,7 @@ const pages = [
 
 const mostViewed = [
   {
-    name: "One Punch-Man",
+    name: "One Punch Man",
     img: "/img/Logo/One-Punch-Man.webp",
   },
   {

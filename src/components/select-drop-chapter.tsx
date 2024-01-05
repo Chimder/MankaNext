@@ -16,10 +16,10 @@ function SelectDropChapter({
   setIsMenuOpen,
 }: SelectDropBtnProps) {
   return (
-    <div className="flex flex-col w-full ">
+    <div className="flex w-full flex-col">
       {data?.chapters?.map((chap) => (
         <Link
-        className="hover:bg-black/20 flex justify-center items-center rounded-sm p-1"
+          className="flex items-center justify-center rounded-sm p-1 hover:bg-black/20"
           scroll={true}
           key={chap.name}
           href={`/manka/${chap.animeName}/${chap.chapter}`}

@@ -25,12 +25,16 @@ module.exports = {
       // => @media (max-width: 639px) { ... }
     },
     extend: {
+      textStroke: {
+        1: "2px", // здесь вы можете добавить другие варианты, если необходимо
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        badge: "hsl(var(--badge))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -85,6 +89,10 @@ module.exports = {
       backgroundImage: {
         "gradient-dark":
           "linear-gradient(to bottom, rgba(40, 42, 54, 0.8) 0%, rgb(40, 42, 54) 100%)",
+        "gradient-light":
+          "linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 1) 100%)",
+        "gradient-light-anime":
+          "linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 60%, rgba(255, 255, 255, 1) 80%)",
       },
       zIndex: {
         60: 60,

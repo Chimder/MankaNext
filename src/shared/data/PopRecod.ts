@@ -1,6 +1,6 @@
 const RecomendAnim = [
   {
-    name: "One Punch-Man",
+    name: "One Punch Man",
     img: "/img/Logo/One-Punch-Man.webp",
   },
   {

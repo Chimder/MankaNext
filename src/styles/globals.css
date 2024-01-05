@@ -28,6 +28,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
+    /* --badge: 191 97% 77%; */
+    --badge: 19 100% 49%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
@@ -58,6 +60,7 @@
     --accent-foreground: 0 0% 98%;
 
     --button-accent: 218 12% 25%;
+    --badge: 218 12% 25%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
@@ -81,22 +84,27 @@
   .containerM {
     @apply px-[10vw] xl:px-[3vw] lg:px-0;
   }
-  
+
   .nav_bar_container {
     @apply fixed bottom-0 left-1/2 z-999 flex max-h-[40px] w-full max-w-[440px] -translate-x-1/2 -translate-y-1/2 transform items-center rounded-2xl bg-[rgba(0,0,0,0.3)] p-2 text-lg backdrop-blur-md;
   }
+
   .noisee {
     @apply pointer-events-none absolute bottom-0 left-0 right-0 top-0 -z-20 rounded-xl opacity-0 mix-blend-overlay;
   }
+
   .nav_icon {
-    @apply flex cursor-pointer items-center justify-center px-2.5 py-[1px] hover:rounded-xl  hover:bg-black/20;
+    @apply flex cursor-pointer items-center justify-center rounded-lg px-2.5 py-[1px]  transition-colors  hover:bg-background/30;
   }
+
   .nav_btn {
-    @apply relative z-100  flex items-center rounded-lg  px-2.5 py-[1px]  font-semibold text-white opacity-90 transition-colors hover:rounded-lg  hover:bg-black/20;
+    @apply relative z-100  flex items-center rounded-lg px-2.5  py-[1px] font-semibold text-white opacity-90 transition-colors  hover:bg-background/20;
   }
+
   .select_btn_genres {
     @apply m-2.5 h-7;
   }
+
   .select_btn_status {
     @apply m-2.5 h-7 w-full justify-start;
   }

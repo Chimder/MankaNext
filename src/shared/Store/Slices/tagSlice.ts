@@ -52,10 +52,10 @@ export const tagSlice = createSlice({
       state.sortTag = !currentTag || currentTag !== newTag ? newTag : "";
       if (payload === "Latest upload") {
         state.sortName = "published";
-        state.sortValue = "asc";
+        state.sortValue = "desc";
       } else if (payload === "Oldest upload") {
         state.sortName = "published";
-        state.sortValue = "desc";
+        state.sortValue = "asc";
       } else if (payload === "Title Ascending") {
         state.sortName = "name";
         state.sortValue = "asc";
@@ -64,10 +64,10 @@ export const tagSlice = createSlice({
         state.sortValue = "desc";
       } else if (payload === "Highest Rating") {
         state.sortName = "averageRating";
-        state.sortValue = "asc";
+        state.sortValue = "desc";
       } else if (payload === "Lowest Rating") {
         state.sortName = "averageRating";
-        state.sortValue = "desc";
+        state.sortValue = "asc";
       } else {
         state.sortName = "";
         state.sortValue = "";

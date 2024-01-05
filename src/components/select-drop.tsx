@@ -31,7 +31,11 @@ function SelectDropBtn({ type, click }: SelectDropBtnProps) {
 
   const allTags = [...genresTag, langTag, statusTag, sortTag];
   return (
-    <div className="flex w-full flex-col items-center">
+    <div
+      className={`flex w-full flex-col  items-center ${
+        type === "genres" ? "md:grid md:grid-cols-2" : ""
+      }`}
+    >
       {data.map((g) => (
         <Button
           variant="ghost"
