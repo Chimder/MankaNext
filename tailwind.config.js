@@ -100,6 +100,7 @@ module.exports = {
         80: 80,
         100: 100,
         999: 999,
+        1000: 1000,
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

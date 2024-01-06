@@ -19,6 +19,7 @@ import DotPublication from "@/components/dot-publication";
 import RatingStars from "@/components/rating-stars";
 import { formatCreatedAt } from "@/shared/lib/data-format";
 import useWindowSize from "@/shared/lib/isMobile";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 type MangaProps = {
   data: MangaDto;
@@ -52,9 +53,9 @@ const Manga = ({ data: manga }: MangaProps) => {
     enabled: !!session,
     staleTime: 0,
   });
-  console.log("favorite", favorite);
+  // console.log("favorite", favorite);
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["addFavorite"],
     mutationFn: () =>
       userControllerAddFavorite({
@@ -78,28 +79,28 @@ const Manga = ({ data: manga }: MangaProps) => {
 
   return (
     <main className="overflow-x-hidden ">
-      <section className="relative z-40 flex max-h-[480px] items-center  lg:absolute  lg:-z-10 ">
+      <section className="relative z-40 flex max-h-[480px] items-center overflow-y-hidden  lg:absolute  lg:-z-10 ">
         <div className="w-full lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:absolute md:w-[100vw] ">
           <img
             className="z-0 h-full w-full md:absolute "
             src={isMobile ? manga?.img : manga?.imgHeader}
             alt=""
           />
-          <div className="md:bg-gradient-light absolute inset-x-0 bottom-0 h-full bg-black/30 lg:z-40 lg:backdrop-blur-[1px] dark:md:bg-gradient-dark"></div>
+          <div className="absolute inset-x-0 bottom-0 h-full bg-black/30 lg:z-40 lg:backdrop-blur-[1px] md:bg-gradient-light dark:md:bg-gradient-dark"></div>
         </div>
       </section>
       <section className="flex h-full w-full lg:pt-[30vh] md:pt-40 ">
-        <div className="containerM z-100 flex w-full bg-background md:bg-transparent md:p-4">
-          <div className="z-90 -mt-28 w-1/5 lg:mt-0 lg:backdrop-blur-md md:backdrop-blur-none">
+        <div className="containerM flex w-full bg-background md:bg-transparent md:p-4">
+          <div className="z-100 -mt-28 w-1/5 lg:mt-0 lg:backdrop-blur-md md:backdrop-blur-none">
             <img
-              className="md: z-100 w-full self-end rounded-lg lg:rounded-none"
+              className="md: z-999 w-full self-end rounded-lg lg:rounded-none"
               src={manga?.img}
               alt=""
             />
           </div>
           <div className="z-100 w-4/5 lg:backdrop-blur-md md:backdrop-blur-none">
             <div className="flex items-center justify-between pt-2 ">
-              <h1 className="relative flex px-5 py-0 text-3xl  drop-shadow-2xl lg:text-2xl md:px-2 md:text-lg text-white">
+              <h1 className="relative flex px-5 py-0 text-3xl  drop-shadow-2xl lg:text-2xl md:px-2 md:text-lg md:text-white">
                 {manga?.name}
               </h1>
               <RatingStars {...manga}></RatingStars>
@@ -111,14 +112,17 @@ const Manga = ({ data: manga }: MangaProps) => {
                   favorite
                     ? "bg-primary hover:bg-primary-foreground"
                     : "bg-teal-600 hover:bg-teal-600/60",
-                  "text-white md:py-0 sm:mr-3 sm:w-full",
+                  "z-10 text-white md:py-0 sm:mr-3 sm:w-full",
                 )}
               >
                 {favorite ? "Favorite" : "Add To Favorite"}
+                {isPending && (
+                  <ReloadIcon className="ml-1 h-4 w-4 animate-spin" />
+                )}
               </Button>
               {manga?.genres.map((genres, i) => (
                 <Badge
-                  className="lg:-py-0 bg-badge hover:bg-badge/70 ml-3 cursor-default text-white lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
+                  className="lg:-py-0 z-10 ml-3 cursor-default bg-badge text-white hover:bg-badge/70 lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
                   key={i}
                 >
                   {genres}

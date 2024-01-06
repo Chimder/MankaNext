@@ -1,16 +1,31 @@
 import Link from "next/link";
 import React from "react";
-import { signIn, useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { signIn, useSession, signOut } from "next-auth/react";
 import {
   MagnifyingGlassIcon,
   HeartIcon,
   HeartFilledIcon,
 } from "@radix-ui/react-icons";
 import { ThemeToggle } from "./ui/themeToggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { DialogDemo } from "./dialog-delete-account";
+import { useMutation } from "@tanstack/react-query";
+import { userControllerDeleteAccount } from "@/shared/Api/generated";
 
 function AsideBar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  console.log(session);
+  const { mutate: DeleteUser } = useMutation({
+    mutationKey: ["deleteUser"],
+    mutationFn: () =>
+      userControllerDeleteAccount({ email: session?.user?.email as string }),
+  });
 
   return (
     <div className="nav_bar_container">
@@ -20,7 +35,7 @@ function AsideBar() {
         </Link>
 
         <div className="w-18 -ml-2 flex justify-between rounded-xl bg-background/10 py-1 pl-0 pr-4 backdrop-blur-sm ">
-          <Link className="nav_btn" href="/manka/">
+          <Link className="nav_btn" href="/">
             Manga
           </Link>
           <Link
@@ -38,13 +53,27 @@ function AsideBar() {
           </Link>
         )}
 
-        <Link className="nav_icon " href="">
+        <div className="nav_icon ">
           {session?.user ? (
-            <img src={session?.user?.image!} width={24} />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <img src={session?.user?.image!} width={24} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="flex flex-col">
+                <Button onClick={() => signOut()} className="my-1 text-white">
+                  LogOut
+                </Button>
+                <DialogDemo>
+                  <Button className="my-1 bg-red-600 text-white hover:bg-red-600/80">
+                    Delete Account
+                  </Button>
+                </DialogDemo>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <div onClick={() => signIn()}>user</div>
           )}
-        </Link>
+        </div>
         <ThemeToggle />
       </nav>
     </div>

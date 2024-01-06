@@ -6,11 +6,6 @@ import {
   DoubleArrowRightIcon,
   DoubleArrowLeftIcon,
 } from "@radix-ui/react-icons";
-import { useQuery } from "@tanstack/react-query";
-import {
-  MangaDto,
-  mangaControllerGetMankaPopular,
-} from "@/shared/Api/generated";
 
 export function Scroll() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -18,7 +13,6 @@ export function Scroll() {
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
-
 
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();

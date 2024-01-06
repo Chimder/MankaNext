@@ -42,7 +42,7 @@ const Anime = ({ data: anime }: any) => {
         </div>
       </section>
       <section className="z-100 flex h-full w-full pt-[36vh] lg:pt-[30vh] md:pt-40 ">
-        <div className="containerM z-100 flex w-full bg-background md:bg-transparent md:p-4">
+        <div className="containerM flex w-full bg-background md:bg-transparent md:p-4">
           <div className="z-90 -mt-28 w-1/5 lg:mt-0 lg:backdrop-blur-md md:backdrop-blur-none">
             <img
               className="md: z-100 w-full self-end rounded-lg lg:rounded-none"

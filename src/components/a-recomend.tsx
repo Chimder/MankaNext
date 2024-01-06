@@ -19,7 +19,6 @@ const AnimeRecomend = ({ name }: any) => {
     staleTime: 0,
   });
 
-  // const manga = data?.data?.results[0];
   useEffect(() => {
     refetch();
   }, [param.query]);

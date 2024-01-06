@@ -19,8 +19,6 @@ const Recomend = () => {
     refetch();
   }, [name?.manka]);
 
-  console.log("aniMME", anime);
-
   if (isFetching) {
     return <div></div>;
   }

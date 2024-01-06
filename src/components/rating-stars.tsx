@@ -7,10 +7,6 @@ import React, { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { StarFilledIcon } from "@radix-ui/react-icons";
 
-interface Props {
-  manga: MangaDto;
-}
-
 const RatingStars = ({ ...manga }: MangaDto) => {
   const [rating, setRating] = useState<number>(manga.averageRating);
   const [hover, setHover] = useState<number | null>(null);
@@ -79,8 +75,8 @@ const RatingStars = ({ ...manga }: MangaDto) => {
         by {manga.ratingCount} reviews
       </span>
       {showNotification && (
-        <Alert className="fixed bottom-4 right-0 z-999 mr-4 w-[380px] border-primary md:fixed md:-right-4 md:-top-[20vh]  md:m-0 md:h-[7vh] md:w-[100vw] ">
-          <StarFilledIcon className="-m-1 h-4 w-6 text-primary md:h-3 md:w-5" />
+        <Alert className="fixed bottom-4 right-0 z-[1000] mr-4 w-[380px] border-primary md:fixed md:-right-4 md:-top-[16vh]  md:m-0 md:h-[7vh] md:w-[100vw] ">
+          <StarFilledIcon className="z-999 -m-1 h-4 w-6 text-primary md:h-3 md:w-5" />
           <AlertTitle className="text-primary">Rating up!</AlertTitle>
           <AlertDescription>
             Thank you for appreciating the manga
