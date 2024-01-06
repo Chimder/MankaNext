@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Link from "next/link";
-import {
-  MangaDto,
-} from "@/shared/Api/generated";
+import { MangaDto } from "@/shared/Api/generated";
 
 type Props = {
   popular: MangaDto[];
@@ -25,18 +23,18 @@ export function ScrollMost({ popular }: Props) {
   }, [emblaApi, onScroll]);
 
   return (
-    <div className="embla pt-10 md:pt-2" ref={emblaRef}>
+    <div className="embla pt-10 md:pt-2 max-h-[340px] rounded-xl md:max-h-[300px] w-full" ref={emblaRef}>
       <div className="embla__container ">
         {popular?.map((card, i) => (
-          <div key={card.name} className="embla__slide rounded-xl pr-8 md:pr-2">
+          <div key={card.name} className="embla__slide h-full rounded-xl pr-8 md:pr-2">
             <div className="relative">
               <span className="absolute top-0 h-8 w-10 bg-orange-600 pl-4 pt-1">
                 {i + 1}
               </span>
             </div>
-            <Link href={`manka/${card.name}`} className="h-full">
+            <Link href={`manka/${card.name}`} className="">
               <img
-                className="h-full max-w-[200px] rounded-xl md:max-w-[100px]"
+                className="max-w-[200px] rounded-xl md:max-w-[100px]"
                 src={card.img}
                 alt=""
               />

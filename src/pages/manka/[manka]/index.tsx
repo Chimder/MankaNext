@@ -98,8 +98,8 @@ const Manga = ({ data: manga }: MangaProps) => {
             />
           </div>
           <div className="z-100 w-4/5 lg:backdrop-blur-md md:backdrop-blur-none">
-            <div className="flex pt-2 items-center justify-between ">
-              <h1 className="relative flex px-5 py-0 text-3xl  lg:text-2xl md:px-2 md:text-lg drop-shadow-2xl md:text-black">
+            <div className="flex items-center justify-between pt-2 ">
+              <h1 className="relative flex px-5 py-0 text-3xl  drop-shadow-2xl lg:text-2xl md:px-2 md:text-lg text-white">
                 {manga?.name}
               </h1>
               <RatingStars {...manga}></RatingStars>
@@ -134,7 +134,7 @@ const Manga = ({ data: manga }: MangaProps) => {
       </section>
       <section className="containerM z-100 mx-auto h-full w-full pt-2.5 lg:bg-background  md:bg-transparent ">
         <div className="flex md:flex-col ">
-          <aside className="w-1/5 md:flex md:w-full flex-col md:items-center md:pt-4">
+          <aside className="w-1/5 flex-col md:flex md:w-full md:items-center md:pt-4">
             <Recomend />
           </aside>
           <div className="w-4/5 px-5 md:w-full md:px-0">

@@ -1,8 +1,7 @@
 import { mangaControllerGetMangaByGenres } from "@/shared/Api/generated";
 import { useAppSelector } from "@/shared/Store/store";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import React, { useEffect, useRef } from "react";
-import { useIntersection } from "@mantine/hooks";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useInView } from "react-intersection-observer";
@@ -59,13 +58,6 @@ export const MangaList = () => {
   useEffect(() => {
     refetch();
   }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch]);
-
-  const lastVideoRef = useRef(null);
-  // const { ref, entry } = useIntersection({
-  //   root: lastVideoRef.current,
-  //   threshold: 1,
-  // });
-
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -100,7 +92,7 @@ export const MangaList = () => {
                   ref={ref}
                   src={manga?.img}
                   alt=""
-                  className="w-full h-full rounded"
+                  className="h-full w-full rounded"
                 />
                 <div
                   className="absolute bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white sm:hidden "
