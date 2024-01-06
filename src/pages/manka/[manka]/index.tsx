@@ -76,22 +76,23 @@ const Manga = ({ data: manga }: MangaProps) => {
   };
 
   const isMobile = useWindowSize();
-
   return (
     <main className="overflow-x-hidden ">
-      <section className="relative z-40 flex max-h-[480px] items-center overflow-y-hidden  lg:absolute  lg:-z-10 ">
-        <div className="w-full lg:fixed lg:top-0 lg:-z-40 lg:h-[48vh] md:absolute md:w-[100vw] ">
+      {/* <section className="relative z-40 flex max-h-[480px] items-center overflow-y-hidden  lg:absolute  lg:-z-10 "> */}
+      <section className="max-h-[480px] lg:-z-10">
+        {/* <div className="w-full lg:fixed  lg:top-0 lg:-z-40 lg:h-[48vh] md:w-[100vw] "> */}
+        <div className="absolute left-0 top-[-80px] z-[-2] h-[640px] w-full">
           <img
-            className="z-0 h-full w-full md:absolute "
+            className="z-0 h-full w-full "
             src={isMobile ? manga?.img : manga?.imgHeader}
             alt=""
           />
           <div className="absolute inset-x-0 bottom-0 h-full bg-black/30 lg:z-40 lg:backdrop-blur-[1px] md:bg-gradient-light dark:md:bg-gradient-dark"></div>
         </div>
       </section>
-      <section className="flex h-full w-full lg:pt-[30vh] md:pt-40 ">
+      <section className="z-100 flex h-full w-full pt-[36vh] lg:pt-[30vh] md:pt-40 ">
         <div className="containerM flex w-full bg-background md:bg-transparent md:p-4">
-          <div className="z-100 -mt-28 w-1/5 lg:mt-0 lg:backdrop-blur-md md:backdrop-blur-none">
+          <div className="z-90 -mt-28 w-1/5 lg:mt-0 lg:backdrop-blur-md md:backdrop-blur-none">
             <img
               className="md: z-999 w-full self-end rounded-lg lg:rounded-none"
               src={manga?.img}
@@ -136,7 +137,7 @@ const Manga = ({ data: manga }: MangaProps) => {
           </div>
         </div>
       </section>
-      <section className="containerM z-100 mx-auto h-full w-full pt-2.5 lg:bg-background  md:bg-transparent ">
+      <section className="containerM z-100 mx-auto h-full w-full bg-background md:bg-transparent pt-2.5">
         <div className="flex md:flex-col ">
           <aside className="w-1/5 flex-col md:flex md:w-full md:items-center md:pt-4">
             <Recomend />

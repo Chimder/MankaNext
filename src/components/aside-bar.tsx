@@ -53,11 +53,11 @@ function AsideBar() {
           </Link>
         )}
 
-        <div className="nav_icon ">
+        <div className="nav_icon">
           {session?.user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <img src={session?.user?.image!} width={24} />
+                <img className="z-999 w-6" src={session?.user?.image!} />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="flex flex-col">
                 <Button onClick={() => signOut()} className="my-1 text-white">

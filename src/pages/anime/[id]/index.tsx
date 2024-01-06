@@ -27,7 +27,7 @@ const Anime = ({ data: anime }: any) => {
 
   return (
     <main className="overflow-x-hidden ">
-      <section className="  max-h-[480px]  lg:-z-10 ">
+      <section className="max-h-[480px] lg:-z-10 ">
         <span className="absolute left-1/2 top-20 z-[-100]">
           If you cant see the image, turn on VPN
         </span>
@@ -52,7 +52,7 @@ const Anime = ({ data: anime }: any) => {
           </div>
           <div className="z-100 w-4/5 lg:backdrop-blur-md md:backdrop-blur-none">
             <div className="flex items-center justify-between ">
-              <h1 className="relative flex px-5 py-0 text-3xl  drop-shadow-2xl lg:text-2xl md:px-2 md:text-xl md:text-black font-semibold">
+              <h1 className="relative flex px-5 py-0 text-3xl  drop-shadow-2xl lg:text-2xl md:px-2 md:text-xl md:text-white font-semibold">
                 {anime?.title_orig}
               </h1>
               <AnimeRating anime={anime.material_data} />

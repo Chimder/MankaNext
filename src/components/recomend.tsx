@@ -40,7 +40,7 @@ const Recomend = () => {
                   <img
                     className="left-0  top-0 h-full w-full"
                     src={anime.material_data.poster_url}
-                    alt="Open VPN"
+                    alt="If you cant see the image, turn on VPN"
                   />
                 </div>
               </div>
