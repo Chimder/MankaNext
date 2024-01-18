@@ -7,13 +7,13 @@ interface SelectDropBtnProps {
   // data?: string[];
   click?: (e: React.MouseEvent<HTMLButtonElement>, category: string) => void;
   data?: MangaDto;
-  setIsMenuOpen?: any;
+  closeMenu?: any;
 }
 function SelectDropChapter({
   type,
   click,
   data,
-  setIsMenuOpen,
+  closeMenu,
 }: SelectDropBtnProps) {
   return (
     <div className="flex w-full flex-col">
@@ -23,7 +23,6 @@ function SelectDropChapter({
           scroll={true}
           key={chap.name}
           href={`/manka/${chap.animeName}/${chap.chapter}`}
-          // onClick={() => setIsMenuOpen(false)}
         >
           {` Chapter ${chap.chapter}`}
         </Link>

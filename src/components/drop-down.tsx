@@ -19,7 +19,6 @@ interface Props {
 }
 const DropDownN = ({ text, clsn, ctgr, click, data }: Props) => {
   const [position, setPosition] = React.useState("bottom");
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -36,10 +35,7 @@ const DropDownN = ({ text, clsn, ctgr, click, data }: Props) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className={cn(clsn)}>
         {ctgr == "chapter" && (
-          <SelectDropChapter
-            data={data}
-            // setIsMenuOpen={setIsMenuOpen}
-          ></SelectDropChapter>
+          <SelectDropChapter data={data}></SelectDropChapter>
         )}
         {ctgr == "genres" && (
           <SelectDropBtn click={click!} type="genres"></SelectDropBtn>
