@@ -23,7 +23,7 @@ function SelectDropChapter({
           scroll={true}
           key={chap.name}
           href={`/manka/${chap.animeName}/${chap.chapter}`}
-          onClick={() => setIsMenuOpen(false)}
+          // onClick={() => setIsMenuOpen(false)}
         >
           {` Chapter ${chap.chapter}`}
         </Link>

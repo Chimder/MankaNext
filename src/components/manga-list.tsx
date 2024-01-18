@@ -20,6 +20,7 @@ export const MangaList = () => {
     sortTag,
     inputValue,
   } = useAppSelector((store) => store.tagSlice);
+
   const fetchAnimePages = async ({ pageParam }: pageParam) => {
     const response = await mangaControllerGetMangaByGenres({
       name: inputValue,
@@ -34,7 +35,6 @@ export const MangaList = () => {
 
     return response;
   };
-
   const {
     data: mangas,
     refetch,
@@ -58,8 +58,8 @@ export const MangaList = () => {
   useEffect(() => {
     refetch();
   }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch]);
-  const { ref, inView } = useInView();
 
+  const { ref, inView } = useInView();
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
