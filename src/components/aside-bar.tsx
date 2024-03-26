@@ -15,7 +15,7 @@ import {
 import { Button } from "./ui/button";
 import { DialogDemo } from "./dialog-delete-account";
 import { useMutation } from "@tanstack/react-query";
-import { userControllerDeleteAccount } from "@/shared/Api/generated";
+import { deleteUser } from "@/shared/Api/generatedv2";
 
 function AsideBar() {
   const { data: session, status } = useSession();
@@ -23,8 +23,7 @@ function AsideBar() {
   console.log(session);
   const { mutate: DeleteUser } = useMutation({
     mutationKey: ["deleteUser"],
-    mutationFn: () =>
-      userControllerDeleteAccount({ email: session?.user?.email as string }),
+    mutationFn: () => deleteUser({ email: session?.user?.email as string }),
   });
 
   return (

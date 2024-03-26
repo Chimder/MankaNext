@@ -8,8 +8,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { deleteUser } from "@/shared/Api/generatedv2";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { userControllerDeleteAccount } from "@/shared/Api/generated";
 import { useMutation } from "@tanstack/react-query";
 import { signOut, useSession } from "next-auth/react";
 import { PropsWithChildren } from "react";
@@ -24,8 +24,7 @@ export function DialogDemo({ children }: PropsWithChildren) {
     isPending,
   } = useMutation({
     mutationKey: ["deleteUser"],
-    mutationFn: () =>
-      userControllerDeleteAccount({ email: session?.user?.email as string }),
+    mutationFn: () => deleteUser({ email: session?.user?.email as string }),
     onSuccess: () => signOut(),
   });
   return (

@@ -6,12 +6,15 @@ import {
 } from "@/shared/Api/generated";
 import { Scroll } from "@/components/scroll";
 import { ScrollMost } from "@/components/scroll-pop";
+import { getPopularManga } from "@/shared/Api/generatedv2";
 type Props = {
   data: MangaDto[];
 };
 
 export async function getServerSideProps() {
-  const data = await mangaControllerGetMankaPopular();
+  const data = await getPopularManga();
+  console.log("first data", data);
+  // const data = await mangaControllerGetMankaPopular();
   return { props: { data } };
 }
 function MainManga({ data: manga }: Props) {

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { RecomendAnim } from "@/shared/data/PopRecod";
 import { useQuery } from "@tanstack/react-query";
-import { mangaControllerGetMangaByName } from "@/shared/Api/generated";
 import { useRouter } from "next/router";
+import { getMangaByName } from "@/shared/Api/generatedv2";
 
 const AnimeRecomend = ({ name }: any) => {
   const param = useRouter();
@@ -15,7 +15,7 @@ const AnimeRecomend = ({ name }: any) => {
     isFetching,
   } = useQuery({
     queryKey: ["isAnime"],
-    queryFn: () => mangaControllerGetMangaByName({ name: name as string }),
+    queryFn: () => getMangaByName({ name: name as string }),
     staleTime: 0,
   });
 

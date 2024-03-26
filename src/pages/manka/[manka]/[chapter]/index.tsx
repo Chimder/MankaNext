@@ -1,11 +1,7 @@
-import React, { ReactElement, useEffect } from "react";
-import {
-  mangaControllerGetAllManga,
-  mangaControllerGetMangaChapter,
-} from "@/shared/Api/generated";
+import React, { ReactElement } from "react";
 import { useRouter } from "next/router";
-import { GetStaticProps } from "next";
 import AsideBarChapter from "@/components/aside-bar-chapter";
+import { getChapter } from "@/shared/Api/generatedv2";
 
 export type ChapterDto = {
   animeName: string;
@@ -17,34 +13,23 @@ export type ChapterDto = {
 type Props = {
   data: ChapterDto;
 };
-export const getStaticPaths = async () => {
-  const data = await mangaControllerGetAllManga();
-  const paths = data?.flatMap((anime) => {
-    return anime?.chapters?.map((chapterNumber) => ({
-      params: { manka: anime.name, chapter: chapterNumber.chapter.toString() },
-    }));
-  });
-  return {
-    paths,
-    fallback: false,
-  };
-};
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = await mangaControllerGetMangaChapter({
-    name: params?.manka as string,
-    chapter: params?.chapter as string,
-  });
+export const getServerSideProps = async (ctx: any) => {
+  const manka = ctx.query.manka;
+  const chapter = ctx.query.chapter;
+
+  const data = await getChapter(manka, chapter);
   return { props: { data } };
 };
 
 const Chapter = ({ data: chapter }: Props) => {
+  console.log("SSPDATA", chapter);
   const router = useRouter();
   return (
     <>
       <div className="flex items-center justify-center">
         <div className="flex flex-col ">
-          {chapter?.img?.map((chap, i) => (
+          {chapter.img?.map((chap, i) => (
             <div key={i}>
               <img src={chap} alt="chap" />
             </div>

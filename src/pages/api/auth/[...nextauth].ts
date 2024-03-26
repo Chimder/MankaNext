@@ -1,4 +1,4 @@
-import { userControllerRegNewUser } from "@/shared/Api/generated";
+import { createOrCheackUser } from "@/shared/Api/generatedv2";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 export const authOptions = {
@@ -12,9 +12,10 @@ export const authOptions = {
   callbacks: {
     async signIn({ user }: any) {
       console.log(user);
-      const check = userControllerRegNewUser(user);
-      console.log(check.then((e) => console.log));
-      console.log(check.data?.statusCode);
+      const check = createOrCheackUser(user);
+
+      // console.log(check.then((e) => console.log));
+      // console.log(check.data?.statusCode);
       return true;
     },
   },

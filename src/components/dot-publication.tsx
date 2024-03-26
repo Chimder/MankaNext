@@ -3,8 +3,8 @@ import { DotFilledIcon } from "@radix-ui/react-icons";
 import { Badge } from "./ui/badge";
 
 type Props = {
-  status: string;
-  year: number | string;
+  status?: string;
+  year?: number | string;
 };
 
 const DotPublication = ({ status, year }: Props) => {

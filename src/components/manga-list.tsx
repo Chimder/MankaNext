@@ -1,10 +1,10 @@
-import { mangaControllerGetMangaByGenres } from "@/shared/Api/generated";
 import { useAppSelector } from "@/shared/Store/store";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useInView } from "react-intersection-observer";
+import { filterAnime } from "@/shared/Api/generatedv2";
 
 type pageParam = {
   pageParam: number;
@@ -22,13 +22,13 @@ export const MangaList = () => {
   } = useAppSelector((store) => store.tagSlice);
 
   const fetchAnimePages = async ({ pageParam }: pageParam) => {
-    const response = await mangaControllerGetMangaByGenres({
+    const response = await filterAnime({
       name: inputValue,
       genres: genresTag,
       status: statusTag,
       country: langTag,
       orderField: sortName,
-      orderDirection: sortValue,
+      orderSort: sortValue,
       page: pageParam,
       perPage: 30,
     });
@@ -46,7 +46,7 @@ export const MangaList = () => {
     queryKey: ["mangas"],
     queryFn: fetchAnimePages,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
-      if (lastPage.length === 0) {
+      if (lastPage?.length === 0) {
         return undefined;
       }
       return lastPageParam + 1;

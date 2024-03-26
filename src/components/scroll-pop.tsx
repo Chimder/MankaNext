@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Link from "next/link";
-import { MangaDto } from "@/shared/Api/generated";
+import { HandlerMangaSwag } from "@/shared/Api/generatedv2";
 
 type Props = {
-  popular: MangaDto[];
+  popular: HandlerMangaSwag[];
 };
 export function ScrollMost({ popular }: Props) {
   const [scrollProgress, setScrollProgress] = useState(0);

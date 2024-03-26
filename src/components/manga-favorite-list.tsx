@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { mangaControllerGetUserManga } from "@/shared/Api/generated";
+import { getUserListManga } from "@/shared/Api/generatedv2";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -10,12 +10,13 @@ const FavoriteList = () => {
   const path = useRouter();
   const { data: session } = useSession();
 
+  const email = session?.user?.email! as string;
   const { data: mangas, isFetching } = useQuery({
     queryKey: ["user-favorite"],
-    queryFn: () =>
-      mangaControllerGetUserManga({ email: session?.user?.email as string }),
+    queryFn: () => getUserListManga({ email: email }),
     staleTime: 0,
   });
+  console.log("MANGAS", mangas);
 
   return (
     <div className="">

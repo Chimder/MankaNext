@@ -1,12 +1,12 @@
 module.exports = {
   main: {
     // input: "./src/shared/api/swagger.yaml", // Укажите URL вашего Swagger-документа
-    input: "http://localhost:4000/api-yaml", // Укажите URL вашего Swagger-документа
+    input: "http://localhost:4000/yaml", // Укажите URL вашего Swagger-документа
     output: {
-      target: "./src/shared/api/generated.ts", // Укажите папку для генерации файлов API
+      target: "./src/shared/Api/generatedv2.ts", // Укажите папку для генерации файлов API
       override: {
         mutator: {
-          path: "./src/shared/api/axios.instance.ts",
+          path: "./src/shared/Api/axios.instance.ts",
           name: "customInstance",
         },
       },
