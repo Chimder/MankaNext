@@ -46,18 +46,21 @@ export const MangaList = () => {
     queryKey: ["mangas"],
     queryFn: fetchAnimePages,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
-      if (lastPage?.length === 0) {
+      if (lastPage === null) {
         return undefined;
       }
       return lastPageParam + 1;
     },
     initialPageParam: 1,
     refetchOnWindowFocus: false,
+    retry: 0,
   });
 
   useEffect(() => {
     refetch();
   }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch]);
+
+  console.log("HASNEXT", hasNextPage);
 
   const { ref, inView } = useInView();
   useEffect(() => {
@@ -82,27 +85,35 @@ export const MangaList = () => {
                 </div>
               </React.Fragment>
             ))
-          : mangas?.pages?.flat().map((manga) => (
-              <Link
-                className="relative z-50"
-                key={manga?.name}
-                href={`/manka/${manga?.name}`}
-              >
-                <img
-                  ref={ref}
-                  src={manga?.img}
-                  alt=""
-                  className="h-full w-full rounded"
-                />
-                <div
-                  className="absolute bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white sm:hidden "
-                  style={{ WebkitTextStroke: "0.2px black" }}
-                >
-                  <img src="/img/lang/JP.svg" width={20} height={20} alt="" />
-                  <div>{manga?.name}</div>
-                </div>
-              </Link>
-            ))}
+          : mangas?.pages?.flat().map(
+              (manga) =>
+                manga !== null && (
+                  <Link
+                    className="relative z-50"
+                    key={manga?.name}
+                    href={`/manka/${manga?.name}`}
+                  >
+                    <img
+                      ref={ref}
+                      src={manga?.img}
+                      alt=""
+                      className="h-full w-full rounded"
+                    />
+                    <div
+                      className="absolute bottom-1 z-50 flex w-full px-3 py-0 font-medium text-white sm:hidden "
+                      style={{ WebkitTextStroke: "0.2px black" }}
+                    >
+                      <img
+                        src="/img/lang/JP.svg"
+                        width={20}
+                        height={20}
+                        alt=""
+                      />
+                      <div>{manga?.name}</div>
+                    </div>
+                  </Link>
+                ),
+            )}
       </div>
     </div>
   );
