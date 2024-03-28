@@ -1,14 +1,10 @@
 import Head from "next/head";
 import React from "react";
-import {
-  MangaDto,
-  mangaControllerGetMankaPopular,
-} from "@/shared/Api/generated";
 import { Scroll } from "@/components/scroll";
 import { ScrollMost } from "@/components/scroll-pop";
-import { getPopularManga } from "@/shared/Api/generatedv2";
+import { HandlerMangaSwag, getPopularManga } from "@/shared/Api/generatedv2";
 type Props = {
-  data: MangaDto[];
+  data: HandlerMangaSwag[];
 };
 
 export async function getServerSideProps() {
