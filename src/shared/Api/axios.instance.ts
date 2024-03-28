@@ -2,8 +2,8 @@ import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const url = process.env.NEXT_PUBLIC_API;
 export const AXIOS_INSTANCE = Axios.create({
-  baseURL: "http://localhost:4000",
-  // baseURL: url?.toString(),
+  // baseURL: "http://localhost:4000",
+  baseURL: url?.toString(),
   headers: {
     "Content-Type": "application/json",
   },
