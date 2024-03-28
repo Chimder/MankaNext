@@ -111,7 +111,7 @@ export interface HandlerFavoriteResponse {
 export interface HandlerChapterSwag {
   animeName?: string;
   chapter?: number;
-  created?: string;
+  createdAt?: string;
   genres?: string[];
   name?: string;
 }

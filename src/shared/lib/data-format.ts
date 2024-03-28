@@ -1,5 +1,5 @@
-export const formatCreatedAt = (createdAtMillis: number): string => {
-  const date = new Date(createdAtMillis);
+export const formatCreatedAt = (createdAtString: string): string => {
+  const date = new Date(Date.parse(createdAtString));
   const now = new Date();
   const diff = Math.abs(now.getTime() - date.getTime());
 
