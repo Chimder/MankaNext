@@ -20,7 +20,6 @@ import { deleteUser } from "@/shared/Api/generatedv2";
 function AsideBar() {
   const { data: session, status } = useSession();
 
-  console.log(session);
   const { mutate: DeleteUser } = useMutation({
     mutationKey: ["deleteUser"],
     mutationFn: () => deleteUser({ email: session?.user?.email as string }),

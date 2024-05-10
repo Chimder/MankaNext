@@ -39,7 +39,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Manga = ({ data: manga }: MangaProps) => {
   const { data: session } = useSession();
-  console.log("datar",manga.chapters)
 
   const { data: favorite, refetch: refetchFavorite } = useQuery({
     queryKey: ["isFavorite"],
@@ -51,7 +50,6 @@ const Manga = ({ data: manga }: MangaProps) => {
     enabled: !!session,
     staleTime: 0,
   });
-  // console.log("favorite", favorite);
 
   const { mutate, isPending } = useMutation({
     mutationKey: ["addFavorite"],

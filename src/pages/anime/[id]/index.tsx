@@ -23,7 +23,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 const Anime = ({ data: anime }: any) => {
-  console.log("ANIME", anime.material_data);
 
   return (
     <main className="overflow-x-hidden ">

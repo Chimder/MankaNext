@@ -9,8 +9,6 @@ type Props = {
 
 export async function getServerSideProps() {
   const data = await getPopularManga();
-  console.log("first data", data);
-  // const data = await mangaControllerGetMankaPopular();
   return { props: { data } };
 }
 function MainManga({ data: manga }: Props) {

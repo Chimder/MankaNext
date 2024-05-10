@@ -60,7 +60,6 @@ export const MangaList = () => {
     refetch();
   }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch]);
 
-  console.log("HASNEXT", hasNextPage);
 
   const { ref, inView } = useInView();
   useEffect(() => {

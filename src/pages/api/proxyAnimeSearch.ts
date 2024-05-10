@@ -9,7 +9,6 @@ export default async function handler(
 ) {
   const { name } = req.query;
 
-  console.log(name);
   const config = {
     params: {
       token: ACCESS_TOKEN,

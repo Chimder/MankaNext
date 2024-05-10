@@ -16,7 +16,6 @@ const FavoriteList = () => {
     queryFn: () => getUserListManga({ email: email }),
     staleTime: 0,
   });
-  console.log("MANGAS", mangas);
 
   return (
     <div className="">

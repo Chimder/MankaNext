@@ -8,7 +8,6 @@ import { getMangaByName } from "@/shared/Api/generatedv2";
 const AnimeRecomend = ({ name }: any) => {
   const param = useRouter();
 
-  console.log("param", name);
   const {
     data: manga,
     refetch,

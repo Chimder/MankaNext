@@ -17,7 +17,6 @@ import { PropsWithChildren } from "react";
 export function DialogDemo({ children }: PropsWithChildren) {
   const { data: session, status } = useSession();
 
-  console.log(session);
   const {
     mutate: DeleteUser,
     isSuccess,

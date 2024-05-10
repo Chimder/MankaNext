@@ -23,7 +23,6 @@ export const getServerSideProps = async (ctx: any) => {
 };
 
 const Chapter = ({ data: chapter }: Props) => {
-  console.log("SSPDATA", chapter);
   const router = useRouter();
   return (
     <>
