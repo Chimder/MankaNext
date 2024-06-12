@@ -28,7 +28,7 @@ export const getStaticPaths = async () => {
   const paths = data.map((manga) => ({ params: { manka: manga.name } }));
   return {
     paths,
-    // fallback: false,
+    fallback: false,
   };
 };
 export const getStaticProps: GetStaticProps = async ({ params }) => {
