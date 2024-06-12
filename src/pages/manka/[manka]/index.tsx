@@ -34,7 +34,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const name = params?.manka as string;
   const data = await getMangaByName({ name: name });
-  return { props: { data } };
+  return { props: { data }, revalidate: 10 };
 };
 
 const Manga = ({ data: manga }: MangaProps) => {
