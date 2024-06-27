@@ -54,7 +54,10 @@ const Manga = ({ data: manga }: MangaProps) => {
   const { mutate, isPending } = useMutation({
     mutationKey: ["addFavorite"],
     mutationFn: () =>
-      toggleFavoriteManga(manga?.name as string, session?.user?.email!),
+      toggleFavoriteManga({
+        email: session?.user?.email!,
+        name: manga?.name as string,
+      }),
     onSuccess: () => {
       refetchFavorite();
     },

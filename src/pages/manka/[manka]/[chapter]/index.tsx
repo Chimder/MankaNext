@@ -18,7 +18,7 @@ export const getServerSideProps = async (ctx: any) => {
   const manka = ctx.query.manka;
   const chapter = ctx.query.chapter;
 
-  const data = await getChapter(manka, chapter);
+  const data = await getChapter({ chapter: chapter, name: manka });
   return { props: { data } };
 };
 

@@ -7,6 +7,17 @@
  */
 import { customInstance } from './axios.instance';
 import type { BodyType } from './axios.instance';
+export type ToggleFavoriteMangaParams = {
+/**
+ * manga name
+ */
+name: string;
+/**
+ * email
+ */
+email: string;
+};
+
 export type GetUserFavoriteMangaParams = {
 /**
  * email
@@ -244,20 +255,6 @@ export const deleteUser = (
     }
   
 /**
- * Toggle manga
- * @summary Toggle Favorite manga
- */
-export const toggleFavoriteManga = (
-    name: string,
-    email: string,
- options?: SecondParameter<typeof customInstance>,) => {
-      return customInstance<HandlerSuccessResponse>(
-      {url: `/user/favorite/${name}/${email}`, method: 'POST'
-    },
-      options);
-    }
-  
-/**
  * User Favorites
  * @summary User favorite Mangas
  */
@@ -285,6 +282,20 @@ export const getUserFavoriteManga = (
       options);
     }
   
+/**
+ * Toggle manga
+ * @summary Toggle Favorite manga
+ */
+export const toggleFavoriteManga = (
+    params: ToggleFavoriteMangaParams,
+ options?: SecondParameter<typeof customInstance>,) => {
+      return customInstance<HandlerSuccessResponse>(
+      {url: `/user/toggle/favorite`, method: 'POST',
+        params
+    },
+      options);
+    }
+  
 export type GetMangaByNameResult = NonNullable<Awaited<ReturnType<typeof getMangaByName>>>
 export type GetChapterResult = NonNullable<Awaited<ReturnType<typeof getChapter>>>
 export type FilterAnimeResult = NonNullable<Awaited<ReturnType<typeof filterAnime>>>
@@ -293,6 +304,6 @@ export type GetPopularMangaResult = NonNullable<Awaited<ReturnType<typeof getPop
 export type GetUserByEmailResult = NonNullable<Awaited<ReturnType<typeof getUserByEmail>>>
 export type CreateOrCheackUserResult = NonNullable<Awaited<ReturnType<typeof createOrCheackUser>>>
 export type DeleteUserResult = NonNullable<Awaited<ReturnType<typeof deleteUser>>>
-export type ToggleFavoriteMangaResult = NonNullable<Awaited<ReturnType<typeof toggleFavoriteManga>>>
 export type GetUserListMangaResult = NonNullable<Awaited<ReturnType<typeof getUserListManga>>>
 export type GetUserFavoriteMangaResult = NonNullable<Awaited<ReturnType<typeof getUserFavoriteManga>>>
+export type ToggleFavoriteMangaResult = NonNullable<Awaited<ReturnType<typeof toggleFavoriteManga>>>
