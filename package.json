@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "swagger": "curl -o ./src/shared/api/swagger.yaml http://localhost:4000/api-yaml",
+    "swagger": "curl -o ./src/shared/Api/swagger.yaml http://localhost:4000/yaml",
     "orval": "orval"
   },
   "dependencies": {
