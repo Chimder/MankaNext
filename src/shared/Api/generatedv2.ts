@@ -157,7 +157,7 @@ export const getMangaByName = (
     },
       options);
     }
-  
+
 /**
  * Find Manga Chapter
  * @summary Get a chapter
@@ -171,7 +171,7 @@ export const getChapter = (
     },
       options);
     }
-  
+
 /**
  * Find Manga Chapter
  * @summary Get a chapter
@@ -185,33 +185,33 @@ export const filterAnime = (
     },
       options);
     }
-  
+
 /**
  * Retrieve a list of all mangas
  * @summary Get all mangas
  */
 export const getAllMangas = (
-    
+
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<HandlerMangaSwag[]>(
       {url: `/manga/many`, method: 'GET'
     },
       options);
     }
-  
+
 /**
  * Retrieve a list of popular mangas
  * @summary Get popular mangas
  */
 export const getPopularManga = (
-    
+
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<HandlerMangaSwag[]>(
       {url: `/manga/popular`, method: 'GET'
     },
       options);
     }
-  
+
 /**
  * Retrieve a user its email
  * @summary Get a user by email
@@ -224,7 +224,7 @@ export const getUserByEmail = (
     },
       options);
     }
-  
+
 /**
  * Create
  * @summary Create or cheack user
@@ -239,7 +239,7 @@ export const createOrCheackUser = (
     },
       options);
     }
-  
+
 /**
  * Delete user
  * @summary delete user by email
@@ -253,7 +253,7 @@ export const deleteUser = (
     },
       options);
     }
-  
+
 /**
  * User Favorites
  * @summary User favorite Mangas
@@ -267,7 +267,7 @@ export const getUserListManga = (
     },
       options);
     }
-  
+
 /**
  * User Favorite
  * @summary User favorite Manga
@@ -281,7 +281,7 @@ export const getUserFavoriteManga = (
     },
       options);
     }
-  
+
 /**
  * Toggle manga
  * @summary Toggle Favorite manga
@@ -295,7 +295,7 @@ export const toggleFavoriteManga = (
     },
       options);
     }
-  
+
 export type GetMangaByNameResult = NonNullable<Awaited<ReturnType<typeof getMangaByName>>>
 export type GetChapterResult = NonNullable<Awaited<ReturnType<typeof getChapter>>>
 export type FilterAnimeResult = NonNullable<Awaited<ReturnType<typeof filterAnime>>>

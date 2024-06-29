@@ -18,12 +18,15 @@ import { useMutation } from "@tanstack/react-query";
 import { deleteUser } from "@/shared/Api/generatedv2";
 
 function AsideBar() {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
-  const { mutate: DeleteUser } = useMutation({
-    mutationKey: ["deleteUser"],
-    mutationFn: () => deleteUser({ email: session?.user?.email as string }),
-  });
+  // const { mutate: DeleteUser } = useMutation({
+  //   mutationKey: ["deleteUser"],
+  //   mutationFn: () => deleteUser({ email: session?.user?.email as string }),
+  // });
+
+  const redirect_uri = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL_ADDRES}/google/auth`;
+  const GoogleLoginURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=openid%20profile%20email%20https://www.googleapis.com/auth/gmail.modify&access_type=offline&prompt=consent`;
 
   return (
     <div className="nav_bar_container">
@@ -43,16 +46,16 @@ function AsideBar() {
             <MagnifyingGlassIcon className="h-6 w-6 fill-current text-white" />
           </Link>
         </div>
-        {session?.user && (
+        {/* {session?.user && (
           <Link className=" nav_btn group h-10 w-10" href="/favorite">
             <HeartIcon className="h-10 w-10 fill-current text-primary group-hover:hidden" />
             <HeartFilledIcon className="hidden h-10 w-10 fill-current text-primary group-hover:block" />
             <div></div>
           </Link>
-        )}
+        )} */}
 
         <div className="nav_icon">
-          {session?.user ? (
+          {/* {session?.user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <img className="z-999 w-6" src={session?.user?.image!} />
@@ -70,8 +73,10 @@ function AsideBar() {
             </DropdownMenu>
           ) : (
             <div onClick={() => signIn()}>user</div>
-          )}
+          )} */}
         </div>
+        <Link href={GoogleLoginURL}>Login</Link>
+        {/* <div onClick={() => handleLogout()}>Logout</div> */}
         <ThemeToggle />
       </nav>
     </div>

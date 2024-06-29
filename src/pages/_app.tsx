@@ -17,19 +17,21 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+// export const [queryClient] = useState(
+//   () =>
+//     new QueryClient({
+//       defaultOptions: {
+//         queries: {
+//           staleTime: 60 * 1000,
+//         },
+//       },
+//     }),
+// );
+
+export const queryClient = new QueryClient()
+
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const path = useRouter();
-
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 60 * 1000,
-          },
-        },
-      }),
-  );
 
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
 
