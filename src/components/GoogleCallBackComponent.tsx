@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { resetUserSession } from "./query";
 
 const GoogleCallBackComponent = () => {
   const searchParams = new URLSearchParams(window.location.search);
   const code = searchParams.get("code");
   const router = useRouter();
-  console.log("CODE", code);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +23,6 @@ const GoogleCallBackComponent = () => {
               grant_type: "authorization_code",
             },
           );
-          console.log("restDATA", response.data);
           const { access_token, refresh_token } = response.data;
           const profileResponse = await axios.get(
             "https://www.googleapis.com/oauth2/v1/userinfo",
@@ -31,8 +30,6 @@ const GoogleCallBackComponent = () => {
               headers: { Authorization: `Bearer ${access_token}` },
             },
           );
-
-          console.log("restPROFF", profileResponse.data);
 
           const { email, id, picture, name } = profileResponse.data;
           const newUser = {
@@ -50,10 +47,11 @@ const GoogleCallBackComponent = () => {
             },
           );
 
-          console.log("OKEEEE");
+          resetUserSession();
           router.push("/");
         } catch (error) {
           console.error("Error during authentication:", error);
+          resetUserSession();
           router.push("/");
         }
       }

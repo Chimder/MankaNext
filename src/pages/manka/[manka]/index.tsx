@@ -3,7 +3,6 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Recomend from "@/components/recomend";
-import { signIn, useSession } from "next-auth/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/shared/lib/utils";
@@ -19,6 +18,9 @@ import {
   getUserFavoriteManga,
   toggleFavoriteManga,
 } from "@/shared/Api/generatedv2";
+import { useUserSession } from "@/components/query";
+import { useRouter } from "next/router";
+import { GoogleLoginURL } from "@/components/aside-bar";
 
 type MangaProps = {
   data: HandlerMangaSwag;
@@ -38,16 +40,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const Manga = ({ data: manga }: MangaProps) => {
-  const { data: session } = useSession();
+  const { data: user } = useUserSession();
+  const router = useRouter();
 
   const { data: favorite, refetch: refetchFavorite } = useQuery({
     queryKey: ["isFavorite"],
     queryFn: () =>
       getUserFavoriteManga({
-        email: session?.user?.email as string,
+        email: user?.email as string,
         name: manga?.name as string,
       }),
-    enabled: !!session,
+    enabled: !!user,
     staleTime: 0,
   });
 
@@ -55,7 +58,7 @@ const Manga = ({ data: manga }: MangaProps) => {
     mutationKey: ["addFavorite"],
     mutationFn: () =>
       toggleFavoriteManga({
-        email: session?.user?.email!,
+        email: user?.email!,
         name: manga?.name as string,
       }),
     onSuccess: () => {
@@ -64,8 +67,9 @@ const Manga = ({ data: manga }: MangaProps) => {
   });
 
   const addFavorite = () => {
-    if (!session?.user?.email) {
-      signIn();
+    if (!user?.email) {
+      // signIn();
+      router.push(GoogleLoginURL);
     } else {
       mutate();
     }

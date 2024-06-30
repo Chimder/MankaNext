@@ -1,14 +1,13 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-const url = process.env.NEXT_PUBLIC_API;
+const url = process.env.NEXT_PUBLIC_URL_API;
 export const AXIOS_INSTANCE = Axios.create({
-  baseURL: "http://localhost:4000",
-  // baseURL: url?.toString(),
+  baseURL: url?.toString(),
   headers: {
     "Content-Type": "application/json",
   },
   withCredentials: true,
-}); // use your own URL here or environment variable
+});
 
 export const customInstance = <T>(
   config: AxiosRequestConfig,

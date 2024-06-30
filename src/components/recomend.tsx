@@ -12,6 +12,7 @@ const Recomend = () => {
     queryFn: () =>
       axios.get("/api/proxyAnimeSearch", { params: { name: name?.manka } }),
     // staleTime: 0,
+    refetchOnWindowFocus: false,
   });
 
   const anime = data?.data?.results[0];

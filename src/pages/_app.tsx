@@ -1,8 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "@/components/layout";
 import type { AppProps } from "next/app";
-import { ReactElement, ReactNode, useState } from "react";
-import { SessionProvider } from "next-auth/react";
+import { ReactElement, ReactNode } from "react";
 import { Provider } from "react-redux";
 import { store } from "@/shared/Store/store";
 import "@/styles/globals.css";
@@ -28,7 +27,7 @@ type AppPropsWithLayout = AppProps & {
 //     }),
 // );
 
-export const queryClient = new QueryClient()
+export const queryClient = new QueryClient();
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const path = useRouter();
@@ -37,11 +36,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <Provider store={store}>
-      <SessionProvider session={pageProps.session}>
-        <QueryClientProvider client={queryClient}>
-          {getLayout(<Component {...pageProps} />)}
-        </QueryClientProvider>
-      </SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        {getLayout(<Component {...pageProps} />)}
+      </QueryClientProvider>
     </Provider>
   );
 };

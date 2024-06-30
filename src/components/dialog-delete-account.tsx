@@ -11,11 +11,11 @@ import {
 import { deleteUser } from "@/shared/Api/generatedv2";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
-import { signOut, useSession } from "next-auth/react";
 import { PropsWithChildren } from "react";
+import { resetUserSessionAndDel, useUserSession } from "./query";
 
 export function DialogDemo({ children }: PropsWithChildren) {
-  const { data: session, status } = useSession();
+  const { data: user } = useUserSession();
 
   const {
     mutate: DeleteUser,
@@ -23,8 +23,8 @@ export function DialogDemo({ children }: PropsWithChildren) {
     isPending,
   } = useMutation({
     mutationKey: ["deleteUser"],
-    mutationFn: () => deleteUser({ email: session?.user?.email as string }),
-    onSuccess: () => signOut(),
+    mutationFn: () => deleteUser({ email: user?.email as string }),
+    onSuccess: () => resetUserSessionAndDel(),
   });
   return (
     <Dialog>

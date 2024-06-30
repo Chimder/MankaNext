@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { signIn, useSession, signOut } from "next-auth/react";
 import {
   MagnifyingGlassIcon,
   HeartIcon,
@@ -14,19 +13,13 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { DialogDemo } from "./dialog-delete-account";
-import { useMutation } from "@tanstack/react-query";
-import { deleteUser } from "@/shared/Api/generatedv2";
+import { resetUserSessionAndDel, useUserSession } from "./query";
+
+const redirect_uri = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL_ADDRES}/google/auth`;
+export const GoogleLoginURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=openid%20profile%20email&access_type=offline&prompt=consent`;
 
 function AsideBar() {
-  // const { data: session, status } = useSession();
-
-  // const { mutate: DeleteUser } = useMutation({
-  //   mutationKey: ["deleteUser"],
-  //   mutationFn: () => deleteUser({ email: session?.user?.email as string }),
-  // });
-
-  const redirect_uri = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL_ADDRES}/google/auth`;
-  const GoogleLoginURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=openid%20profile%20email%20https://www.googleapis.com/auth/gmail.modify&access_type=offline&prompt=consent`;
+  const { data: user } = useUserSession();
 
   return (
     <div className="nav_bar_container">
@@ -46,22 +39,25 @@ function AsideBar() {
             <MagnifyingGlassIcon className="h-6 w-6 fill-current text-white" />
           </Link>
         </div>
-        {/* {session?.user && (
+        {user && (
           <Link className=" nav_btn group h-10 w-10" href="/favorite">
             <HeartIcon className="h-10 w-10 fill-current text-primary group-hover:hidden" />
             <HeartFilledIcon className="hidden h-10 w-10 fill-current text-primary group-hover:block" />
             <div></div>
           </Link>
-        )} */}
+        )}
 
         <div className="nav_icon">
-          {/* {session?.user ? (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <img className="z-999 w-6" src={session?.user?.image!} />
+                <img className="z-999 w-6" src={user.image} />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="flex flex-col">
-                <Button onClick={() => signOut()} className="my-1 text-white">
+                <Button
+                  onClick={() => resetUserSessionAndDel()}
+                  className="my-1 text-white"
+                >
                   LogOut
                 </Button>
                 <DialogDemo>
@@ -72,11 +68,9 @@ function AsideBar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div onClick={() => signIn()}>user</div>
-          )} */}
+            <Link href={GoogleLoginURL}>user</Link>
+          )}
         </div>
-        <Link href={GoogleLoginURL}>Login</Link>
-        {/* <div onClick={() => handleLogout()}>Logout</div> */}
         <ThemeToggle />
       </nav>
     </div>
