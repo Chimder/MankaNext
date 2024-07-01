@@ -23,5 +23,5 @@ export function resetUserSessionAndDel() {
 }
 
 export const signOut = () => {
-  Cookies.remove("manka_google_user");
+   Cookies.remove("manka_google_user", { path: "/", sameSite: "None", secure: true });
 };
