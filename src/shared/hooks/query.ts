@@ -8,6 +8,7 @@ import {
   getUserSession,
 } from "@/shared/Api/generatedv2";
 import { queryClient } from "@/pages/_app";
+import { serialize } from "cookie";
 
 export function useUserSession() {
   return useQuery({
@@ -63,6 +64,19 @@ export function resetUserSessionAndDel() {
   queryClient.resetQueries();
 }
 
+// export const signOut = () => {
+//   Cookies.remove("manka_google_user");
+// };
+
 export const signOut = () => {
-  Cookies.remove("manka_google_user");
+  // Cookies.remove("manka_google_user", {
+  //   path: "/",
+  //   sameSite: "Lax",
+  //   secure: false,
+  // });
+
+  document.cookie = serialize("manka_google_user", "", {
+    maxAge: -1,
+    path: "/",
+  });
 };
