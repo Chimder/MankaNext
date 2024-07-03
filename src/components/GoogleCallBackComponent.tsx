@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { resetUserSession } from "./query";
+import { resetUserSession } from "../shared/hooks/query";
 
 const GoogleCallBackComponent = () => {
   const searchParams = new URLSearchParams(window.location.search);

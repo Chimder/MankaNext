@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import { useRouter } from "next/router";
 import AsideBarChapter from "@/components/aside-bar-chapter";
 import { getChapter } from "@/shared/Api/generatedv2";
 
@@ -23,7 +22,6 @@ export const getServerSideProps = async (ctx: any) => {
 };
 
 const Chapter = ({ data: chapter }: Props) => {
-  const router = useRouter();
   return (
     <>
       <div className="flex items-center justify-center">

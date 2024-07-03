@@ -12,7 +12,7 @@ import { deleteUser } from "@/shared/Api/generatedv2";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
-import { resetUserSessionAndDel, useUserSession } from "./query";
+import { resetUserSessionAndDel, useUserSession } from "../shared/hooks/query";
 
 export function DialogDemo({ children }: PropsWithChildren) {
   const { data: user } = useUserSession();

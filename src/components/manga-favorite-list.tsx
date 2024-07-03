@@ -1,20 +1,14 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { getUserListManga } from "@/shared/Api/generatedv2";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import React from "react";
-import { useUserSession } from "./query";
+import { useUserListManga, useUserSession } from "../shared/hooks/query";
 
 const FavoriteList = () => {
   const { data: user } = useUserSession();
 
   const email = user?.email! as string;
-  const { data: mangas, isFetching } = useQuery({
-    queryKey: ["user-favorite"],
-    queryFn: () => getUserListManga({ email: email }),
-    staleTime: 0,
-    refetchOnWindowFocus: false,
-  });
+
+  const { data: mangas, isFetching } = useUserListManga(email);
 
   return (
     <div className="">

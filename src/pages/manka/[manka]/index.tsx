@@ -3,11 +3,9 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Recomend from "@/components/recomend";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import DotPublication from "@/components/dot-publication";
-// import RatingStars from "@/components/rating-stars";
 import { formatCreatedAt } from "@/shared/lib/data-format";
 import useWindowSize from "@/shared/lib/isMobile";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -15,12 +13,11 @@ import {
   HandlerMangaSwag,
   getAllMangas,
   getMangaByName,
-  getUserFavoriteManga,
-  toggleFavoriteManga,
 } from "@/shared/Api/generatedv2";
-import { useUserSession } from "@/components/query";
 import { useRouter } from "next/router";
 import { GoogleLoginURL } from "@/components/aside-bar";
+import { useUserFavoriteManga, useUserSession } from "@/shared/hooks/query";
+import { useToggleFavoriteManga } from "@/shared/hooks/mutation";
 
 type MangaProps = {
   data: HandlerMangaSwag;
@@ -43,35 +40,15 @@ const Manga = ({ data: manga }: MangaProps) => {
   const { data: user } = useUserSession();
   const router = useRouter();
 
-  const { data: favorite, refetch: refetchFavorite } = useQuery({
-    queryKey: ["isFavorite"],
-    queryFn: () =>
-      getUserFavoriteManga({
-        email: user?.email as string,
-        name: manga?.name as string,
-      }),
-    enabled: !!user,
-    staleTime: 0,
-  });
+  const { data: favorite } = useUserFavoriteManga(user, manga.name as string);
 
-  const { mutate, isPending } = useMutation({
-    mutationKey: ["addFavorite"],
-    mutationFn: () =>
-      toggleFavoriteManga({
-        email: user?.email!,
-        name: manga?.name as string,
-      }),
-    onSuccess: () => {
-      refetchFavorite();
-    },
-  });
+  const { mutate, isPending } = useToggleFavoriteManga();
 
   const addFavorite = () => {
     if (!user?.email) {
-      // signIn();
       router.push(GoogleLoginURL);
     } else {
-      mutate();
+      mutate({ email: user.email, name: manga?.name as string });
     }
   };
 

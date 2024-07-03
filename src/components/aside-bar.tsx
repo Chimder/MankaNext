@@ -13,7 +13,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { DialogDemo } from "./dialog-delete-account";
-import { resetUserSessionAndDel, useUserSession } from "./query";
+import { resetUserSessionAndDel, useUserSession } from "../shared/hooks/query";
 
 const redirect_uri = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL_ADDRES}/google/auth`;
 export const GoogleLoginURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&redirect_uri=${redirect_uri}&response_type=code&scope=openid%20profile%20email&access_type=offline&prompt=consent`;
