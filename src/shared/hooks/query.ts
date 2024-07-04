@@ -65,14 +65,13 @@ export function resetUserSessionAndDel() {
 }
 
 export const signOut = () => {
-  Cookies.remove("manka_google_user", {
-    path: "/",
-    sameSite: "None",
-    secure: true,
-  });
-
-  // document.cookie = serialize("manka_google_user", "", {
-  //   maxAge: -1,
+  // Cookies.remove("manka_google_user", {
   //   path: "/",
+  //   sameSite: "None",
+  //   secure: true,
   // });
+  document.cookie = serialize("manka_google_user", "", {
+    maxAge: -1,
+    path: "/",
+  });
 };
