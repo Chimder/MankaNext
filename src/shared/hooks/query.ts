@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
+import { serialize } from "cookie";
 import {
   HandlerUserSwag,
   getMangaByName,
@@ -8,7 +9,6 @@ import {
   getUserSession,
 } from "@/shared/Api/generatedv2";
 import { queryClient } from "@/pages/_app";
-import { serialize } from "cookie";
 
 export function useUserSession() {
   return useQuery({
@@ -70,8 +70,14 @@ export const signOut = () => {
   //   sameSite: "None",
   //   secure: true,
   // });
+  // document.cookie = serialize("manka_google_user", "", {
+  //   maxAge: -1,
+  //   path: "/",
+  // });
   document.cookie = serialize("manka_google_user", "", {
     maxAge: -1,
     path: "/",
+    sameSite: "none",
+    secure: true,
   });
 };
