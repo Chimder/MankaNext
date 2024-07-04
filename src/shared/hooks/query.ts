@@ -65,11 +65,17 @@ export function resetUserSessionAndDel() {
 }
 
 export const signOut = () => {
-  Cookies.remove("manka_google_user", {
-    path: "/",
-    // sameSite: "None",
-    // secure: true,
-  });
+  document.cookie = "manka_google_user=; Max-Age=-1; path=/";
+
+  // document.cookie = "manka_google_user=; Max-Age=-1; path=/; domain=yourdomain.com; SameSite=None; Secure=true";
+
+  // Cookies.remove("manka_google_user", {
+  //   path: "/",
+  //   domain: "https://gotest-vtqv.onrender.com",
+  //   sameSite: "None",
+  //   secure: true,
+  // });
+
   // document.cookie = serialize("manka_google_user", "", {
   //   maxAge: -1,
   //   path: "/",
