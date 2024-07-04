@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { serialize } from "cookie";
 import {
   HandlerUserSwag,
+  deleteUserCookie,
   getMangaByName,
   getUserFavoriteManga,
   getUserListManga,
@@ -57,7 +58,7 @@ export function useMangaByName(name: string) {
 }
 
 export function resetUserSession() {
-  queryClient.refetchQueries({ queryKey: ["gmail_session"], exact: true });
+  queryClient.resetQueries();
 }
 
 export async function resetUserSessionAndDel() {
@@ -67,13 +68,7 @@ export async function resetUserSessionAndDel() {
 
 export const signOut = async () => {
   try {
-    await axios.post(
-      "/api/delete-cookie",
-      {},
-      {
-        withCredentials: true,
-      },
-    );
+    await deleteUserCookie();
   } catch (error) {
     console.error("Error deleting cookie:", error);
   }

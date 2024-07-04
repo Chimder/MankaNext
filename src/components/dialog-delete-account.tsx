@@ -12,7 +12,7 @@ import { deleteUser } from "@/shared/Api/generatedv2";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import { PropsWithChildren } from "react";
-import { resetUserSessionAndDel, useUserSession } from "../shared/hooks/query";
+import { resetUserSession, useUserSession } from "../shared/hooks/query";
 
 export function DialogDemo({ children }: PropsWithChildren) {
   const { data: user } = useUserSession();
@@ -24,7 +24,7 @@ export function DialogDemo({ children }: PropsWithChildren) {
   } = useMutation({
     mutationKey: ["deleteUser"],
     mutationFn: () => deleteUser({ email: user?.email as string }),
-    onSuccess: () => resetUserSessionAndDel(),
+    onSuccess: () => resetUserSession(),
   });
   return (
     <Dialog>
