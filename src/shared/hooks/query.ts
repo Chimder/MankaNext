@@ -67,7 +67,13 @@ export async function resetUserSessionAndDel() {
 
 export const signOut = async () => {
   try {
-    await axios.post("/api/delete-cookie");
+    await axios.post(
+      "/api/delete-cookie",
+      {},
+      {
+        withCredentials: true,
+      },
+    );
   } catch (error) {
     console.error("Error deleting cookie:", error);
   }

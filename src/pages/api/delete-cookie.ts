@@ -5,6 +5,11 @@ export default async function deleteCookie(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  if (!req.headers.cookie) {
+    res.status(400).json({ error: "No cookies in request" });
+    return;
+  }
+
   const cookieExists = req.cookies["manka_google_user"] !== undefined;
 
   if (!cookieExists) {
