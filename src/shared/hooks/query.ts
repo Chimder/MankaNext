@@ -9,6 +9,7 @@ import {
   getUserSession,
 } from "@/shared/Api/generatedv2";
 import { queryClient } from "@/pages/_app";
+import axios from "axios";
 
 export function useUserSession() {
   return useQuery({
@@ -59,27 +60,15 @@ export function resetUserSession() {
   queryClient.refetchQueries({ queryKey: ["gmail_session"], exact: true });
 }
 
-export function resetUserSessionAndDel() {
-  signOut();
+export async function resetUserSessionAndDel() {
+  await signOut();
   queryClient.resetQueries();
 }
 
-export const signOut = () => {
-  document.cookie = "manka_google_user=; Max-Age=-1; path=/";
-
-  // document.cookie = "manka_google_user=; Max-Age=-1; path=/; domain=yourdomain.com; SameSite=None; Secure=true";
-
-  // Cookies.remove("manka_google_user", {
-  //   path: "/",
-  //   domain: "https://gotest-vtqv.onrender.com",
-  //   sameSite: "None",
-  //   secure: true,
-  // });
-
-  // document.cookie = serialize("manka_google_user", "", {
-  //   maxAge: -1,
-  //   path: "/",
-  //   sameSite: "none",
-  //   secure: true,
-  // });
+export const signOut = async () => {
+  try {
+    await axios.post("/api/delete-cookie");
+  } catch (error) {
+    console.error("Error deleting cookie:", error);
+  }
 };
