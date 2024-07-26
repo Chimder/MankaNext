@@ -43,6 +43,13 @@ export type DeleteUserParams = {
 email: string;
 };
 
+export type GetUserByEmailParams = {
+/**
+ * User Email
+ */
+email: string;
+};
+
 export type FilterAnimeParams = {
 /**
  * Name of the Manga
@@ -219,10 +226,11 @@ export const getPopularManga = (
  * @summary Get a user by email
  */
 export const getUserByEmail = (
-    email: string,
+    params: GetUserByEmailParams,
  options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<HandlerUserSwag>(
-      {url: `/user/${email}`, method: 'GET'
+      {url: `/user`, method: 'GET',
+        params
     },
       options);
     }
