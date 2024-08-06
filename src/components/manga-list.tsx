@@ -40,6 +40,8 @@ export const MangaList = () => {
     refetch,
     fetchNextPage,
     isFetching,
+    isFetched,
+    fetchStatus,
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
@@ -56,17 +58,17 @@ export const MangaList = () => {
     retry: 0,
   });
 
+  console.log("FETCHSTAT", fetchStatus);
   useEffect(() => {
     refetch();
-  }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch]);
-
+  }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch, sortName]);
 
   const { ref, inView } = useInView();
   useEffect(() => {
-    if (inView && hasNextPage) {
+    if (inView && hasNextPage && isFetched) {
       fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, hasNextPage, isFetched]);
 
   return (
     <div className="containerM px-0 pt-8">
@@ -91,9 +93,9 @@ export const MangaList = () => {
                     className="relative z-50"
                     key={manga?.name}
                     href={`/manka/${manga?.name}`}
+                    ref={ref}
                   >
                     <img
-                      ref={ref}
                       src={manga?.img}
                       alt=""
                       className="h-full w-full rounded"

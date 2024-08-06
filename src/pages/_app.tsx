@@ -18,15 +18,14 @@ type AppPropsWithLayout = AppProps & {
 export const queryClient = new QueryClient();
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
 
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
         {getLayout(<Component {...pageProps} />)}
-      </QueryClientProvider>
-    </Provider>
+      </Provider>
+    </QueryClientProvider>
   );
 };
 

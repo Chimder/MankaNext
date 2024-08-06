@@ -13,8 +13,10 @@ import { Input } from "@/components/ui/input";
 import { BadgeList } from "@/components/badge-list";
 import { DropDownMenuN } from "@/components/drop-down-menu";
 import { Button } from "@/components/ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 
 function mangaSearch() {
+  const queryClient = useQueryClient();
   const { inputValue } = useAppSelector((store) => store.tagSlice);
   const dispatch = useAppDispatch();
   const handleTag = (tag: string, category: string) => {
@@ -33,7 +35,8 @@ function mangaSearch() {
     handleTag(button.innerText, category);
   };
 
-  const reset = () => {
+  const reset = async () => {
+    await queryClient.resetQueries({ queryKey: ["mangas"], exact: true });
     dispatch(resetTag());
   };
 
