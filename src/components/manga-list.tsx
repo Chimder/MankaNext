@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/shared/Store/store";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,6 +11,13 @@ type pageParam = {
 };
 
 export const MangaList = () => {
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    return () => {
+      queryClient.resetQueries({ queryKey: ["mangas"], exact: true });
+    };
+  }, [queryClient]);
+
   const {
     genresTag,
     langTag,
@@ -48,13 +55,15 @@ export const MangaList = () => {
     queryKey: ["mangas"],
     queryFn: fetchAnimePages,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
-      if (lastPage === null) {
+      if (lastPage.length < 28) {
         return undefined;
       }
       return lastPageParam + 1;
     },
     initialPageParam: 1,
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    staleTime: 30000,
     retry: 0,
   });
 
@@ -63,7 +72,7 @@ export const MangaList = () => {
     refetch();
   }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch, sortName]);
 
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({ triggerOnce: false, skip: !hasNextPage });
   useEffect(() => {
     if (inView && hasNextPage && isFetched) {
       fetchNextPage();
