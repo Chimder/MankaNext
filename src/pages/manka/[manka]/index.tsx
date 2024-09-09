@@ -1,7 +1,6 @@
 import { GetStaticProps } from "next";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
 import Recomend from "@/components/recomend";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/shared/lib/utils";
@@ -18,6 +17,8 @@ import { useRouter } from "next/router";
 import { GoogleLoginURL } from "@/components/aside-bar";
 import { useUserFavoriteManga, useUserSession } from "@/shared/hooks/query";
 import { useToggleFavoriteManga } from "@/shared/hooks/mutation";
+import { useAppDispatch, useAppSelector } from "@/shared/Store/store";
+import { setLastView, shortMankaType } from "@/shared/Store/Slices/lastView";
 
 type MangaProps = {
   data: HandlerMangaSwag;
@@ -39,6 +40,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const Manga = ({ data: manga }: MangaProps) => {
   const { data: user } = useUserSession();
   const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { name: names } = useAppSelector((state) => state.lastView);
 
   const { data: favorite } = useUserFavoriteManga(user, manga.name as string);
 
@@ -52,12 +55,20 @@ const Manga = ({ data: manga }: MangaProps) => {
     }
   };
 
+  const chooseManga = (chapter?: number) => {
+    const manka: shortMankaType = {
+      img: manga.img || "",
+      lastCapter: chapter || 0,
+      name: manga.name || "",
+    };
+    dispatch(setLastView(manka));
+    router.push(`/manka/${manga?.name}/${chapter}`);
+  };
+
   const isMobile = useWindowSize();
   return (
     <main className="overflow-x-hidden ">
-      {/* <section className="relative z-40 flex max-h-[480px] items-center overflow-y-hidden  lg:absolute  lg:-z-10 "> */}
       <section className="max-h-[480px] lg:-z-10">
-        {/* <div className="w-full lg:fixed  lg:top-0 lg:-z-40 lg:h-[48vh] md:w-[100vw] "> */}
         <div className="absolute left-0 top-[-80px] z-[-2] h-[640px] w-full">
           <img
             className="z-0 h-full w-full "
@@ -124,20 +135,22 @@ const Manga = ({ data: manga }: MangaProps) => {
               Chapters
             </span>
             <div className="pt-3 md:px-4 md:pb-14">
-              {manga?.chapters?.map((chap) => (
-                <Link
-                  className="my-2 flex items-center justify-between rounded-sm bg-accent p-4 md:my-1 md:py-3"
-                  key={chap.name}
-                  href={`/manka/${manga?.name}/${chap.chapter}`}
-                >
-                  <div className="lg:text-sm">
-                    Ch. {chap.chapter} - {chap.name}
+              {manga &&
+                manga?.chapters?.map((chap) => (
+                  <div
+                    className="my-2 flex cursor-pointer items-center justify-between rounded-sm bg-accent p-4 md:my-1 md:py-3"
+                    key={chap.name}
+                    onClick={() => chooseManga(chap.chapter)}
+                    // href={`/manka/${manga?.name}/${chap.chapter}`}
+                  >
+                    <div className="lg:text-sm">
+                      Ch. {chap.chapter} - {chap.name}
+                    </div>
+                    <div className="lg:text-sm">
+                      {formatCreatedAt(chap?.createdAt!)}
+                    </div>
                   </div>
-                  <div className="lg:text-sm">
-                    {formatCreatedAt(chap?.createdAt!)}
-                  </div>
-                </Link>
-              ))}
+                ))}
             </div>
           </div>
         </div>

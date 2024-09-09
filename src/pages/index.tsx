@@ -3,6 +3,7 @@ import React from "react";
 import { Scroll } from "@/components/scroll";
 import { ScrollMost } from "@/components/scroll-pop";
 import { HandlerMangaSwag, getPopularManga } from "@/shared/Api/generatedv2";
+import LastViewList from "@/components/lastViewList";
 type Props = {
   data: HandlerMangaSwag[];
 };
@@ -24,7 +25,8 @@ function MainManga({ data: manga }: Props) {
         <section className="items-center justify-center ">
           <Scroll></Scroll>
         </section>
-        <section className="">
+        <LastViewList />
+        <section className="pl-2">
           <h1 className="text-4xl md:text-2xl">The most popular now</h1>
           <ScrollMost popular={manga}></ScrollMost>
         </section>

@@ -23,7 +23,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 const Anime = ({ data: anime }: any) => {
-
   return (
     <main className="overflow-x-hidden ">
       <section className="max-h-[480px] lg:-z-10 ">
@@ -37,7 +36,7 @@ const Anime = ({ data: anime }: any) => {
             background: `url(${anime.material_data.poster_url}) no-repeat top 50% center / 100%`,
           }}
         >
-          <div className="md:bg-gradient-light-anime absolute inset-x-0 bottom-0 z-20 h-full bg-background/30 lg:z-40 lg:backdrop-blur-[1px] md:backdrop-blur-none dark:md:bg-gradient-dark"></div>
+          <div className="absolute inset-x-0 bottom-0 z-20 h-full bg-background/30 lg:z-40 lg:backdrop-blur-[1px] md:bg-gradient-light-anime md:backdrop-blur-none dark:md:bg-gradient-dark"></div>
         </div>
       </section>
       <section className="z-100 flex h-full w-full pt-[36vh] lg:pt-[30vh] md:pt-40 ">
@@ -51,7 +50,7 @@ const Anime = ({ data: anime }: any) => {
           </div>
           <div className="z-100 w-4/5 lg:backdrop-blur-md md:backdrop-blur-none">
             <div className="flex items-center justify-between ">
-              <h1 className="relative flex px-5 py-0 text-3xl  drop-shadow-2xl lg:text-2xl md:px-2 md:text-xl md:text-white font-semibold">
+              <h1 className="relative flex px-5 py-0 text-3xl  font-semibold drop-shadow-2xl lg:text-2xl md:px-2 md:text-xl md:text-white">
                 {anime?.title_orig}
               </h1>
               <AnimeRating anime={anime.material_data} />
@@ -68,7 +67,7 @@ const Anime = ({ data: anime }: any) => {
               </Button>
               {anime?.material_data?.genres?.map((genres: any, i: number) => (
                 <Badge
-                  className="lg:-py-0 bg-badge hover:bg-badge/70 ml-3 cursor-default text-white lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
+                  className="lg:-py-0 ml-3 cursor-default bg-badge text-white hover:bg-badge/70 lg:rounded-md lg:px-1 md:mt-2 sm:mt-1"
                   key={i}
                 >
                   {genres}
