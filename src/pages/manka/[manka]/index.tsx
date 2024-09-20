@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import React from "react";
+import React, { useCallback } from "react";
 import { Badge } from "@/components/ui/badge";
 import Recomend from "@/components/recomend";
 import { Button } from "@/components/ui/button";

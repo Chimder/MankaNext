@@ -7,7 +7,7 @@ export type shortMankaType = {
 };
 interface lastView {
   name: string;
-  mankaView: Required<shortMankaType[]>;
+  mankaView: shortMankaType[];
 }
 
 const initialState: lastView = {
