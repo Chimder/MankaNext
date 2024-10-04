@@ -55,7 +55,7 @@ export const MangaList = () => {
     queryKey: ["mangas"],
     queryFn: fetchAnimePages,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
-      if (lastPage.length < 28) {
+      if (!lastPage || lastPage.length < 28) {
         return undefined;
       }
       return lastPageParam + 1;
@@ -107,6 +107,8 @@ export const MangaList = () => {
                     <img
                       src={manga?.img}
                       alt=""
+                      width={210}
+                      height={290}
                       className="h-full w-full rounded"
                     />
                     <div
