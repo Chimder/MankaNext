@@ -2,9 +2,11 @@
 
 const nextConfig = {
   reactStrictMode: true,
+ 
   experimental: {
     reactCompiler: true,
   },
+
   async headers() {
     return [
       {

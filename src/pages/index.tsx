@@ -4,14 +4,24 @@ import { Scroll } from "@/components/scroll";
 import { ScrollMost } from "@/components/scroll-pop";
 import { HandlerMangaSwag, getPopularManga } from "@/shared/Api/generatedv2";
 import LastViewList from "@/components/lastViewList";
+import type { GetServerSideProps } from "next";
+import { generateSiteMapMain } from "@/shared/lib/seo-xml-main";
 type Props = {
   data: HandlerMangaSwag[];
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps<{
+  data: HandlerMangaSwag[];
+}> = async ({ res }) => {
   const data = await getPopularManga();
+
+  // const sitemap = generateSiteMapMain(data);
+  // res.setHeader("Content-Type", "text/xml");
+  // res.write(sitemap);
+  // res.end();
   return { props: { data } };
-}
+};
+
 function MainManga({ data: manga }: Props) {
   return (
     <>

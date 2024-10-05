@@ -11,7 +11,8 @@ const Recomend = () => {
     queryKey: ["isAnime"],
     queryFn: () =>
       axios.get("/api/proxyAnimeSearch", { params: { name: name?.manka } }),
-    // staleTime: 0,
+    staleTime: 90000,
+    retry: 0,
     refetchOnWindowFocus: false,
   });
 
