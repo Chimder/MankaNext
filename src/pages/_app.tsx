@@ -27,7 +27,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           {getLayout(<Component {...pageProps} />)}
-          <Analytics mode={"production"} />;
+          <Analytics mode={"production"} />
         </PersistGate>
       </Provider>
     </QueryClientProvider>

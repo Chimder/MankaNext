@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/shared/Store/store";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import React, { memo } from "react";
+import React  from "react";
 import { Badge } from "./ui/badge";
 
 interface Props {
