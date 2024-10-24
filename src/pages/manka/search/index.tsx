@@ -7,7 +7,7 @@ import {
   setLangTag,
   setSort,
   setStatus,
-} from "@/shared/Store/Slices/tagSlice";
+} from "@/shared/Store/Slices/tag-slice";
 import { MangaList } from "@/components/manga-list";
 import { Input } from "@/components/ui/input";
 import { BadgeList } from "@/components/badge-list";

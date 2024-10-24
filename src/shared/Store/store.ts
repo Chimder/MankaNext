@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import tagSlice from "./Slices/tagSlice";
-import lastView from "./Slices/lastView";
+import tagSlice from "./Slices/tag-slice";
+import lastView from "./Slices/last-view";
 import {
   persistStore,
   persistReducer,

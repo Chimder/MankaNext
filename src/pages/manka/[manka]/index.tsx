@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 import DotPublication from "@/components/dot-publication";
 import { formatCreatedAt } from "@/shared/lib/data-format";
-import useWindowSize from "@/shared/lib/isMobile";
+import useWindowSize from "@/shared/lib/is-mobile";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import {
   HandlerMangaSwag,
@@ -18,7 +18,7 @@ import { GoogleLoginURL } from "@/components/aside-bar";
 import { useUserFavoriteManga, useUserSession } from "@/shared/hooks/query";
 import { useToggleFavoriteManga } from "@/shared/hooks/mutation";
 import { useAppDispatch, useAppSelector } from "@/shared/Store/store";
-import { setLastView, shortMankaType } from "@/shared/Store/Slices/lastView";
+import { setLastView, shortMankaType } from "@/shared/Store/Slices/last-view";
 import { MankaHead } from "@/components/seo-head";
 
 type MangaProps = {

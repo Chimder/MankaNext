@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
 const GoogleCallBackComponent = dynamic(
-  () => import("@/components/GoogleCallBackComponent"),
+  () => import("@/components/google-callback"),
   { ssr: false },
 
 );

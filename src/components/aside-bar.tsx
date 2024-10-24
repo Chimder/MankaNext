@@ -5,7 +5,7 @@ import {
   HeartIcon,
   HeartFilledIcon,
 } from "@radix-ui/react-icons";
-import { ThemeToggle } from "./ui/themeToggle";
+import { ThemeToggle } from "./ui/theme-toggle";
 import {
   DropdownMenu,
   DropdownMenuContent,

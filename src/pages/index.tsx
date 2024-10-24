@@ -2,7 +2,7 @@ import React from "react";
 import { Scroll } from "@/components/scroll";
 import { ScrollMost } from "@/components/scroll-pop";
 import { HandlerMangaSwag, getPopularManga } from "@/shared/Api/generatedv2";
-import LastViewList from "@/components/lastViewList";
+import LastViewList from "@/components/last-view-list";
 import type { GetServerSideProps } from "next";
 import { MainHead } from "@/components/seo-head";
 

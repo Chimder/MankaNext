@@ -1,4 +1,7 @@
-import { deleteLastView, shortMankaType } from "@/shared/Store/Slices/lastView";
+import {
+  deleteLastView,
+  shortMankaType,
+} from "@/shared/Store/Slices/last-view";
 import { useAppDispatch, useAppSelector } from "@/shared/Store/store";
 import { X } from "lucide-react";
 import Link from "next/link";

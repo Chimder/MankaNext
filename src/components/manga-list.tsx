@@ -71,8 +71,8 @@ export const MangaList = () => {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     placeholderData: keepPreviousData,
-    staleTime: 30000,
-    retry: 0,
+    // staleTime: 30000,
+    // retry: 0,
   });
 
   const { ref, inView } = useInView({ triggerOnce: false, skip: !hasNextPage });
