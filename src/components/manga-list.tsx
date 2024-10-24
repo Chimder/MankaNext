@@ -1,22 +1,22 @@
 import { useAppSelector } from "@/shared/Store/store";
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useInView } from "react-intersection-observer";
 import { filterAnime } from "@/shared/Api/generatedv2";
+import { queryClient } from "@/pages/_app";
 
 type pageParam = {
   pageParam: number;
 };
 
 export const MangaList = () => {
-  const queryClient = useQueryClient();
   useEffect(() => {
     return () => {
       queryClient.resetQueries({ queryKey: ["mangas"], exact: true });
     };
-  }, [queryClient]);
+  }, []);
 
   const {
     genresTag,
@@ -42,17 +42,24 @@ export const MangaList = () => {
 
     return response;
   };
+
   const {
     data: mangas,
-    refetch,
     fetchNextPage,
     isFetching,
     isFetched,
-    fetchStatus,
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["mangas"],
+    queryKey: [
+      "mangas",
+      genresTag,
+      langTag,
+      statusTag,
+      sortTag,
+      inputValue,
+      sortName,
+    ],
     queryFn: fetchAnimePages,
     getNextPageParam: (lastPage, pages, lastPageParam) => {
       if (!lastPage || lastPage.length < 28) {
@@ -63,14 +70,10 @@ export const MangaList = () => {
     initialPageParam: 1,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    placeholderData: keepPreviousData,
     staleTime: 30000,
     retry: 0,
   });
-
-  console.log("FETCHSTAT", fetchStatus);
-  useEffect(() => {
-    refetch();
-  }, [genresTag, langTag, statusTag, sortTag, inputValue, refetch, sortName]);
 
   const { ref, inView } = useInView({ triggerOnce: false, skip: !hasNextPage });
   useEffect(() => {

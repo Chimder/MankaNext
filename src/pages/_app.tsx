@@ -8,6 +8,7 @@ import "@/styles/globals.css";
 import { NextPage } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { PersistGate } from "redux-persist/integration/react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -24,6 +25,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           {getLayout(<Component {...pageProps} />)}
